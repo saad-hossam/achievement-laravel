@@ -34,8 +34,8 @@ class AppServiceProvider extends ServiceProvider
     //     $departments = Department::with('translations')->get();
     //     $view->with('departments', $departments);
     // });
-    view()->share('departments', Department::all());
-    view()->share('services', Service::all());
+    // view()->share('departments', Department::all());
+    // view()->share('services', Service::all());
 
 
         // view()->composer('*',function($view) {
