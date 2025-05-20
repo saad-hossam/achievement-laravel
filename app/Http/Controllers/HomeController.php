@@ -46,8 +46,8 @@ class HomeController extends Controller
     }
     public function services()
     {
-        $services = Service::active()->with('translations')->get();
-        return view('Front.services', compact('services'));
+        // $services = Service::active()->with('translations')->get();
+        return view('Front.services');
     }
 
     public function projects_all()

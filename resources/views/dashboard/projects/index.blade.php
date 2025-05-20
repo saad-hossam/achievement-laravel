@@ -116,7 +116,7 @@
                                 <tr>
                                     <td>{{ $project->id }}</td>
                                     <td>{!! $project->name !!}</td>
-                                    <td>{{ $project->department->name }}</td>
+                                    <td>{!! $project->department->name !!}</td>
                                     {{-- <td>{{ $project->description }}</td> --}}
                                     {{-- @dd($project->image) --}}
                                     <td> <a type="image" target="_blank"

@@ -83,7 +83,7 @@
                                     <select class="form-control select2-search" id="department_id" name="department_id">
                                         @foreach ($departments as $department)
                                             <option value="{{ $department->id }}" @if ($project->department_id == $department->id) selected @endif>
-                                                {{ $department->name }}
+                                                {!! $department->name !!}
                                             </option>
                                         @endforeach
                                     </select>

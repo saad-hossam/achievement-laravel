@@ -1,95 +1,57 @@
-    <!-- Spinner Start -->
-    {{-- <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-border position-relative text-primary" style="width: 6rem; height: 6rem;" role="status"></div>
-        <img class="position-absolute top-50 start-50 translate-middle" src="/img/274730667_341453347913506_6048684782427197231_n.jpg" width="300px" height="300px" alt="Icon">
-    </div> --}}
-    <!-- Spinner End -->
+<!-- Start Bootstrap Header -->
+<header class=" py-3">
+    <nav class="navbar navbar-expand-lg navbar-light container">
+      <!-- Logo -->
+      <a class="navbar-brand" href="">
+        <img src="{{ asset('assets/front') }}/images/3.png" width="80" alt="Logo">
+      </a>
 
+      <!-- Toggler button for mobile view -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+        aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <!-- Topbar Start -->
-    <div class="container-fluid bg-dark p-0 wow fadeIn" data-wow-delay="0.1s">
-        <div class="row gx-0 d-none d-lg-flex">
-            <div class="col-lg-7 px-5 text-start">
-                <div class="h-100 d-inline-flex align-items-center py-3 me-3">
-                    <a class="text-body px-2" href="tel:+0123456789"><i class="fa fa-phone-alt text-primary me-2"></i>+012 345 6789</a>
-                    <a class="text-body px-2" href="mailto:info@example.com"><i class="fa fa-envelope-open text-primary me-2"></i>info@example.com</a>
-                </div>
+      <!-- Navbar links and utilities -->
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 mainNav ">
+          <li class="">
+            <a class=" headLinks" href="{{ route('home') }}" data-lang="home"></a>
+          </li>
+          <li class="">
+            <!-- <a class=" headLinks" href="details.html" data-lang="news"></a> -->
+          </li>
+          <li class="">
+            <a class=" headLinks" href="{{ route('about') }}" data-lang="about"></a>
+          </li>
+        </ul>
+
+        <!-- Right Side Buttons -->
+        <div class="d-flex align-items-center">
+          <!-- Dark Mode Toggle -->
+          <div class="darkModeButton">
+            <input type="checkbox" class="checkbox" id="chk" />
+            <label class="label" for="chk">
+                <i class="fas fa-moon moon"></i>
+                <i class="fas fa-sun sun"></i>
+                <div class="ball"></div>
+            </label>
+          </div>
+
+          <!-- Language Switcher -->
+          <div class="laguagesButton ms-5" >
+            <div class="inner1">
+
+            <input type="checkbox" class="checkboxlang" id="chklang" />
+            <label class="labellang" for="chklang">
+                <img src="{{ asset('assets/front') }}/images/eg.svg" alt="Egypt Flag" class="egFlag" />
+                <img src="{{ asset('assets/front') }}/images/gb.svg" alt="United Kingdom Flag" class="gbFlag" />
+                <div class="balllang"></div>
+            </label>
             </div>
-            <div class="col-lg-5 px-5 text-end">
-                <div class="h-100 d-inline-flex align-items-center py-3 me-2">
-                    <a class="text-body px-2" href="">Terms</a>
-                    <a class="text-body px-2" href="">Privacy</a>
-                </div>
-                <div class="h-100 d-inline-flex align-items-center">
-                    <a class="btn btn-sm-square btn-outline-body me-1" href=""><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-sm-square btn-outline-body me-1" href=""><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-sm-square btn-outline-body me-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-sm-square btn-outline-body me-0" href=""><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
+           </div>
         </div>
-    </div>
-    <!-- Topbar End -->
-
-
-    <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
-        <a href="{{route('home')}}" class="navbar-brand ms-4 ms-lg-0">
-            <h1 class="text-primary m-0"><img class="me-3" src="/img/b8c72a254b2d423f8e19c1b9f9d387fc (1).png"  width="140px" height="80px" alt="Icon"></h1>
-        </a>
-        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="{{route('home')}}" class="nav-item nav-link active" data-translate="header.nav.home">{{trans('header.home')}}</a>
-                <a href="{{route('about')}}" class="nav-item nav-link" data-translate="header.nav.about">{{trans('header.about_us')}}</a>
-
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-translate="header.nav.pages">{{ trans('header.our_departments') }}</a>
-                    <div class="dropdown-menu border-0 m-0">
-                        @foreach ($departments as $department)
-                            <a href="{{ route('projects.by_department', $department->id) }}" class="dropdown-item">
-                                {!! $department->translate(app()->getLocale())->name !!}
-                            </a>
-                        @endforeach
-                    </div>
-                </div>
-
-                <a href="{{route('services_all')}}" class="nav-item nav-link" data-translate="header.nav.services">{{trans('header.our_services')}}</a>
-                <a href="{{route('projects_all')}}" class="nav-item nav-link" data-translate="header.nav.projects">{{trans('header.projects')}}</a>
-
-                {{-- <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-translate="header.nav.pages">{{trans('header.projects')}}</a>
-                    <div class="dropdown-menu border-0 m-0">
-                        <a href="feature.html" class="dropdown-item">Our Services</a>
-                        <a href="project.html" class="dropdown-item">Our Projects</a>
-                        <a href="team.html" class="dropdown-item">Team Members</a>
-                        <a href="appointment.html" class="dropdown-item">Appointment</a>
-                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                        <a href="404.html" class="dropdown-item">404 Page</a>
-                    </div>
-                </div> --}}
-                <a href="{{route('contact-us')}}" class="nav-item nav-link" data-translate="header.nav.contact">{{trans('header.contact_us')}}</a>
-            </div>
-            <div class="border-start ps-4 d-none d-lg-block">
-                @if (app()->getLocale() == 'en')
-                    <a rel="alternate" hreflang="ar"
-                       href="{{ LaravelLocalization::getLocalizedURL('ar', null, [], true) }}">
-                        <button class="btn btn-primary  " style="border-radius: 25px; font-size:20px">
-                            <i class="fa fa-globe" style="margin-right: 5px;"></i> عربى
-                        </button>
-                    </a>
-                @else
-                    <a rel="alternate" hreflang="en"
-                       href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}">
-                       <button class="btn btn-primary  " style="border-radius: 25px; font-size:18px">
-                        <i class="fa fa-globe" style="margin-right: 5px;"></i> English
-                        </button>
-                    </a>
-                @endif
-            </div>
-
-        </div>
+      </div>
     </nav>
-    <!-- Navbar End -->
+  </header>
+  <!-- End Bootstrap Header -->

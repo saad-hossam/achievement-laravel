@@ -56,19 +56,6 @@ Route::group(['prefix'=>'/admin/','middleware' => ['auth','admin']], function ()
 
     Route::resource('users', UserController::class);
     Route::resource('roles', RoleController::class);
-    Route::resource('departments', DepartmentController::class);
-    // Route::resource('categories', CategoryController::class);
-    Route::resource('products', ProductController::class);
-    // Route::resource('gallaries', GallaryController::class);
-    Route::resource('messages', MessageController::class);
-    // Route::resource('abouts', AboutController::class);
-    Route::resource('partners', PartnerController::class);
-    Route::resource('sliders', SliderController::class);
-    // Route::resource('histories', HistoryController::class);
-    Route::resource('histories', HistoryController::class);
-    Route::resource('services', ServiceController::class);
-    Route::resource('projects', ProjectController::class);
-    Route::get('projects/{project}/images', [ProjectController::class, 'showImages'])->name('projects.showImages');
 
 
 

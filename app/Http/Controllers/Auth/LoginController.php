@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\Type;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -41,7 +41,7 @@ class LoginController extends Controller
     }
     public function showLoginForm()
     {
-        return view('auth.login_new');
+        return view('auth.login');
     }
     protected function redirectTo()
     {

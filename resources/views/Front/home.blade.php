@@ -2,274 +2,377 @@
 
 @section('content')
 
-    <!-- Carousel Start -->
-    <div class="container-fluid p-0 pb-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="owl-carousel header-carousel position-relative">
-            @foreach ($sliders as $slide )
-            <div class="owl-carousel-item position-relative" data-dot="<img src='{{ asset('images/sliders/'. $slide->image) }}'>">
-                    <img src="{{ asset('images/sliders/'. $slide->image) }}" alt="" height="520px">
-                                <div class="owl-carousel-inner">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-10 col-lg-8 text-center">
-                                <h1 class="display-1 text-white typewriter" data-text="{{$slide->translate(app()->getLocale())->title}}"></h1>
-                                <a href="" class="btn btn-primary py-3 px-5 animated slideInLeft">{{trans('about.read_more')}}</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endforeach
+
+    <!--Start Landing-->
+    <div class="landing">
+        <div class="container">
+          <div class="text">
+            <h1 id="landing-title" data-lang="landingTitle"></h1>
+            <p id="landing-paragraph" data-lang="landingParagraph"></p>
+          </div>
+          <div class="photo">
+            <img src="{{ asset('assets/front') }}/images/1.jpeg" alt="landing-image"  />
+          </div>
         </div>
-    </div>
-    <!-- Carousel End -->
+        <a href="#articles">
+          <i class="fas fa-angle-double-down fa-2x"></i>
+        </a>
+      </div>
+
+           <!--End Landing-->
+
+      <!-- Start Articles -->
+      <div id="articles" style="margin:20px;">
+        <h2 class="mainTitle" data-i18n="latestArticles">Latest Articles</h2>
+
+        <div class="filters" style="margin-bottom: 20px;">
+          <div class="filter-group">
+            <label for="titleFilter" data-i18n="filterTitle">Title:</label>
+            <input type="text" id="titleFilter" placeholder="Search by title..." />
+          </div>
 
 
+          <div class="filter-group">
+          <label> from date:
+            <input type="date" id="from-date">
+          </label>
+          </div>
 
-<!-- About Start -->
-<div class="container-xxl  facts about">
-    <div class="container">
-        <div class="row g-5">
-            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                <div class="about-img">
-                    <img class="img-fluid" src="img/about-1.jpg" alt="">
-                    <img class="img-fluid" src="img/about-2.jpg" alt="">
-                </div>
-            </div>
-            <div class="col-lg-6 wow fadeIn" style="font-size: 17px" data-wow-delay="0.5s">
-                <h2 class="section-title">{{ trans('about.title') }}</h2>
-                <h6 class="display-6 mb-4">{{ trans('about.headline') }}</h6>
-                <p>{{ trans('about.description.part1') }}</p>
-                <p>{{ trans('about.description.part2') }}</p>
-                <p>{{ trans('about.description.part3') }}</p>
-                <div class="d-flex align-items-center mb-5">
-                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center border border-5 border-primary" style="width: 120px; height: 120px;">
-                        <h1 class="display-1 mb-n2" data-toggle="counter-up">25</h1>
-                    </div>
-                    <div class="ps-4">
-                        <h3>{{ trans('about.years_working_experience') }}</h3>
-                    </div>
-                </div>
-                <a class="btn btn-primary py-3 px-5" href="">{{ trans('about.read_more') }}</a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- About End -->
+          <div class="filter-group">
 
-<!-- Feature Start -->
-<div class="container-xxl py-5">
-    <div class="container">
-        <div class="row g-3">
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                <h2 class="section-title">{{ trans('features.title') }}</h2>
-                <h6 class="display-6 mb-4">{{ trans('features.headline') }}</h6>
-                <div class="row g-4">
-                    <div class="col-12">
-                        <div class="d-flex align-items-start" style="font-size: 17px">
-                            <img class="flex-shrink-0" src="img/icons/icon-2.png" alt="Icon">
-                            <div class="ms-4">
-                                <h3>{{ trans('features.mission.title') }}</h3>
-                                <p class="mb-0">{{ trans('features.mission.description') }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="d-flex align-items-start">
-                            <img class="flex-shrink-0" src="img/icons/icon-3.png" alt="Icon">
-                            <div class="ms-4">
-                                <h3>{{ trans('features.vision.title') }}</h3>
-                                <p class="mb-0">{{ trans('features.vision.description') }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="d-flex align-items-start">
-                            <img class="flex-shrink-0" src="img/icons/icon-4.png" alt="Icon">
-                            <div class="ms-4">
-                                <h3>{{ trans('features.goal.title') }}</h3>
-                                <p class="mb-0">{{ trans('features.goal.description') }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="feature-img">
-                    <img class="img-fluid" src="img/about-2.jpg" alt="">
-                    <img class="img-fluid" src="img/about-1.jpg" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Feature End -->
 
-<!-- Service Start -->
-<div class="container-xxl py-5">
-    <div class="container">
-        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-            <h4 class="section-title">{{trans('services.services_title')}}</h4>
-            <h3 class="display-6 mb-4">{{trans('services.services_subtitle')}}</h3>
-        </div>
-        <div class="row g-4">
-            <!-- Always Visible Services -->
-            @foreach ($services as $service )
+          <label> to date:
+            <input type="date" id="to-date">
+          </label>
+          </div>
 
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="service-item d-flex position-relative text-center h-100">
-                    <img class="bg-img  " src="{{ asset('img/service-2.jpg') }}" alt="">
-                    <div class="service-text  w-100">
-                    <img class="mb-4 pt-3" src="{{ asset('images/services/'. $service->image) }}" alt="Icon">
-                    <h3 class="mb-3">{!! $service->translate(app()->getLocale())->name !!}</h3>
-                    <p class="mb-4">{!! Str::words($service->translate(app()->getLocale())->description, 15, '...') !!}</p>
-                                       <a class="btn mb-4" href="{{route('service_details',$service->id)}}"><i class="fa fa-plus text-primary  fs-2"></i>{{trans('about.read_more')}}</a>
-                    </div>
-                    <div>
+          <div class="filter-group">
+            <label for="daySelect" data-i18n="filterDay">Day:</label>
+            <select id="daySelect">
+              <option value="" data-i18n="all">All</option>
+              <script>
+                document.write([...Array(31).keys()].map(i => `<option value="${i + 1}">${i + 1}</option>`).join(''));
+              </script>
+            </select>
+          </div>
 
-                    </div>
-                </div>
-            </div>
-            @endforeach
+          <div class="filter-group">
+            <label for="monthSelect" data-i18n="filterMonth">Month:</label>
+            <select id="monthSelect">
+              <option value="" data-i18n="all">All</option>
+              <option value="1" data-i18n="month1">January</option>
+              <option value="2" data-i18n="month2">February</option>
+              <option value="3" data-i18n="month3">March</option>
+              <option value="4" data-i18n="month4">April</option>
+              <option value="5" data-i18n="month5">May</option>
+              <option value="6" data-i18n="month6">June</option>
+              <option value="7" data-i18n="month7">July</option>
+              <option value="8" data-i18n="month8">August</option>
+              <option value="9" data-i18n="month9">September</option>
+              <option value="10" data-i18n="month10">October</option>
+              <option value="11" data-i18n="month11">November</option>
+              <option value="12" data-i18n="month12">December</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="yearSelect" data-i18n="filterYear">Year:</label>
+            <select id="yearSelect">
+              <option value="" data-i18n="all">All</option>
+              <option value="2023">2023</option>
+              <option value="2024">2024</option>
+              <option value="2025">2025</option>
+            </select>
+          </div>
+
+
+          <div class="filter-group">
+            <button id="filterButton" data-i18n="applyFilter">Apply Filter</button>
+            <button id="resetButton" data-i18n="resetFilter">Reset</button>
+          </div>
+
 
         </div>
-        <!-- Show More Button -->
-        <div class="text-center mt-4">
-            <button class="btn btn-primary" id="toggle-more">{{trans('projects.read_more')}}</button>
+
+      <div class="container">
+        <!-- Article 1 -->
+        <div class="box" data-title="Exploring the Desert" data-date="2023-12-10">
+          <div class="coverPhoto">
+            <img src="{{ asset('assets/front') }}/images/news/1.jpg" alt="Desert" />
+          </div>
+          <div class="cardText">
+            <h3 data-i18n="article1Title">Exploring the Desert</h3>
+            <p data-i18n="article1Desc">Discover the secrets of the world’s driest regions and how life adapts to survive.</p>
+            <small class="article-date">2023-12-10</small>
+          </div>
+          <div class="cardFooter">
+            <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          </div>
         </div>
-    </div>
-</div>
-<!-- Service End -->
 
-
-<!-- Facts Start -->
-<div class="container ">
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <h2 class="section-title">{{ trans('about.facts_title') }}</h2>
-            {{-- <h6 class="display-5 mb-4">{{trans('about.facts_content')}} </h6> --}}
+        <!-- Article 2 -->
+        <div class="box" data-title="Cat Behavior Explained" data-date="2024-01-05">
+          <div class="coverPhoto">
+            <img src="{{ asset('assets/front') }}/images/news/2.jpg" alt="Desert" />
+          </div>
+          <div class="cardText">
+            <h3 data-i18n="article2Title">Cat Behavior Explained</h3>
+            <p data-i18n="article2Desc">Understand your feline friend better by learning the reasons behind common behaviors.</p>
+            <small class="article-date">2024-01-05</small>
+          </div>
+          <div class="cardFooter">
+            <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          </div>
         </div>
-    </div>
-</div>
-<div class="container-xxl pt-5 ">
 
-    <div class="container pt-5">
-
-        <div class="row g-4">
-
-            @foreach ($departments as $department )
-
-            <div class="col-lg-3 col-md-6 wow fadeInUp pb-5" data-wow-delay="0.1s">
-                <div class="fact-item text-center bg-light h-100 p-5 pt-0">
-                    <div class="fact-icon">
-                        <img src="{{asset('images/departments/'.$department->image)}}" alt="Icon">
-                    </div>
-                    <h3 class="mb-2">{!! $department->translate(app()->getLocale())->name !!}</h3>
-                    <a href="{{route('projects.by_department',$department->id)}}">
-                    <button class="btn btn-primary mt-3">{{trans('about.fact_button')}}</button>
-                </a>
-                </div>
-            </div>
-            @endforeach
-
+        <!-- Article 3 -->
+        <div class="box" data-title="Ocean Depths Revealed" data-date="2024-02-14">
+          <div class="coverPhoto">
+            <img src="{{ asset('assets/front') }}/images/news/3.jpg" alt="Desert" />
+          </div>
+          <div class="cardText">
+            <h3 data-i18n="article3Title">Ocean Depths Revealed</h3>
+            <p data-i18n="article3Desc">Dive into the unknown as we explore the hidden wonders of the ocean floor.</p>
+            <small class="article-date">2024-02-14</small>
+          </div>
+          <div class="cardFooter">
+            <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          </div>
         </div>
-    </div>
-</div>
-<!-- Facts End -->
 
-
-
-
-<!-- Project Start -->
-<div class="container-xxl project py-5">
-    <div class="container">
-        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-            <h4 class="section-title">{{trans('projects.our_projects')}}</h4>
-            <h3 class="display-5 mb-4">{{trans('projects.projects_body')}}</h3>
+        <!-- Article 4 -->
+        <div class="box" data-title="The Art of Night Photography" data-date="2024-03-02">
+          <div class="coverPhoto">
+            <img src="{{ asset('assets/front') }}/images/news/4.jpg" alt="Desert" />
+          </div>
+          <div class="cardText">
+            <h3 data-i18n="article4Title">The Art of Night Photography</h3>
+            <p data-i18n="article4Desc">Learn how to capture stunning images in the dark using simple settings.</p>
+            <small class="article-date">2024-03-02</small>
+          </div>
+          <div class="cardFooter">
+            <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          </div>
         </div>
-        <div class="row g-4 wow fadeInUp" data-wow-delay="0.3s">
-            <div class="col-lg-4">
-                <div class="nav nav-pills d-flex justify-content-between w-100 h-100 me-4">
-                    @foreach($projects as $index => $project)
-                        <button class="nav-link w-100 d-flex align-items-center text-start   @if($index == 0) active @endif" data-bs-toggle="pill" data-bs-target="#tab-pane-{{ $index + 1 }}" type="button">
-                            <h3 class="m-0"> {!! $project->translate(app()->getLocale())->name !!}</h3>
 
-                            {{-- <h3 class="m-0">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}. {!! $project->translate(app()->getLocale())->name !!}</h3> --}}
-                        </button>
-                    @endforeach
-                </div>
-            </div>
-            <div class="col-lg-8">
-                <div class="tab-content w-100">
-                    @foreach($projects as $index => $project)
-                        <div class="tab-pane fade @if($index == 0) show active @endif" id="tab-pane-{{ $index + 1 }}">
-                            <div class="row g-4">
-                                <div class="col-md-6" style="min-height: 400px;">
-                                    <div class="position-relative h-100">
-                                        <img class="position-absolute img-fluid w-100 h-100" src="{{ asset('images/projects/main/' . $project->image) }}" style="object-fit: cover;" alt="">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <h1 class="mb-3">{!! $project->translate(app()->getLocale())->name !!}</h1>
-                                    <p class="mb-4">{!! $project->translate(app()->getLocale())->description !!}</p>
-                                    {{-- <p><i class="fa fa-check text-primary me-3"></i>{{ $project->design_approach }}</p> --}}
-                                    {{-- <p><i class="fa fa-check text-primary me-3"></i>{{ $project->innovative_solutions }}</p> --}}
-                                    {{-- <p><i class="fa fa-check text-primary me-3"></i>{{ $project->project_management }}</p> --}}
-                                    <a href="{{ route('project_details', $project->id) }}" class="btn btn-primary py-3 px-5 mt-3">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
+        <!-- Article 5 -->
+        <div class="box" data-title="Journey in the Alps" data-date="2024-03-15">
+          <div class="coverPhoto">
+            <img src="{{ asset('assets/front') }}/images/news/5.jpg" alt="Desert" />
+          </div>
+          <div class="cardText">
+            <h3 data-i18n="article5Title">Journey in the Alps</h3>
+            <p data-i18n="article5Desc">Enjoy the breathtaking beauty of the snow-covered mountain peaks.</p>
+            <small class="article-date">2024-03-15</small>
+          </div>
+          <div class="cardFooter">
+            <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          </div>
         </div>
-        <!-- Show More Button -->
-        <div class="text-center mt-4 pt-3 ">
-            <a href="{{route('projects_all')}}"><button class="btn btn-primary px-5 py-2 rounded" id="toggle-more">{{trans('projects.read_more')}}</button>
-            </a>
-            </div>
-    </div>
-</div>
-<!-- Project End -->
 
-<!-- Carousel -->
+        <!-- Article 6 -->
+        <div class="box" data-title="Future Technology" data-date="2024-04-01">
+          <div class="coverPhoto">
+            <img src="{{ asset('assets/front') }}/images/news/6.jpg" alt="Desert" />
+          </div>
+          <div class="cardText">
+            <h3 data-i18n="article6Title">Future Technology</h3>
+            <p data-i18n="article6Desc">Learn about the latest innovations that will change our lives in the coming years.</p>
+            <small class="article-date">2024-04-01</small>
+          </div>
+          <div class="cardFooter">
+            <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          </div>
+        </div>
 
-<!-- Heading for Our Partners -->
-<div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+        <!-- Article 7 -->
+        <div class="box" data-title="Life in the Arctic" data-date="2024-04-18">
+          <div class="coverPhoto">
+            <img src="{{ asset('assets/front') }}/images/news/7.jpg" alt="Desert" />
+          </div>
+          <div class="cardText">
+            <h3 data-i18n="article7Title">Life in the Arctic</h3>
+            <p data-i18n="article7Desc">Discover how animals and humans survive in the harshest environment on Earth.</p>
+            <small class="article-date">2024-04-18</small>
+          </div>
+          <div class="cardFooter">
+            <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          </div>
+        </div>
 
-    <h2 class="section-title">{{trans('home.heading.title')}}</h2>
-    <h3 class="display-5 mb-4">{{trans('home.heading.subtitle')}}</h3>
-</div>
-<!-- </div> -->
+        <!-- Article 8 -->
+        <div class="box" data-title="Beginner's Guide to Farming" data-date="2024-05-01">
+          <div class="coverPhoto">
+            <img src="{{ asset('assets/front') }}/images/news/8.jpg" alt="Desert" />
+          </div>
+          <div class="cardText">
+            <h3 data-i18n="article8Title">Beginner's Guide to Farming</h3>
+            <p data-i18n="article8Desc">Start your own home farming journey and learn the best practices for success.</p>
+            <small class="article-date">2024-05-01</small>
+          </div>
+          <div class="cardFooter">
+            <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          </div>
+        </div>
 
-<!-- Carousel -->
-<div id="carouselExampleCaptions" class="carousel container-fluid slide container" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        @foreach ($partners->chunk(4) as $chunkIndex => $partnerChunk)
-            <div class="carousel-item {{ $chunkIndex == 0 ? 'active' : '' }}" data-bs-interval="1500">
-                <div class="d-flex justify-content-between">
-                    @foreach ($partnerChunk as $partner)
-                        <img src="{{ asset('images/partners/' . $partner->logo) }}"
-                             class="d-block"
-                             alt="Partner {{ $loop->iteration }}"
-                             style="height: 200px; width: 200px;">
-                    @endforeach
-                </div>
-            </div>
-        @endforeach
-    </div>
+        <!-- Article 9 -->
+        <div class="box" data-title="Rainforests: Nature's Treasures" data-date="2024-05-10">
+          <div class="coverPhoto">
+            <img src="{{ asset('assets/front') }}/images/news/9.jpg" alt="Desert" />
+          </div>
+          <div class="cardText">
+            <h3 data-i18n="article9Title">Rainforests: Nature's Treasures</h3>
+            <p data-i18n="article9Desc">Learn about the incredible biodiversity of rainforests and their importance.</p>
+            <small class="article-date">2024-05-10</small>
+          </div>
+          <div class="cardFooter">
+            <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          </div>
+        </div>
+
+        <!-- Article 10 -->
+        <div class="box" data-title="Astronomy for Beginners" data-date="2024-05-20">
+          <div class="coverPhoto">
+            <img src="{{ asset('assets/front') }}/images/news/10.jpg" alt="Desert" />
+          </div>
+          <div class="cardText">
+            <h3 data-i18n="article10Title">Astronomy for Beginners</h3>
+            <p data-i18n="article10Desc">Start your journey into astronomy and learn about planets, stars, and galaxies.</p>
+            <small class="article-date">2024-05-20</small>
+          </div>
+          <div class="cardFooter">
+            <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          </div>
+        </div>
+
+        <!-- Article 11 -->
+        <div class="box" data-title="How to Care for Your Houseplants" data-date="2024-06-01">
+          <div class="coverPhoto">
+            <img src="{{ asset('assets/front') }}/images/news/11.jpg" alt="Desert" />
+          </div>
+          <div class="cardText">
+            <h3 data-i18n="article11Title">How to Care for Your Houseplants</h3>
+            <p data-i18n="article11Desc">Your daily guide to keeping your plants healthy throughout the seasons.</p>
+            <small class="article-date">2024-06-01</small>
+          </div>
+          <div class="cardFooter">
+            <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          </div>
+        </div>
+
+        <!-- Article 12 -->
+        <div class="box" data-title="Artificial Intelligence in Our Lives" data-date="2024-06-15">
+          <div class="coverPhoto">
+            <img src="{{ asset('assets/front') }}/images/news/12.jpeg" alt="Desert" />
+          </div>
+          <div class="cardText">
+            <h3 data-i18n="article12Title">Artificial Intelligence in Our Lives</h3>
+            <p data-i18n="article12Desc">How AI is changing the way we work, communicate, and learn.</p>
+            <small class="article-date">2024-06-15</small>
+          </div>
+          <div class="cardFooter">
+            <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          </div>
+        </div>
+
+        <!-- Article 13 -->
+        <div class="box" data-title="The Smart Traveler's Guide" data-date="2024-07-01">
+          <div class="coverPhoto">
+            <img src="{{ asset('assets/front') }}/images/news/13.jpg" alt="Desert" />
+          </div>
+          <div class="cardText">
+            <h3 data-i18n="article13Title">The Smart Traveler's Guide</h3>
+            <p data-i18n="article13Desc">Smart tips for traveling on a budget while having an unforgettable experience.</p>
+            <small class="article-date">2024-07-01</small>
+          </div>
+          <div class="cardFooter">
+            <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          </div>
+        </div>
+
+        <!-- Article 14 -->
+        <div class="box" data-title="World Cuisine: A Culinary Journey" data-date="2024-07-12">
+          <div class="coverPhoto">
+            <img src="{{ asset('assets/front') }}/images/news/14.jpg" alt="Desert" />
+          </div>
+          <div class="cardText">
+            <h3 data-i18n="article14Title">World Cuisine: A Culinary Journey</h3>
+            <p data-i18n="article14Desc">Explore famous dishes from different cultures around the world.</p>
+            <small class="article-date">2024-07-12</small>
+          </div>
+          <div class="cardFooter">
+            <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          </div>
+        </div>
+
+        <!-- Article 15 -->
+
+       <div class="box" data-title="World Cuisine: A Culinary Journey" data-date="2024-07-12">
+          <div class="coverPhoto">
+            <img src="{{ asset('assets/front') }}/images/news/15.jpg" alt="Desert" />
+          </div>
+          <div class="cardText">
+            <h3 data-i18n="article15Title">World Cuisine: A Culinary Journey</h3>
+            <p data-i18n="article15Desc">Explore famous dishes from different cultures around the world.</p>
+            <small class="article-date">2024-03-02</small>
+          </div>
+          <div class="cardFooter">
+            <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          </div>
+        </div>
 
 
-    <!-- Carousel Controls -->
-    {{-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button> --}}
-</div>
+       <div class="box" data-title="World Cuisine: A Culinary Journey" data-date="2024-07-12">
+          <div class="coverPhoto">
+            <img src="{{ asset('assets/front') }}/images/news/16.jpeg" alt="Desert" />
+          </div>
+          <div class="cardText">
+            <h3 data-i18n="article16Title">World Cuisine: A Culinary Journey</h3>
+            <p data-i18n="article16Desc">Explore famous dishes from different cultures around the world.</p>
+            <small class="article-date">2024-07-12</small>
+          </div>
+          <div class="cardFooter">
+            <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          </div>
+        </div>
+
+
+      <div class="box" data-title="World Cuisine: A Culinary Journey" data-date="2024-14-12">
+          <div class="coverPhoto">
+            <img src="{{ asset('assets/front') }}/images/news/17.jpg" alt="Desert" />
+          </div>
+          <div class="cardText">
+            <h3 data-i18n="article17Title">World Cuisine: A Culinary Journey</h3>
+            <p data-i18n="article17Desc">Explore famous dishes from different cultures around the world.</p>
+            <small class="article-date">2024-07-12</small>
+          </div>
+          <div class="cardFooter">
+            <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          </div>
+        </div>
+
+       <div class="box" data-title="World Cuisine: A Culinary Journey" data-date="2024-010-12">
+          <div class="coverPhoto">
+            <img src="{{ asset('assets/front') }}/images/news/18.jpg" alt="Desert" />
+          </div>
+          <div class="cardText">
+            <h3 data-i18n="article18Title">World Cuisine: A Culinary Journey</h3>
+            <p data-i18n="article18Desc">Explore famous dishes from different cultures around the world.</p>
+            <small class="article-date">2024-07-12</small>
+          </div>
+          <div class="cardFooter">
+            <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="spikes"></div>
+
+
+
+
+
 
 
 

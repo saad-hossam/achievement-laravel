@@ -2,57 +2,123 @@
 @section('content')
 
 
-    <!-- Page Header Start -->
-    <div class="container-fluid page-header bg-primary py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container text-center py-5">
-            <h1 class="display-3 text-white mb-4 animated slideInDown">{{trans('header.our_services')}}</h1>
-            <nav aria-label="breadcrumb animated slideInDown">
-                <ol class="breadcrumb justify-content-center mb-0">
-                    <li class="breadcrumb-item"><a href="#">{{trans('home.house')}}</a></li>
-                    <li class="breadcrumb-item"><a href="#"></a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{trans('header.our_services')}}</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-    <!-- Page Header End -->
-
-
-<!-- Service Start -->
-<div class="container-xxl py-5">
+<!--Start Articles-->
+<div id="" style="padding-top:140px ;">
+    <h2 class="mainTitle" data-lang="gallary"></h2>
     <div class="container">
-        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-            <h4 class="section-title">{{trans('services.services_title')}}</h4>
-            <h6 class="display-6 mb-4">{{trans('services.services_subtitle')}}</h6>
-        </div>
-        <div class="row g-4">
-            <!-- Always Visible Services -->
-            @foreach ($services as $service )
+      <div class="image-description mt-5">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus ducimus explicabo reiciendis officia! Provident illo quas voluptas hic repudiandae repellendus molestias dolorum! Quia consectetur fuga voluptate at ratione, beatae illum.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus ducimus explicabo reiciendis officia! Provident illo quas voluptas hic repudiandae repellendus molestias dolorum! Quia consectetur fuga voluptate at ratione, beatae illum.
 
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="service-item d-flex position-relative text-center h-100">
-                    <img class="bg-img  " src="{{ asset('img/service-2.jpg') }}" alt="">
-                    <div class="service-text  w-100">
-                    <img class="mb-4 pt-3" src="{{ asset('images/services/'. $service->image) }}" alt="Icon">
-                    <h3 class="mb-3">{!! $service->translate(app()->getLocale())->name !!}</h3>
-                    <p class="mb-4">{!! Str::words($service->translate(app()->getLocale())->description, 20, '...') !!}</p> 
-                                       <a class="btn mb-4" href="{{route('service_details',$service->id)}}"><i class="fa fa-plus text-primary  fs-2"></i>{{trans('about.read_more')}}</a>
-                    </div>
-                    <div>
+      </div>
+      <h2 class="mainTitle" data-lang="gallary" style="margin-top: 50px"></h2>
+  <div class="container">
 
-                    </div>
-                </div>
-            </div>
-            @endforeach
-
-        </div>
-        <!-- Show More Button -->
-        <div class="text-center mt-4">
-            <button class="btn btn-primary" id="toggle-more">{{trans('projects.read_more')}}</button>
-        </div>
+  <div class="slider ">
+    <!-- Main Image -->
+    <div class="main-image-container">
+      <img id="mainImage" src="{{ asset('assets/front') }}/images/news/1.jpg" alt="Main Image" class="main-image">
     </div>
-</div>
-<!-- Service End -->
+
+    <!-- Thumbnail Images -->
+    <div class="thumbnail-container">
+  <img src="{{ asset('assets/front') }}/images/news/1.jpg" alt="Thumbnail 1" class="thumbnail" onclick="changeImage('images/news/1.jpg')">
+  <img src="{{ asset('assets/front') }}/images/news/2.jpg" alt="Thumbnail 2" class="thumbnail" onclick="changeImage('images/news/2.jpg')">
+  <img src="{{ asset('assets/front') }}/images/news/3.jpg" alt="Thumbnail 3" class="thumbnail" onclick="changeImage('images/news/3.jpg')">
+  <img src="{{ asset('assets/front') }}/images/news/4.jpg" alt="Thumbnail 4" class="thumbnail" onclick="changeImage('images/news/4.jpg')">
+  <img src="{{ asset('assets/front') }}/images/news/5.jpg" alt="Thumbnail 1" class="thumbnail" onclick="changeImage('images/news/5.jpg')">
+  <img src="{{ asset('assets/front') }}/images/news/6.jpg" alt="Thumbnail 2" class="thumbnail" onclick="changeImage('images/news/6.jpg')">
+  <img src="{{ asset('assets/front') }}/images/news/7.jpg" alt="Thumbnail 3" class="thumbnail" onclick="changeImage('images/news/7.jpg')">
+  <img src="{{ asset('assets/front') }}/images/news/8.jpg" alt="Thumbnail 4" class="thumbnail" onclick="changeImage('images/news/8.jpg')">
+  <img src="{{ asset('assets/front') }}/images/news/9.jpg" alt="Thumbnail 1" class="thumbnail" onclick="changeImage('images/news/9.jpg')">
+  <img src="{{ asset('assets/front') }}/images/news/10.jpg" alt="Thumbnail 2" class="thumbnail" onclick="changeImage('images/news/10.jpg')">
+  <img src="{{ asset('assets/front') }}/images/news/11.jpg" alt="Thumbnail 3" class="thumbnail" onclick="changeImage('images/news/11.jpg')">
+  <img src="{{ asset('assets/front') }}/images/news/12.jpeg" alt="Thumbnail 4" class="thumbnail" onclick="changeImage('images/news/12.jpeg')">
+  <img src="{{ asset('assets/front') }}/images/news/1.jpg" alt="Thumbnail 1" class="thumbnail" onclick="changeImage('images/news/1.jpg')">
+  <img src="{{ asset('assets/front') }}/images/news/2.jpg" alt="Thumbnail 2" class="thumbnail" onclick="changeImage('images/news/2.jpg')">
+  <img src="{{ asset('assets/front') }}/images/news/3.jpg" alt="Thumbnail 3" class="thumbnail" onclick="changeImage('images/news/3.jpg')">
+  <img src="{{ asset('assets/front') }}/images/news/4.jpg" alt="Thumbnail 4" class="thumbnail" onclick="changeImage('images/news/4.jpg')">
+  <img src="{{ asset('assets/front') }}/images/news/5.jpg" alt="Thumbnail 1" class="thumbnail" onclick="changeImage('images/news/5.jpg')">
+  <!-- Add more thumbnails as needed -->
+  </div>
+  </div>
+  </div>
+
+    </div>
+
+  </div>
+  <div class="spikes"></div>
+  <!--End Articles-->
+
+  <div id="topVideos">
+    <h2 class="mainTitle" data-lang="gallary"></h2>
+    <div class="container">
+      <div class="holder">
+        <!-- Sidebar List -->
+        <div class="list">
+          <div class="name" data-lang="videos">Videos</div>
+          <ul id="videoList">
+            <li data-video="https://www.youtube.com/embed/QAOg2UAuHeg" data-info="A classic music video.">
+              <div>
+                <span>Classic Music Video</span>
+              </div>
+              <img class="thumbnail" />
+
+            </li>
+            <li data-video="https://www.youtube.com/embed/aqz-KE-bpKQ" data-info="Big Buck Bunny animated short film.">
+              <div>
+                <span>Big Buck Bunny</span>
+              </div>
+              <img class="thumbnail" />
+
+            </li>
+            <li data-video="https://www.youtube.com/embed/kXYiU_JCYtU" data-info="Numb by Linkin Park.">
+              <div>
+                <span>Linkin Park - Numb</span>
+              </div>
+              <img class="thumbnail" />
+
+            </li>
+            <li data-video="https://www.youtube.com/embed/5qap5aO4i9A" data-info="Lofi hip hop radio for relaxing.">
+              <div>
+                <span>Lofi Hip Hop Radio</span>
+              </div>
+              <img class="thumbnail" />
+
+            </li>
+            <li data-video="https://www.youtube.com/embed/oHg5SJYRHA0" data-info="You know this one.">
+              <div>
+                <span>Surprise Video</span>
+              </div>
+              <img class="thumbnail" />
+
+            </li>
+          </ul>
+        </div>
+
+        <!-- Main Preview Area -->
+        <div class="preview">
+          <iframe id="videoPlayer" width="100%" height="500" src="{{ asset('assets/front') }}/https://www.youtube.com/embed/QAOg2UAuHeg" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="newsLinksSection">
+    <h2 class="sectionTitle" data-lang="news">Latest News</h2>
+    <ul class="newsLinks">
+      <li><a href="#"><i class="fas fa-newspaper icon news-icon"></i> New development in tech industry</a></li>
+      <li><a href="#"><i class="fas fa-newspaper icon news-icon"></i> Economy shows signs of recovery</a></li>
+      <li><a href="#"><i class="fas fa-newspaper icon news-icon"></i> New policies announced today</a></li>
+      <li><a href="#"><i class="fas fa-newspaper icon news-icon"></i> Sports team wins championship</a></li>
+      <li><a href="#"><i class="fas fa-newspaper icon news-icon"></i> Upcoming cultural events</a></li>
+    </ul>
+  </div>
+
+
+
+
 
 
 

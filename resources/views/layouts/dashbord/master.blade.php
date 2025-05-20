@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+    <link rel="icon" href="{{ URL::asset('images/logo/b8c72a254b2d423f8e19c1b9f9d387fc (1).png') }}" type="image/x-icon" />
+
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

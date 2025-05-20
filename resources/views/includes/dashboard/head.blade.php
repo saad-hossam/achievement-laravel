@@ -1,7 +1,7 @@
 <!-- Title -->
-<title> alakaria dashboard </title>
+<title>  اﻹنجازات </title>
 <!-- Favicon -->
-<link rel="icon" href="{{ URL::asset('images/logo/274730667_341453347913506_6048684782427197231_n.jpg') }}" type="image/x-icon" />
+<link rel="icon" href="{{ URL::asset('assets/img/logo.png') }}" type="image/x-icon" />
 <!-- Icons css -->
 <link href="{{ URL::asset('assets/admin/css-rtl/icons.css') }}" rel="stylesheet">
 <!--  Custom Scroll bar-->
