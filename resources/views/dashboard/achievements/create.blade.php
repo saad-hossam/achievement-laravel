@@ -18,11 +18,11 @@
 <!-- Breadcrumb -->
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
-        <h4 class="content-title mb-0 my-auto">إضافة مشروع جديد</h4>
+        <h4 class="content-title mb-0 my-auto">إضافة انجاز جديد</h4>
     </div>
-    @can('project-list')
+    @can('achievement-list')
     <div class="d-flex my-xl-auto right-content">
-        <a class="btn btn-primary btn-block" href="{{ route('projects.index') }}">جميع المشاريع</a>
+        <a class="btn btn-primary btn-block" href="{{ route('achievements.index') }}">جميع الانجازات</a>
     </div>
     @endcan
 </div>
@@ -45,7 +45,7 @@
                 @endif
 
                 <!-- Form -->
-                <form method="POST" action="{{ route('projects.store') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('achievements.store') }}" enctype="multipart/form-data">
                     @csrf
 
                     <!-- Multilingual Tabs -->
@@ -67,15 +67,17 @@
                                 <div class="tab-pane mt-3 fade @if ($loop->first) show active @endif" id="{{ $key }}"
                                     role="tabpanel">
                                     <div class="form-group">
-                                        <label>{{ __('words.project_name') }} ({{ $lang }})</label>
+                                        <label>{{ __('words.achievement_title') }} ({{ $lang }})</label>
+                                        <input type="text" name="{{ $key }}[title]" id="title-{{ $key }}" class="form-control" placeholder="الاسم" required value="{{ old($key . '.title') }}">
+{{--
                                         <textarea name="{{ $key }}[name]" class="form-control plain-text"
-                                            id="name-{{ $key }}" rows="2">{{ old("$key.name") }}</textarea>
+                                            id="name-{{ $key }}" rows="2">{{ old("$key.name") }}</textarea> --}}
                                     </div>
                                     <div class="form-group">
-                                        <label>{{ __('words.project_description') }} ({{ $lang }})</label>
-                                        <textarea name="{{ $key }}[description]" class="form-control plain-text"
-                                            id="description-{{ $key }}"
-                                            rows="5">{{ old("$key.description") }}</textarea>
+                                        <label>{{ __('words.achievement_desc') }} ({{ $lang }})</label>
+                                        <textarea name="{{ $key }}[desc]" class="form-control plain-text"
+                                            id="desc-{{ $key }}"
+                                            rows="5">{{ old("$key.desc") }}</textarea>
                                     </div>
                                 </div>
                                 @endforeach
@@ -96,7 +98,7 @@
                         </div>
 
                         <div class="col-md-6">
-                            <label>حالة المشروع</label>
+                            <label>الحالة</label>
                             <select class="form-control select2" name="status">
                                 <option value="active">مفعل</option>
                                 <option value="disabled">غير مفعل</option>
@@ -105,18 +107,18 @@
 
                         <div class="col-md-6 mt-3">
                             <label>الصورة الرئيسية</label>
-                            <input type="file" name="image" class="dropify" data-height="200" />
+                            <input type="file" name="image_layout" class="dropify" data-height="200" />
                         </div>
 
-                        <div class="col-md-6 mt-3">
+                        {{-- <div class="col-md-6 mt-3">
                             <label>صور إضافية</label>
                             <input type="file" name="images[]" class="dropify" data-height="200" multiple />
-                        </div>
+                        </div> --}}
                     </div>
 
                     <!-- Submit Button -->
                     <div class="text-center mt-4">
-                        <button type="submit" class="btn btn-primary">إضافة المشروع</button>
+                        <button type="submit" class="btn btn-primary">إضافة</button>
                     </div>
                 </form>
             </div>
@@ -141,7 +143,7 @@
         .catch(error => console.error('Error initializing CKEditor for name:', error));
 
     ClassicEditor
-        .create(document.querySelector('#description-{{ $key }}'))
+        .create(document.querySelector('#desc-{{ $key }}'))
         .catch(error => console.error('Error initializing CKEditor for description:', error));
 @endforeach
 

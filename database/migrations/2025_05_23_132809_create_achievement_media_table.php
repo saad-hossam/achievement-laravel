@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('achievement_media', function (Blueprint $table) {
             $table->id();
             $table->foreignId('achievement_id')->constrained()->cascadeOnDelete();
-            $table->enum('type', ['image', 'youtube']);
-            $table->string('path_or_url');
+            $table->enum('type', ['image', 'video']);
+            $table->string('path');
             $table->timestamps();
         });
     }

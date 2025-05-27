@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\Achievement;
+use App\Traits\SaveFile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AchievementController extends Controller
 {
+    use SaveFile;
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +18,9 @@ class AchievementController extends Controller
      */
     public function index()
     {
-        $achievements=Achievement::all();
-       return view('dashboard.achievements.index',['achievements'=>$achievements]);
-
+        $achievements = Achievement::with('department')->get();
+        // dd($achievements[0]->department->name);
+        return view('dashboard.achievements.index', ['achievements' => $achievements]);
     }
 
     /**
@@ -26,7 +30,8 @@ class AchievementController extends Controller
      */
     public function create()
     {
-        return view('dashboard.achievements.create');
+        $departments = Department::active()->get();
+        return view('dashboard.achievements.create', ['departments' => $departments]);
     }
 
     /**
@@ -37,24 +42,27 @@ class AchievementController extends Controller
      */
     public function store(Request $request)
     {
-             // Step 1: Save the department main fields (e.g., status)
-          $data = $request->except(['_token', 'ar', 'en', 'fr']); // Exclude translations
-          if ($request->hasFile('image')) {
-            $finalImagePathName = $this->SaveImage('images/departments', $request->file('image'));
-            $data['image'] = $finalImagePathName; // Save the image path
-          }
-          $department = Department::create($data);  // This will save 'status' and other fields
-          // Step 2: Handle translations for each locale (ar, en, fr)
-          $locales = array_keys(config('app.languages'));  // List of locales to process
-          foreach ($locales as $locale) {
-              if ($request->has($locale)) {
-                  // Create or update the translation for each locale
-                  $department->translateOrNew($locale)->name = $request->input("$locale.name");
-              }
-          }
-          // Save the department along with its translations
-          $department->save();
-          return redirect()->route('departments.index');
+        // dd($request);
+        // Step 1: Save the department main fields (e.g., status)
+        $data = $request->except(['_token', 'ar', 'en']); // Exclude translations
+        if ($request->hasFile('image_layout')) {
+            $finalImagePathName = $this->SaveImage('images/achievements', $request->file('image_layout'));
+            $data['image_layout'] = $finalImagePathName; // Save the image path
+        }
+        $data['created_by'] = Auth::id();
+        $achievement = Achievement::create($data);  // This will save 'status' and other fields
+        // Step 2: Handle translations for each locale (ar, en, fr)
+        $locales = array_keys(config('app.languages'));  // List of locales to process
+        foreach ($locales as $locale) {
+            if ($request->has($locale)) {
+                // Create or update the translation for each locale
+                $achievement->translateOrNew($locale)->title = $request->input("$locale.title");
+                $achievement->translateOrNew($locale)->desc = $request->input("$locale.desc");
+            }
+        }
+        // Save the department along with its translations
+        $achievement->save();
+        return redirect()->route('achievements.edit', $achievement->id);
     }
 
     /**
@@ -74,9 +82,19 @@ class AchievementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Achievement $achievement)
     {
-        //
+        $links=$achievement->links()->get();
+        $media=$achievement->media()->orderBy('type')->get();
+        // dd($media);
+
+        $departments = Department::active()->get();
+        return view('dashboard.achievements.edit', [
+                                                    'achievement' => $achievement,
+                                                     'links'=>$links,
+                                                     'departments' => $departments,
+                                                     'media'=>$media
+                                                    ]);
     }
 
     /**
@@ -86,9 +104,27 @@ class AchievementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,  Achievement $achievement)
     {
-        //
+        $data = $request->except(['_token', '_method', 'ar', 'en', 'fr']); // Exclude translations
+
+        if ($request->hasFile('image_layout')) {
+            if ($achievement->image_layout && file_exists(public_path('images/achievements/' . $achievement->image_layout))) {
+                unlink(public_path('images/achievements/' . $achievement->image_layout));
+            }
+            $finalImagePathName = $this->SaveImage('images/achievements', $request->file('image_layout'));
+            $data['image_layout'] = $finalImagePathName; // Save the image path
+        }
+        $achievement->update($data);
+        $locales = array_keys(config('app.languages')); // List of locales to process
+        foreach ($locales as $locale) {
+            if ($request->has($locale)) {
+                $achievement->translateOrNew($locale)->title = $request->input("$locale.title");
+                $achievement->translateOrNew($locale)->desc = $request->input("$locale.desc");
+            }
+        }
+        $achievement->save();
+        return redirect()->back();
     }
 
     /**
