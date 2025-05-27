@@ -20,6 +20,10 @@ class HomeController extends Controller
 
         ]);
     }
+    public function services()
+    {
+        return view('Front.services');
+    }
 
 
 }
