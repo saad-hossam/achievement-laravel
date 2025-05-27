@@ -1,12 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\Slider;
-use App\Models\Gallary;
-use App\Models\History;
-use App\Models\Partner;
-use App\Models\Project;
-use App\Models\Service;
 use App\Models\Department;
 use Illuminate\Http\Request;
 
