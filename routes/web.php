@@ -76,6 +76,8 @@ Route::group(
     function () {
         Route::get('/',  [HomeController::class, 'index'])->name('home');
         // Route::get('/about',  [HomeController::class, 'about'])->name('about');
+        Route::get('/services',  [HomeController::class, 'services'])->name('services');
+
     }
 );
 
