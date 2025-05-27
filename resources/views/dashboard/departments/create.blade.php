@@ -68,7 +68,7 @@
                             <div class="col-md-6">
                                 <label class="form-label h5" for="image">الصوره</label>
                                 <div class="form-group">
-                                    <input name="image" type="file" class="form-control" required>
+                                    <input name="image" type="file" class="form-control" >
                                 </div>
                             </div>
 

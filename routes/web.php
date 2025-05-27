@@ -2,10 +2,12 @@
 
 use App\Models\Project;
 use App\Mail\UserMessage;
+use App\Models\Achievement;
+use App\Models\AchievementLink;
 use Illuminate\Contracts\View\View;
+
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -26,6 +28,9 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\AchievementController;
+use App\Http\Controllers\AchievementLinkController;
+use App\Http\Controllers\AchievementMediaController;
 
 // use App\Http\Middleware\TrackVisitor;
 
@@ -56,6 +61,13 @@ Route::group(['prefix'=>'/admin/','middleware' => ['auth','admin']], function ()
 
     Route::resource('users', UserController::class);
     Route::resource('roles', RoleController::class);
+    Route::resource('departments', DepartmentController::class);
+    Route::resource('achievements', AchievementController::class);
+    Route::resource('achievement_links', AchievementLinkController::class);
+    Route::resource('achievement_media', AchievementMediaController::class);
+
+    Route::get('/achievement_links/create/{id}', [AchievementLinkController::class, 'create'])->name('achievement.links.create');
+    Route::get('/achievement_media/create/{id}', [AchievementMediaController::class, 'create'])->name('achievement.media.create');
 
 
 

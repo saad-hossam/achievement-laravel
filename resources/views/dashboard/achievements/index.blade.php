@@ -2,7 +2,7 @@
 @section('css')
 
 @section('title')
-    الاقسام
+    الانجازات
 @stop
 
 <!-- Internal Data table css -->
@@ -21,14 +21,14 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">الاقسام</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ قائمة
-                الاقسام</span>
+            <h4 class="content-title mb-0 my-auto">الانجازات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ قائمة
+                الانجازات</span>
         </div>
     </div>
-    @can('department-create')
+    @can('achievement-create')
 
     <div class="d-flex my-xl-auto right-content">
-        <a class="btn btn-primary btn-block" href="{{ route('departments.create') }}">اضافه قسم</a>
+        <a class="btn btn-primary btn-block" href="{{ route('achievements.create') }}">اضافه انجاز</a>
     </div>
     @endcan
 </div>
@@ -92,57 +92,68 @@
                 </div> --}}
             </div>
             <div class="card-body">
-                <div class="table-responsive hoverable-table">
-                    <table class="table table-hover  text-md-nowrap" id="example1" data-page-length='50' style=" text-align: center;">
-                        <thead>
-                            <tr>
-                                <th class="wd-10p border-bottom-0">#</th>
-                                <th class="wd-15p border-bottom-0">اسم القسم</th>
-                                {{-- <th class="wd-15p border-bottom-0">صورة القسم</th> --}}
-                                <th class="wd-15p border-bottom-0">حالة القسم</th>
-                                <th class="wd-15p border-bottom-0">العمليات </th>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if ($departments->count()>0)
-                             @foreach ($departments as $department)
-                                <tr>
-                                    <td>{{ $department->id }}</td>
-                                    <td>{!! $department->name !!}</td>
-                                    {{-- <td><a href="{{ asset('images/departments/' . $department->image) }}" target="_blank"><img src="{{ asset('images/departments/' . $department->image) }}" alt=""></a></td> --}}
-                                    <td>
-                                        @if ($department->status == 'active')
-                                            <span class="label text-success  d-flex  " style="margin-right: 50px;">
-                                                <div class="dot-label bg-success "></div>مفعل
-                                            </span>
-                                        @else
-                                            <span class="label text-danger  d-flex " style="margin-right: 50px;">
-                                                <div class="dot-label bg-danger "></div>غير مفعل
-                                            </span>
-                                        @endif
-                                    </td>
-
-                                    <td>
-                                        @can('department-edit')
-
-                                        <a href="{{ route('departments.edit', $department->id) }}" class="btn btn-sm btn-info"
-                                            title="تعديل"><i class="las la-pen"></i></a>
-                                        @endcan
-                                        @can('department-delete')
-                                        <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                            data-user_id="{{ $department->id }}" data-username="{{ $department->name }}"
-                                            data-toggle="modal" href="#modaldemo8" title="حذف"><i class="las la-trash"></i></a>
-
-                                        @endcan
-
-                                    </td>
-                                </tr>
-                                @endforeach
-
+                <table class="table table-hover text-md-nowrap" id="example1" data-page-length='50' style="text-align: center;">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>عنوان الانجاز</th>
+                        <th>اسم القسم</th>
+                        {{-- <th>الصورة</th> --}}
+                        <th>الحالة</th>
+                        <th>عمليات</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @forelse ($achievements as $achievement)
+                        <tr>
+                          <td>{{ $achievement->id }}</td>
+                          <td>{!! $achievement->title !!}</td>
+                          <td>{!! optional($achievement->department)->name !!}</td>
+                          {{-- <td>
+                            @if($achievement->image_layout)
+                              <a target="_blank" href="{{ asset('images/achievements/' . $achievement->image_layout) }}">
+                                <img class="rounded" style="max-width:30px; max-height:30px"
+                                     src="{{ asset('images/achievements/' . $achievement->image_layout) }}">
+                              </a>
                             @endif
-                        </tbody>
-                    </table>
+                          </td> --}}
+                          <td>
+                            @if ($achievement->status == 'active')
+                              <span class="label text-success d-flex" style="margin-right: 50px;">
+                                <div class="dot-label bg-success"></div>مفعل
+                              </span>
+                            @else
+                              <span class="label text-danger d-flex" style="margin-right: 50px;">
+                                <div class="dot-label bg-danger"></div>غير مفعل
+                              </span>
+                            @endif
+                          </td>
+                          <td>
+                            @can('achievement-edit')
+                            <a href="{{ route('achievements.edit', $achievement->id) }}" class="btn btn-sm btn-info" title="تعديل">
+                              <i class="las la-pen"></i>
+                            </a>
+                            @endcan
+
+                            @can('achievement-delete')
+                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
+                               data-user_id="{{ $achievement->id }}" data-username="{!! $achievement->title !!}"
+                               data-toggle="modal" href="#modaldemo8" title="حذف">
+                              <i class="las la-trash"></i>
+                            </a>
+                            @endcan
+                          </td>
+                        </tr>
+                      @empty
+                        <tr>
+                          <td colspan="6">لا توجد بيانات</td>
+                        </tr>
+                      @endforelse
+                    </tbody>
+                  </table>
+
+
                 </div>
             </div>
         </div>
@@ -157,12 +168,12 @@
                     <h6 class="modal-title">حذف المستخدم</h6><button aria-label="Close" class="close"
                         data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
                 </div>
-                <form action="{{ route('departments.destroy',0) }}" method="post">
+                <form action="{{ route('achievements.destroy',0) }}" method="post">
                     {{ method_field('delete') }}
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <p>هل انت متاكد من عملية الحذف ؟</p><br>
-                        <input type="hidden" name="department_id" id="user_id" value="">
+                        <input type="hidden" name="project_id" id="user_id" value="">
                         <input class="form-control" name="username" id="username" type="text" readonly>
                     </div>
                     <div class="modal-footer">
@@ -212,6 +223,7 @@
     })
 
 </script>
+
 
 
 @endsection

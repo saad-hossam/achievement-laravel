@@ -6,11 +6,11 @@ Trait  SaveFile
 {
 
     public function SaveImage($path,$image){
-
         $uploadpath = $path;
-        $fileimage=$image;
+        $fileimage = $image;
         $extension = $fileimage->getClientOriginalExtension();
-        $filename = time().$fileimage->getClientOriginalName(). '.' . $extension;
+        $originalName = pathinfo($fileimage->getClientOriginalName(), PATHINFO_FILENAME);
+        $filename = time() . $originalName . '.' . $extension;
         $fileimage->move($uploadpath, $filename);
         return $filename;
     }

@@ -23,23 +23,18 @@ class Department extends Model
         // 'translations' // Assuming this is the pivot table name
     ];
 
-    // protected static function boot()
-    // {
-    //     static::deleting(function ($department) {
-    //         $department->translations()->delete();
-    //     });
-    // }
     public function translations()
     {
         return $this->hasMany(DepartmentTranslation::class);
     }
 
-    // Department.php
 
-public function projects()
+    public function achievements()
     {
-        return $this->hasMany(Project::class);
+        return $this->hasMany(Achievement::class);
     }
+
+
     public function scopeActive($query)
     {
         return $query->where('status', 'active');
