@@ -91,8 +91,9 @@ class AchievementLinkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(EditAchievementLinkRequest $request,AchievementLink $achievement_link)
+    public function update(Request $request,AchievementLink $achievement_link)
     {
+        // return $request;
         $data = $request->except(['_token', '_method', 'ar', 'en']);
         $achievement_link->update($data);
         $locales = array_keys(config('app.languages')); // List of locales to process

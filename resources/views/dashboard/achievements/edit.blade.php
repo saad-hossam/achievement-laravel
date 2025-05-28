@@ -168,14 +168,14 @@
             <div class="card">
                 <div class="card-header pb-0">
                     <div class="col-sm-1 col-md-2">
-                        @can('achievement_link-create ')
+                        @can('achievement_link-create')
                         <a class="btn btn-primary btn-block" href="{{ route('achievement.links.create',$achievement->id) }}">اضافه لينك</a>
                         @endcan
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive hoverable-table">
-                        @can('achievement_link-list ')
+                        @can('achievement_link-list')
 
                         <table class="table table-hover  text-md-nowrap" id="example1" data-page-length='50' style=" text-align: center;">
                             <thead>
