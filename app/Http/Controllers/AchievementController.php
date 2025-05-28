@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\SaveFile;
 use App\Models\Department;
 use App\Models\Achievement;
-use App\Traits\SaveFile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class AchievementController extends Controller
@@ -45,6 +46,10 @@ class AchievementController extends Controller
         // dd($request);
         // Step 1: Save the department main fields (e.g., status)
         $data = $request->except(['_token', 'ar', 'en']); // Exclude translations
+        $achievementDate = $request->achievement_date
+    ? Carbon::createFromFormat('m/d/Y', $request->achievement_date)->format('Y-m-d')
+    : null;
+    $data['achievement_date']=$achievementDate;
         if ($request->hasFile('image_layout')) {
             $finalImagePathName = $this->SaveImage('images/achievements', $request->file('image_layout'));
             $data['image_layout'] = $finalImagePathName; // Save the image path
@@ -107,7 +112,10 @@ class AchievementController extends Controller
     public function update(Request $request,  Achievement $achievement)
     {
         $data = $request->except(['_token', '_method', 'ar', 'en', 'fr']); // Exclude translations
-
+        $achievementDate = $request->achievement_date
+        ? Carbon::createFromFormat('m/d/Y', $request->achievement_date)->format('Y-m-d')
+        : null;
+        $data['achievement_date']=$achievementDate;
         if ($request->hasFile('image_layout')) {
             if ($achievement->image_layout && file_exists(public_path('images/achievements/' . $achievement->image_layout))) {
                 unlink(public_path('images/achievements/' . $achievement->image_layout));

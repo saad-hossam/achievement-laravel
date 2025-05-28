@@ -16,6 +16,11 @@
 <!--- Custom-scroll -->
 <link href="{{URL::asset('assets/plugins/custom-scroll/jquery.mCustomScrollbar.css')}}" rel="stylesheet">
 
+
+<link href="{{URL::asset('assets/admin/plugins/amazeui-datetimepicker/css/amazeui.datetimepicker.css')}}" rel="stylesheet">
+<link href="{{URL::asset('assets/admin/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.css')}}" rel="stylesheet">
+<link href="{{URL::asset('assets/admin/plugins/pickerjs/picker.min.css')}}" rel="stylesheet">
+
 @endsection
 
 @section('page-header')
@@ -95,7 +100,10 @@
                                 </select>
                             </div>
                         </div>
-
+                        <div class="col-md-6">
+                            <label>تاريخ الانجاز</label>
+                            <input class="form-control fc-datepicker" name="achievement_date" placeholder="MM/DD/YYYY" type="text" value="{{ $achievement->achievement_date }}">
+                        </div>
                         <div class="col-md-6 mg-t-20 mg-md-t-0">
                             <label class="form-lable h5" for="status">حاله العميل</label>
                             <div class="form-group">
@@ -380,5 +388,23 @@
         modal.find('.modal-body #media_id').val(media_id)
     })
 </script>
+<!--Internal  Datepicker js -->
+<script src="{{URL::asset('assets/admin/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
+<!--Internal  jquery.maskedinput js -->
+<script src="{{URL::asset('assets/admin/plugins/jquery.maskedinput/jquery.maskedinput.js')}}"></script>
+<!--Internal  spectrum-colorpicker js -->
+<script src="{{URL::asset('assets/admin/plugins/spectrum-colorpicker/spectrum.js')}}"></script>
+<!-- Internal Select2.min js -->
+<script src="{{URL::asset('assets/admin/plugins/select2/js/select2.min.js')}}"></script>
+<!--Internal Ion.rangeSlider.min js -->
+<script src="{{URL::asset('assets/admin/plugins/ion-rangeslider/js/ion.rangeSlider.min.js')}}"></script>
+<!--Internal  jquery-simple-datetimepicker js -->
+<script src="{{URL::asset('assets/admin/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js')}}"></script>
+<!-- Ionicons js -->
+<script src="{{URL::asset('assets/admin/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.js')}}"></script>
+<!--Internal  pickerjs js -->
+<script src="{{URL::asset('assets/admin/plugins/pickerjs/picker.min.js')}}"></script>
+<!-- Internal form-elements js -->
+<script src="{{URL::asset('assets/admin/js/form-elements.js')}}"></script>
 
 @endsection
