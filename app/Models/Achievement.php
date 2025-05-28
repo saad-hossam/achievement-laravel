@@ -15,6 +15,7 @@ class Achievement extends Model
         'department_id',
         'created_by',
         'updated_by',
+        'achievement_date',
         'status',
     ];
 

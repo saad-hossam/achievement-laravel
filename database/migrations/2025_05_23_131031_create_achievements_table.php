@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('achievements', function (Blueprint $table) {
             $table->id();
             $table->string('image_layout')->nullable();
+            $table->date('achievement_date')->nullable();
             $table->foreignId('department_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();

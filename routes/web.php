@@ -57,10 +57,6 @@ Route::group(['prefix'=>'/admin/','middleware' => ['auth','admin']], function ()
     Route::get('/achievement_media/create/{id}', [AchievementMediaController::class, 'create'])->name('achievement.media.create');
 
 
-
-
-
-
     // Route::post('/product_save_photos',  [ProductController::class, 'saveAttachmentPhotos'])->name('products.photo.store');
 
     // Route::resource('services', ServiceController::class);
