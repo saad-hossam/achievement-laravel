@@ -1,6 +1,9 @@
 @extends('layouts.front.master')
 
 @section('content')
+<style>
+
+  </style>
 
   <!-- Fix for any navigation buttons with hidden class -->
   <script>
@@ -16,19 +19,19 @@
           button.style.opacity = "1";
           button.style.visibility = "visible";
         });
-        
+
         console.log("Fixed navigation buttons visibility");
       }
-      
+
       // Run immediately
       fixNavigationButtons();
-      
+
       // And also run after a small delay to catch any buttons added later
       setTimeout(fixNavigationButtons, 500);
     });
   </script>
   <!--Start Header-->
- 
+
 
   <main>
     <!-- Banner/Breadcrumbs -->
@@ -42,7 +45,7 @@
     <div id="details-content" style="padding-top:40px;">
       <div class="container">
         <h2 class="mainTitle" data-lang="gallary"></h2>
-        
+
         <!-- Content Filter Bar -->
         <div class="content-filter-bar">
           <button class="filter-btn active" data-filter="all" data-i18n="show_all">Show All</button>
@@ -51,7 +54,7 @@
           <button class="filter-btn" data-filter="news" data-i18n="news_filter">News</button>
           <button class="filter-btn" data-filter="description" data-i18n="description">Description</button>
         </div>
-        
+
         <div class="details-layout">
           <!-- Image Slider Column -->
           <div class="slider-column" data-content-type="images">
@@ -84,14 +87,14 @@
                   <i class="fas fa-chevron-right rtl-flip"></i>
                 </button>
           </div>
-              
+
               <!-- Slide Indicators -->
               <div class="slide-indicators-container">
                 <div class="slide-indicators image-indicators"></div>
         </div>
       </div>
     </div>
-          
+
           <!-- Description Column -->
           <div class="description-column" data-content-type="description">
             <div class="image-description">
@@ -124,7 +127,7 @@
     <div id="relatedVideosSection" data-content-type="videos">
       <div class="container">
         <h2 class="sectionTitle" data-lang="videos">Related Videos</h2>
-        
+
         <!-- Main Video Player -->
         <div class="main-video-container">
           <div class="main-video-player">
@@ -138,13 +141,13 @@
             <p id="mainVideoDescription">Watch this comprehensive overview of our industrial development achievement, highlighting key milestones and outcomes of this landmark project.</p>
                 </div>
                 </div>
-        
+
         <!-- Video Thumbnails Slider -->
         <div class="video-slider-container">
           <button class="video-nav-btn video-prev-btn" aria-label="Previous videos">
             <i class="fas fa-chevron-left rtl-flip"></i>
           </button>
-          
+
           <div class="video-slider-track-wrapper">
             <div class="video-slider-track">
               <!-- Video Card 1 -->
@@ -168,7 +171,7 @@
         </div>
                 <div class="video-title" data-i18n="project_lead_interview">Interview with Project Lead Engineer</div>
       </div>
-              
+
               <!-- Video Card 3 -->
               <div class="video-card" data-video-id="VIDEO_ID_3" data-video-title="Project Completion Ceremony Highlights" data-video-desc="Highlights from the official ceremony marking the successful completion of this groundbreaking industrial development initiative." onclick="playInMainPlayer(this)">
                 <div class="video-thumbnail-box">
@@ -190,7 +193,7 @@
                 </div>
                 <div class="video-title" data-i18n="behind_scenes">Behind the Scenes: Project Development</div>
               </div>
-              
+
               <!-- Video Card 5 -->
               <div class="video-card" data-video-id="VIDEO_ID_5" data-video-title="Impact Analysis: Community Benefits" data-video-desc="Learn about the positive economic and social impacts this project has created for the surrounding communities and region." onclick="playInMainPlayer(this)">
                 <div class="video-thumbnail-box">
@@ -203,11 +206,11 @@
               </div>
             </div>
           </div>
-          
+
           <button class="video-nav-btn video-next-btn" aria-label="Next videos">
             <i class="fas fa-chevron-right rtl-flip"></i>
           </button>
-          
+
           <!-- Video Slide Indicators -->
           <div class="slide-indicators-container">
             <div class="slide-indicators video-indicators"></div>
@@ -215,7 +218,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- Video Modal -->
     <div id="videoModal" class="video-modal">
       <div class="video-modal-content">
@@ -237,11 +240,11 @@
       </ul>
     </div>
 
-    
+
   </main>
 
   <div class="scrollToTop"><i class="fa-solid fa-arrow-up"></i></div>
-  
+
   <!-- Fullscreen Image Overlay -->
   <div id="fullscreenOverlay" class="fullscreen-overlay">
     <div class="overlay-header">
@@ -262,12 +265,12 @@
       <span id="currentImageIndex">1</span> / <span id="totalImages">12</span>
     </div>
   </div>
-  
+
   <!-- Test button (temporarily for debugging) -->
   <!-- <button id="testOverlayBtn" style="position: fixed; bottom: 70px; right: 20px; z-index: 9999; padding: 10px 20px; background: #ff0000; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">Click to Test Overlay</button> -->
-  
 
- 
- 
+
+
+
 
 @endsection

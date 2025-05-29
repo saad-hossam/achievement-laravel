@@ -1,6 +1,20 @@
 @extends("layouts.front.master")
 @section('content')
 
+  <!-- Banner/Breadcrumbs -->
+  <div class="banner">
+    <div class="container">
+      <p class="breadcrumbs" data-lang="about"></p>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <div class="container py-5">
+    <div class="row align-items-center hero-section">
+      <div class="col-lg-5 mb-4 mb-lg-0">
+        <div class="profile-image-container shadow">
+          <img src="{{ asset('assets/front') }}/images/1.jpeg" alt="Major General Mokhtar Abdel Latif" class="img-fluid rounded"
+            onerror="this.src='https://via.placeholder.com/400x500?text=Profile+Photo'">
      <!-- Banner/Breadcrumbs -->
      <div class="banner">
         <div class="container">
