@@ -13,7 +13,7 @@
     <div class="row align-items-center hero-section">
       <div class="col-lg-5 mb-4 mb-lg-0">
         <div class="profile-image-container shadow">
-          <img src="images/1.jpeg" alt="Major General Mokhtar Abdel Latif" class="img-fluid rounded"
+          <img src="{{ asset('assets/front') }}/images/1.jpeg" alt="Major General Mokhtar Abdel Latif" class="img-fluid rounded"
             onerror="this.src='https://via.placeholder.com/400x500?text=Profile+Photo'">
         </div>
       </div>

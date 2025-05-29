@@ -107,7 +107,7 @@
             survive.</p>
         </div>
         <div class="cardFooter">
-          <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          <a href="{{route('details')}}" data-i18n="readMore">Read More</a>
         </div>
       </div>
 
@@ -123,7 +123,7 @@
             behaviors.</p>
         </div>
         <div class="cardFooter">
-          <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          <a href="{{route('details')}}" data-i18n="readMore">Read More</a>
         </div>
       </div>
 
@@ -138,7 +138,7 @@
           <p data-i18n="article3Desc">Dive into the unknown as we explore the hidden wonders of the ocean floor.</p>
         </div>
         <div class="cardFooter">
-          <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          <a href="{{route('details')}}" data-i18n="readMore">Read More</a>
         </div>
       </div>
 
@@ -153,7 +153,7 @@
           <p data-i18n="article4Desc">Learn how to capture stunning images in the dark using simple settings.</p>
         </div>
         <div class="cardFooter">
-          <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          <a href="{{route('details')}}" data-i18n="readMore">Read More</a>
         </div>
       </div>
 
@@ -168,7 +168,7 @@
           <p data-i18n="article5Desc">Enjoy the breathtaking beauty of the snow-covered mountain peaks.</p>
         </div>
         <div class="cardFooter">
-          <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          <a href="{{route('details')}}" data-i18n="readMore">Read More</a>
         </div>
       </div>
 
@@ -184,7 +184,7 @@
             years.</p>
         </div>
         <div class="cardFooter">
-          <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          <a href="{{route('details')}}" data-i18n="readMore">Read More</a>
         </div>
       </div>
 
@@ -200,7 +200,7 @@
           </p>
         </div>
         <div class="cardFooter">
-          <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          <a href="{{route('details')}}" data-i18n="readMore">Read More</a>
         </div>
       </div>
 
@@ -216,7 +216,7 @@
           </p>
         </div>
         <div class="cardFooter">
-          <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          <a href="{{route('details')}}" data-i18n="readMore">Read More</a>
         </div>
       </div>
 
@@ -231,7 +231,7 @@
           <p data-i18n="article9Desc">Learn about the incredible biodiversity of rainforests and their importance.</p>
         </div>
         <div class="cardFooter">
-          <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          <a href="{{route('details')}}" data-i18n="readMore">Read More</a>
         </div>
       </div>
 
@@ -247,7 +247,7 @@
           </p>
         </div>
         <div class="cardFooter">
-          <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          <a href="{{route('details')}}" data-i18n="readMore">Read More</a>
         </div>
       </div>
 
@@ -263,7 +263,7 @@
           <p data-i18n="article11Desc">Your daily guide to keeping your plants healthy throughout the seasons.</p>
         </div>
         <div class="cardFooter">
-          <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          <a href="{{route('details')}}" data-i18n="readMore">Read More</a>
         </div>
       </div>
 
@@ -279,7 +279,7 @@
           <p data-i18n="article12Desc">How AI is changing the way we work, communicate, and learn.</p>
         </div>
         <div class="cardFooter">
-          <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          <a href="{{route('details')}}" data-i18n="readMore">Read More</a>
         </div>
       </div>
 
@@ -295,7 +295,7 @@
           </p>
         </div>
         <div class="cardFooter">
-          <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          <a href="{{route('details')}}" data-i18n="readMore">Read More</a>
         </div>
       </div>
 
@@ -311,7 +311,7 @@
           <p data-i18n="article14Desc">Explore famous dishes from different cultures around the world.</p>
         </div>
         <div class="cardFooter">
-          <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          <a href="{{route('details')}}" data-i18n="readMore">Read More</a>
         </div>
       </div>
 
@@ -327,7 +327,7 @@
           <p data-i18n="article15Desc">Explore famous dishes from different cultures around the world.</p>
         </div>
         <div class="cardFooter">
-          <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          <a href="{{route('details')}}" data-i18n="readMore">Read More</a>
         </div>
       </div>
 
@@ -343,7 +343,7 @@
           <p data-i18n="article16Desc">Explore famous dishes from different cultures around the world.</p>
         </div>
         <div class="cardFooter">
-          <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          <a href="{{route('details')}}" data-i18n="readMore">Read More</a>
         </div>
       </div>
 
@@ -359,7 +359,7 @@
           <p data-i18n="article17Desc">Explore famous dishes from different cultures around the world.</p>
         </div>
         <div class="cardFooter">
-          <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          <a href="{{route('details')}}" data-i18n="readMore">Read More</a>
         </div>
       </div>
 
@@ -375,7 +375,7 @@
           <p data-i18n="article18Desc">Explore famous dishes from different cultures around the world.</p>
         </div>
         <div class="cardFooter">
-          <a href="{{route('services')}}" data-i18n="readMore">Read More</a>
+          <a href="{{route('details')}}" data-i18n="readMore">Read More</a>
         </div>
       </div>
 

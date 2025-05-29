@@ -16,13 +16,13 @@
       <div class="collapse navbar-collapse" id="mainNavbar">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 mainNav ">
           <li class="">
-            <a class=" headLinks" href="index.html" data-lang="home"></a>
+            <a class=" headLinks" href="{{ route('home') }}" data-lang="home"></a>
           </li>
           <li class="">
-            <a class=" headLinks" href="videos.html" data-lang="videos"></a>
+            <a class=" headLinks" href="{{ route('videos') }}" data-lang="videos"></a>
           </li>
           <li class="">
-            <a class=" headLinks" href="about.html" data-lang="about"></a>
+            <a class=" headLinks" href="{{ route('about') }}" data-lang="about"></a>
           </li>
         </ul>
 
