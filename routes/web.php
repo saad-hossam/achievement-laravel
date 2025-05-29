@@ -74,7 +74,7 @@ Route::group(
         Route::get('/about',  [HomeController::class, 'about'])->name('about');
         Route::get('/details',  [HomeController::class, 'details'])->name('details');
         Route::get('/videos',  [HomeController::class, 'videos'])->name('videos');
-
+////////
     }
 );
 
