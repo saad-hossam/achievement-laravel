@@ -18,6 +18,9 @@ class Achievement extends Model
         'achievement_date',
         'status',
     ];
+    protected $casts = [
+        'achievement_date' => 'date',
+    ];
 
     public $translatedAttributes = ['title', 'desc'];
 
