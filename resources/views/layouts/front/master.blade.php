@@ -43,31 +43,11 @@
     <script src="{{ asset('assets/front') }}/js/date-range-picker.js"></script>
     <script src="{{ asset('assets/front') }}/js/voice-search.js"></script>
     <!--Link Date Range Picker JS-->
-    <script>
+    <script src="{{ asset('assets/front') }}/js/filter-dropdowns.js"></script>
+    <script src="{{ asset('assets/front') }}/js/voice-search.js"></script>
+    <script src="{{ asset('assets/front') }}/js/video-filters.js"></script>
 
 
-      // Get references to the checkbox and body
-      const darkModeToggle = document.getElementById('chk');
-      const body = document.body;
-
-      // Check if dark mode is saved in local storage
-      if (localStorage.getItem('darkMode') === 'enabled') {
-        body.classList.add('dark-mode');
-        darkModeToggle.checked = true;
-      }
-
-      // Event listener for toggle
-      darkModeToggle.addEventListener('change', () => {
-        if (darkModeToggle.checked) {
-          body.classList.add('dark-mode');
-          localStorage.setItem('darkMode', 'enabled');  // Save preference in local storage
-        } else {
-          body.classList.remove('dark-mode');
-          localStorage.setItem('darkMode', 'disabled');
-        }
-      });
-
-    </script>
     <script>
       const translations = {
         en: {
@@ -173,7 +153,45 @@
           month9: "September",
           month10: "October",
           month11: "November",
-          month12: "December"
+          month12: "December",
+
+            // Video page content
+            video_library: "Video Library",
+                search_videos_placeholder: "Search videos...",
+                searchPlaceholder: "Search videos...",
+                allCategories: "All Categories",
+                category: "Category",
+                military: "Military",
+                defense: "Defense",
+                industry: "Industry",
+                technology: "Technology",
+                international: "International Relations",
+                development: "Development",
+                security: "Security",
+                leadership: "Leadership",
+                dateRange: "Date Range",
+                sortBy: "Sort By",
+                dateNewest: "Date (Newest First)",
+                dateOldest: "Date (Oldest First)",
+                titleAZ: "Title (A-Z)",
+                titleZA: "Title (Z-A)",
+                clearFilters: "Clear All Filters",
+                noResultsTitle: "No Results Found",
+                noResultsDesc: "Try adjusting your filters or search criteria.",
+                videosFound: "Videos Found",
+                noResultsFound: "No videos match your search criteria. Please try different filters.",
+
+                // Video titles
+                video1: "Kader Factory for Advanced Industries - Arab Organization for Industrialization",
+                video2: "The Container | Kader Factory for Manufacturing Armored Vehicles, Equipped Cars and Heavy Equipment",
+                video3: "Major General Amr Abdel Aziz, Chairman of Kader Factory, Explains the Most Important Products",
+                video4: "Manufacturing Aircraft Engine Parts in Egypt",
+                video5: "Tour Inside the Electronics Factory of the Arab Organization for Industrialization",
+                video6: "Arab Organization for Industrialization - Arabic Film Version",
+                video7: "Interview with Kader Factory CEO on Electric Scooters by AOI",
+                video8: "Kader Factory for Advanced Industries - Arab Organization for Industrialization",
+                video9: "News: AOI Success in Producing Wooden Molds for Buses",
+                video10: "Engines Factory - Arab Organization for Industrialization",
         },
 
         ar: {
@@ -291,7 +309,44 @@
           month9: "سبتمبر",
           month10: "أكتوبر",
           month11: "نوفمبر",
-          month12: "ديسمبر"
+          month12: "ديسمبر",
+          // Video page content
+          video_library: "مكتبة الفيديو",
+                search_videos_placeholder: "البحث عن الفيديوهات...",
+                searchPlaceholder: "البحث عن الفيديوهات...",
+                allCategories: "جميع الفئات",
+                category: "الفئة",
+                military: "عسكري",
+                defense: "دفاع",
+                industry: "صناعة",
+                technology: "تكنولوجيا",
+                international: "علاقات دولية",
+                development: "تنمية",
+                security: "أمن",
+                leadership: "قيادة",
+                dateRange: "النطاق الزمني",
+                sortBy: "ترتيب حسب",
+                dateNewest: "التاريخ (الأحدث أولاً)",
+                dateOldest: "التاريخ (الأقدم أولاً)",
+                titleAZ: "العنوان (أ-ي)",
+                titleZA: "العنوان (ي-أ)",
+                clearFilters: "مسح كل الفلاتر",
+                noResultsTitle: "لم يتم العثور على نتائج",
+                noResultsDesc: "حاول تعديل المرشحات أو معايير البحث.",
+                videosFound: "فيديوهات وجدت",
+                noResultsFound: "لا توجد فيديوهات تطابق معايير البحث. يرجى تجربة فلاتر مختلفة.",
+
+                // Video titles
+                video1: "مصنع قادر للصناعات المتطورة - الهيئة العربية للتصنيع",
+                video2: "الكونتينر | مصنع قادر لتصنيع المدرعات والسيارات المجهزة والمعدات الثقيلة قصة فخر لكل مصري",
+                video3: "لواء أركان حرب عمرو عبد العزيز رئيس مجلس إدارة مصنع قادر يوضح أهم وأبرز المنتجات في المصنع",
+                video4: "تصنيع قطع غيار محركات الطائرات في مصر",
+                video5: "جولة داخل مصنع الإلكترونيات التابع للهيئة العربية للتصنيع مع اللواء أ.ح مهندس / أحمد عبد العزيز",
+                video6: "الهيئة العربية للتصنيع. نسخة الفيلم باللغة العربية",
+                video7: "مداخلة ر م إ مصنع قادر لموقع الوطن بشأن موضوع الإسكوتر الكهربائي إنتاج الهيئة العربية للتصنيع",
+                video8: "مصنع قادر للصناعات المتطورة - التابع للهيئة العربية للتصنيع",
+                video9: "الأخبار نجاح الهيئة العربية للتصنيع في إنتاج الإسطمبات الخشبية للأوتوبيسات",
+                video10: "مصنع المحركات - الهيئة العربية للتصنيع",
         }
       };
 
@@ -592,40 +647,40 @@
         img.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
         img.alt = "Video thumbnail";
       });
-    
+
       // Load selected video
       const videoPlayer = document.getElementById("videoPlayer");
       const videoInfo = document.getElementById("videoInfo");
-    
+
       document.querySelectorAll('#videoList li').forEach(li => {
         li.addEventListener("click", function () {
           const videoUrl = li.getAttribute("data-video");
           const info = li.getAttribute("data-info");
-    
+
           videoPlayer.src = videoUrl;
           if (videoInfo) videoInfo.textContent = info;
         });
       });
     });
   </script>
-        
- 
+
+
   <script>
     // Thumbnail slider functionality
     document.addEventListener('DOMContentLoaded', function() {
       const thumbnailsWrapper = document.querySelector('.thumbnails-wrapper');
       const prevButton = document.querySelector('.slider-prev');
       const nextButton = document.querySelector('.slider-next');
-      
+
       if (thumbnailsWrapper && prevButton && nextButton) {
         // Set scroll amount to thumbnail width + gap (approximately)
-        const scrollAmount = 85 * 3; 
-        
+        const scrollAmount = 85 * 3;
+
         // Function to check if page is in RTL mode
         function isRTLMode() {
           return document.dir === 'rtl' || document.body.getAttribute('dir') === 'rtl';
         }
-        
+
         // Function to scroll thumbnails that handles RTL mode automatically
         function scrollThumbnails(direction) {
           const scrollDir = isRTLMode() ? -direction : direction;
@@ -633,16 +688,16 @@
             left: scrollDir * scrollAmount,
             behavior: 'smooth'
           });
-          
+
           // After scrolling, update arrow visibility
           setTimeout(updateArrowVisibility, 300);
         }
-        
+
         // Function to update arrow visibility based on scroll position
         function updateArrowVisibility() {
           const scrollPosition = thumbnailsWrapper.scrollLeft;
           const maxScroll = thumbnailsWrapper.scrollWidth - thumbnailsWrapper.clientWidth;
-          
+
           // In RTL mode, scrollLeft is negative and goes from 0 to -maxScroll
           if (isRTLMode()) {
             // For RTL: show prev when not at rightmost position (scrollLeft is not 0)
@@ -656,16 +711,16 @@
             nextButton.classList.toggle('hidden', scrollPosition >= maxScroll - 5);
           }
         }
-        
+
         // Button click handlers
         prevButton.addEventListener('click', function() {
           scrollThumbnails(-1); // Scroll left in LTR, right in RTL
         });
-        
+
         nextButton.addEventListener('click', function() {
           scrollThumbnails(1);  // Scroll right in LTR, left in RTL
         });
-        
+
         // Update navigation on language change
         const langToggle = document.getElementById('chklang');
         if (langToggle) {
@@ -678,13 +733,13 @@
             }, 200);
           });
         }
-        
+
         // Listen for scroll events to update arrow visibility
         thumbnailsWrapper.addEventListener('scroll', updateArrowVisibility);
-        
+
         // Initial check for arrow visibility
         updateArrowVisibility();
-        
+
         // Also update on window resize
         window.addEventListener('resize', updateArrowVisibility);
       }
@@ -698,7 +753,7 @@
     function initializeImagePaths() {
       const thumbnails = document.querySelectorAll('.thumbnail');
       imagePaths = Array.from(thumbnails).map(thumb => thumb.src);
-      
+
       // Update total images display
       document.getElementById('totalImages').textContent = imagePaths.length;
     }
@@ -711,36 +766,36 @@
     // Function to change the main image when a thumbnail is clicked
     function changeImage(src) {
       const mainImage = document.getElementById('mainImage');
-      
+
       // Add fade-out effect
       mainImage.style.opacity = '0';
       mainImage.style.transition = 'opacity 0.3s ease';
-      
+
       // Change image after fade out
       setTimeout(function() {
         mainImage.src = src;
-  
+
         // Update current image index for the overlay
         const thumbnails = document.querySelectorAll('.thumbnail');
         currentImageIndex = Array.from(thumbnails).findIndex(thumb => thumb.src.includes(src));
-        
+
         // Update indicators
         updateImageIndicators(currentImageIndex);
-        
+
         // Fade back in
         mainImage.style.opacity = '1';
       }, 300);
-  
+
       // Highlight the selected thumbnail
       const thumbnails = document.querySelectorAll('.thumbnail');
       thumbnails.forEach(thumb => {
         thumb.classList.remove('selected');
       });
-  
+
       const selectedThumbnail = Array.from(thumbnails).find(thumb => thumb.src.includes(src));
       if (selectedThumbnail) {
         selectedThumbnail.classList.add('selected');
-        
+
         // Scroll the thumbnail into view if needed
         selectedThumbnail.scrollIntoView({
           behavior: 'smooth',
@@ -762,31 +817,31 @@
     function openFullscreenOverlay(src) {
       const overlay = document.getElementById('fullscreenOverlay');
       const overlayImage = document.getElementById('overlayImage');
-      
+
       // Set the image source
       overlayImage.src = src;
-      
+
       // Update current image index
       const thumbnails = document.querySelectorAll('.thumbnail');
       currentImageIndex = Array.from(thumbnails).findIndex(thumb => thumb.src.includes(src));
-      
+
       // Update counter
       document.getElementById('currentImageIndex').textContent = currentImageIndex + 1;
-      
+
       // Show overlay with transition
       overlay.style.display = 'flex';
       setTimeout(() => {
         overlay.classList.add('active');
       }, 10);
-      
+
       // Add loaded class when image is loaded
       overlayImage.onload = function() {
         overlayImage.classList.add('loaded');
       };
-      
+
       // Disable body scroll
       document.body.style.overflow = 'hidden';
-      
+
       // Listen for keyboard events
       document.addEventListener('keydown', handleKeyPress);
     }
@@ -794,17 +849,17 @@
     function closeFullscreenOverlay() {
       const overlay = document.getElementById('fullscreenOverlay');
       const overlayImage = document.getElementById('overlayImage');
-      
+
       // Hide with transition
       overlay.classList.remove('active');
       setTimeout(() => {
         overlay.style.display = 'none';
         overlayImage.classList.remove('loaded');
       }, 300);
-      
+
       // Re-enable body scroll
       document.body.style.overflow = 'auto';
-      
+
       // Remove keyboard event listener
       document.removeEventListener('keydown', handleKeyPress);
     }
@@ -813,43 +868,43 @@
       const overlayImage = document.getElementById('overlayImage');
       const prevBtn = document.querySelector('.overlay-nav.prev-btn');
       const nextBtn = document.querySelector('.overlay-nav.next-btn');
-      
+
       // Remove loaded class
       overlayImage.classList.remove('loaded');
-      
+
       // Calculate new index based on direction
       const isRTL = document.dir === 'rtl' || document.body.getAttribute('dir') === 'rtl';
       const effectiveDirection = isRTL ? -direction : direction;
-      
+
       currentImageIndex = (currentImageIndex + effectiveDirection + imagePaths.length) % imagePaths.length;
-      
+
       // Update counter
       document.getElementById('currentImageIndex').textContent = currentImageIndex + 1;
-      
+
       // Update navigation buttons visibility
       updateOverlayNavVisibility();
-      
+
       // Change the image with fade effect
       setTimeout(() => {
         overlayImage.src = imagePaths[currentImageIndex];
-        
+
         // Add loaded class when image is loaded
         overlayImage.onload = function() {
           overlayImage.classList.add('loaded');
         };
       }, 300);
     }
-    
+
     function updateOverlayNavVisibility() {
       const prevBtn = document.querySelector('.overlay-nav.prev-btn');
       const nextBtn = document.querySelector('.overlay-nav.next-btn');
       const totalImages = imagePaths.length;
-      
+
       if (!prevBtn || !nextBtn) return;
-      
+
       // Hide previous button if at first image
       prevBtn.classList.toggle('hidden', currentImageIndex === 0);
-      
+
       // Hide next button if at last image
       nextBtn.classList.toggle('hidden', currentImageIndex === totalImages - 1);
     }
@@ -869,34 +924,34 @@
       }
     }
   </script>
-  
+
   <script>
     // Standalone overlay functionality
     document.addEventListener('DOMContentLoaded', function() {
       console.log('DOM fully loaded - initializing overlay functionality');
       initializeOverlay();
     });
-    
+
     // If the DOM is already loaded, run initialization immediately
     if (document.readyState === 'complete' || document.readyState === 'interactive') {
       console.log('DOM already loaded - initializing overlay functionality immediately');
       initializeOverlay();
     }
-    
+
     function initializeOverlay() {
       // Get references to overlay elements
       const overlay = document.getElementById('fullscreenOverlay');
       const overlayImage = document.getElementById('overlayImage');
       const testButton = document.getElementById('testOverlayBtn');
       const mainImage = document.getElementById('mainImage');
-      
+
       // Set up test button click handler
       if (testButton) {
         testButton.addEventListener('click', function() {
           openFullscreenOverlay(mainImage.src);
         });
       }
-      
+
       // Make sure main image is clickable
       const mainImageContainer = document.getElementById('mainImageContainer');
       if (mainImage && mainImageContainer) {
@@ -904,41 +959,41 @@
         mainImage.addEventListener('click', function() {
           openFullscreenOverlay(this.src);
         });
-        
+
         mainImageContainer.addEventListener('click', function() {
           openFullscreenOverlay(mainImage.src);
         });
-        
+
         console.log("Click handlers added to main image");
       }
-      
+
       // Populate image paths immediately
       const thumbnails = document.querySelectorAll('.thumbnail');
       const imagePaths = Array.from(thumbnails).map(thumb => thumb.src);
-      
+
       // Update total images count
       const totalImagesElement = document.getElementById('totalImages');
       if (totalImagesElement) {
         totalImagesElement.textContent = imagePaths.length;
       }
-      
+
       // Expose necessary variables and functions to global scope
       window.imagePaths = imagePaths;
       window.currentImageIndex = 0;
-      
+
       window.openFullscreenOverlay = function(src) {
         console.log("Opening overlay with image:", src);
-        
+
         // Set the image source
         overlayImage.src = src;
-        
+
         // Find current image index
         window.currentImageIndex = imagePaths.findIndex(path => path.includes(src.split('/').pop()));
         if (window.currentImageIndex === -1) window.currentImageIndex = 0;
-        
+
         // Update counter
         document.getElementById('currentImageIndex').textContent = window.currentImageIndex + 1;
-        
+
         // Update navigation buttons visibility
         if (typeof updateOverlayNavVisibility === 'function') {
           updateOverlayNavVisibility();
@@ -947,32 +1002,32 @@
           const prevBtn = document.querySelector('.overlay-nav.prev-btn');
           const nextBtn = document.querySelector('.overlay-nav.next-btn');
           const totalImages = imagePaths.length;
-          
+
           // Hide previous button if at first image
           if (prevBtn) prevBtn.classList.toggle('hidden', window.currentImageIndex === 0);
-          
+
           // Hide next button if at last image
           if (nextBtn) nextBtn.classList.toggle('hidden', window.currentImageIndex === totalImages - 1);
         }
-        
+
         // Show overlay with transition
         overlay.style.display = 'flex';
         setTimeout(() => {
           overlay.classList.add('active');
         }, 10);
-        
+
         // Add loaded class when image is loaded
         overlayImage.onload = function() {
           overlayImage.classList.add('loaded');
         };
-        
+
         // Disable body scroll
         document.body.style.overflow = 'hidden';
-        
+
         // Listen for keyboard events
         document.addEventListener('keydown', handleKeyPress);
       };
-      
+
       window.closeFullscreenOverlay = function() {
         // Hide with transition
         overlay.classList.remove('active');
@@ -980,38 +1035,38 @@
           overlay.style.display = 'none';
           overlayImage.classList.remove('loaded');
         }, 300);
-        
+
         // Re-enable body scroll
         document.body.style.overflow = 'auto';
-        
+
         // Remove keyboard event listener
         document.removeEventListener('keydown', handleKeyPress);
       };
-      
+
       window.changeOverlayImage = function(direction) {
         // Remove loaded class
         overlayImage.classList.remove('loaded');
-        
+
         // Calculate new index based on direction
         const isRTL = document.dir === 'rtl' || document.body.getAttribute('dir') === 'rtl';
         const effectiveDirection = isRTL ? -direction : direction;
-        
+
         window.currentImageIndex = (window.currentImageIndex + effectiveDirection + imagePaths.length) % imagePaths.length;
-        
+
         // Update counter
         document.getElementById('currentImageIndex').textContent = window.currentImageIndex + 1;
-        
+
         // Change the image with fade effect
         setTimeout(() => {
           overlayImage.src = imagePaths[window.currentImageIndex];
-          
+
           // Add loaded class when image is loaded
           overlayImage.onload = function() {
             overlayImage.classList.add('loaded');
           };
         }, 300);
       };
-      
+
       function handleKeyPress(e) {
         // Handle arrow keys and escape
         switch(e.key) {
@@ -1026,49 +1081,49 @@
             break;
         }
       }
-      
+
       window.handleKeyPress = handleKeyPress;
-      
+
       console.log("Fullscreen overlay initialized with " + imagePaths.length + " images");
     }
   </script>
-  
+
   <!-- Video Player JavaScript -->
   <script>
     // Content Filter Functionality
     document.addEventListener('DOMContentLoaded', function() {
       const filterButtons = document.querySelectorAll('.filter-btn');
       const contentSections = document.querySelectorAll('[data-content-type]');
-      
+
       // Initialize with 'all' filter
       applyActiveFilter('all');
-      
+
       // Add click event listeners to filter buttons
       filterButtons.forEach(button => {
         button.addEventListener('click', function() {
           const filter = this.getAttribute('data-filter');
-          
+
           // Update active button
           filterButtons.forEach(btn => btn.classList.remove('active'));
           this.classList.add('active');
-          
+
           // Apply the filter
           applyActiveFilter(filter);
         });
       });
-      
+
       // Function to apply the active filter
       function applyActiveFilter(filter) {
         // First fade out all content
         contentSections.forEach(section => {
           section.classList.add('fade-out');
         });
-        
+
         // After transition completes, show/hide sections based on filter
         setTimeout(() => {
           contentSections.forEach(section => {
             const contentType = section.getAttribute('data-content-type');
-            
+
             if (filter === 'all' || filter === contentType) {
               section.classList.remove('hidden-content');
               setTimeout(() => {
@@ -1079,53 +1134,53 @@
               section.classList.add('hidden-content');
             }
           });
-          
+
           // Trigger window resize to ensure sliders update properly
           window.dispatchEvent(new Event('resize'));
         }, 300);
       }
     });
-    
+
     // Main Video Player Function
     function playInMainPlayer(videoCard) {
       // Get video information from data attributes
       const videoId = videoCard.getAttribute('data-video-id');
       const videoTitle = videoCard.getAttribute('data-video-title');
       const videoDesc = videoCard.getAttribute('data-video-desc');
-      
+
       // Update main player
       const mainPlayer = document.getElementById('mainVideoPlayer');
       const mainTitle = document.getElementById('mainVideoTitle');
       const mainDesc = document.getElementById('mainVideoDescription');
-      
+
       // Add a loading class to the container
       const container = document.querySelector('.main-video-container');
       container.classList.add('loading');
-      
+
       // Update video source with slight delay to allow for loading animation
       setTimeout(() => {
         mainPlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
         mainTitle.textContent = videoTitle;
         mainDesc.textContent = videoDesc;
-        
+
         // Remove the loading class
         container.classList.remove('loading');
-        
+
         // Highlight the active video card
         const videoCards = document.querySelectorAll('.video-card');
         const currentIndex = Array.from(videoCards).indexOf(videoCard);
-        
+
         videoCards.forEach(card => {
           card.classList.remove('active');
         });
         videoCard.classList.add('active');
-        
+
         // Update video indicators
         updateVideoIndicators(currentIndex);
-        
+
         // Scroll the selected thumbnail into better view within the slider
         centerSelectedVideoInSlider(videoCard);
-        
+
         // Scroll to the main video area if on mobile
         if (window.innerWidth < 768) {
           document.querySelector('.main-video-container').scrollIntoView({
@@ -1135,26 +1190,26 @@
         }
       }, 300);
     }
-    
+
     // Function to center the selected video card in the slider
     function centerSelectedVideoInSlider(videoCard) {
       const sliderTrack = document.querySelector('.video-slider-track');
       const sliderWrapper = document.querySelector('.video-slider-track-wrapper');
-      
+
       if (!sliderTrack || !sliderWrapper) return;
-      
+
       // Get all video cards and determine special positions
       const videoCards = sliderTrack.querySelectorAll('.video-card');
       const totalCards = videoCards.length;
       const isFirstVideo = videoCard === videoCards[0];
       const isSecondVideo = videoCard === videoCards[1];
       const isLastVideo = videoCard === videoCards[totalCards - 1];
-      
+
       // Calculate max scroll position
       const containerWidth = sliderWrapper.offsetWidth;
       const trackWidth = sliderTrack.scrollWidth;
       const maxScroll = Math.max(0, trackWidth - containerWidth);
-      
+
       // Handle special cases for first, second, and last video
       if (isFirstVideo || isSecondVideo) {
         // First or second video: reset to beginning position
@@ -1164,34 +1219,34 @@
         window.currentVideoPosition = 0;
         return;
       }
-      
+
       if (isLastVideo) {
         // Last video: go to end position
         console.log("Last video selected, setting to end position");
         const isRTL = document.dir === 'rtl' || document.body.getAttribute('dir') === 'rtl';
         const endPosition = isRTL ? maxScroll : -maxScroll;
-        
+
         sliderTrack.style.transition = 'transform 0.5s ease';
         sliderTrack.style.transform = `translateX(${endPosition}px)`;
         window.currentVideoPosition = Math.abs(endPosition);
         return;
       }
-      
+
       // For other videos, continue with normal centering
       // Check if RTL mode is active
       const isRTL = document.dir === 'rtl' || document.body.getAttribute('dir') === 'rtl';
-      
+
       // Calculate the current scroll position and the card's position
       const wrapperRect = sliderWrapper.getBoundingClientRect();
       const cardRect = videoCard.getBoundingClientRect();
-      
+
       // Calculate center positions
       const wrapperCenter = wrapperRect.left + (wrapperRect.width / 2);
       const cardCenter = cardRect.left + (cardRect.width / 2);
-      
+
       // Calculate how far the card is from the center
       const distanceFromCenter = cardCenter - wrapperCenter;
-      
+
       // Get the current transform value
       let currentTranslate = 0;
       const transformValue = sliderTrack.style.transform;
@@ -1201,7 +1256,7 @@
           currentTranslate = parseFloat(match[1]);
         }
       }
-      
+
       // Calculate new position, accounting for RTL if needed
       let newTranslate = currentTranslate;
       if (isRTL) {
@@ -1209,49 +1264,49 @@
       } else {
         newTranslate -= distanceFromCenter;
       }
-      
+
       // Apply boundary limits
       if (Math.abs(newTranslate) > maxScroll) {
         newTranslate = isRTL ? maxScroll : -maxScroll;
       }
       if (newTranslate > 0 && !isRTL) newTranslate = 0;
       if (newTranslate < 0 && isRTL) newTranslate = 0;
-      
+
       // Apply the new transform with smooth animation
       sliderTrack.style.transition = 'transform 0.5s ease';
       sliderTrack.style.transform = `translateX(${newTranslate}px)`;
-      
+
       // Update the stored position for the slider navigation
       window.currentVideoPosition = Math.abs(newTranslate);
     }
-    
+
     // Video Modal Functions
     function openVideoModal(videoSrc) {
       // Get modal elements
       const modal = document.getElementById('videoModal');
       const videoFrame = document.getElementById('videoFrame');
-      
+
       // Set video source
       videoFrame.src = videoSrc;
-      
+
       // Show modal with a fade effect
       modal.style.display = 'block';
       setTimeout(() => {
         modal.style.opacity = '1';
       }, 10);
-      
+
       // Disable body scroll
       document.body.style.overflow = 'hidden';
-      
+
       // Add escape key event listener
       document.addEventListener('keydown', handleVideoModalKeyPress);
     }
-    
+
     function closeVideoModal() {
       // Get modal elements
       const modal = document.getElementById('videoModal');
       const videoFrame = document.getElementById('videoFrame');
-      
+
       // Fade out and hide
       modal.style.opacity = '0';
       setTimeout(() => {
@@ -1259,20 +1314,20 @@
         // Clear video source to stop playback
         videoFrame.src = '';
       }, 300);
-      
+
       // Re-enable body scroll
       document.body.style.overflow = 'auto';
-      
+
       // Remove key event listener
       document.removeEventListener('keydown', handleVideoModalKeyPress);
     }
-    
+
     function handleVideoModalKeyPress(e) {
       if (e.key === 'Escape') {
         closeVideoModal();
       }
     }
-    
+
     // Close the modal if user clicks outside of content
     window.addEventListener('click', function(event) {
       const modal = document.getElementById('videoModal');
@@ -1280,14 +1335,14 @@
         closeVideoModal();
       }
     });
-    
+
     // Initialize the first video as active on page load
     document.addEventListener('DOMContentLoaded', function() {
       const firstVideoCard = document.querySelector('.video-card');
       if (firstVideoCard) {
         // Just add active class without triggering centering
         firstVideoCard.classList.add('active');
-        
+
         // Reset track position to ensure we start at the beginning
         const videoTrack = document.querySelector('.video-slider-track');
         if (videoTrack) {
@@ -1298,7 +1353,7 @@
     });
   </script>
 
- 
+
 
   <script>
     // Video slider navigation
@@ -1306,32 +1361,32 @@
       const videoTrack = document.querySelector('.video-slider-track');
       const prevButton = document.querySelector('.video-prev-btn');
       const nextButton = document.querySelector('.video-next-btn');
-      
+
       // Ensure buttons are visible by default until we can check them
       if (prevButton) {
         prevButton.classList.remove('hidden');
         prevButton.style.opacity = "1";
         prevButton.style.visibility = "visible";
       }
-      
+
       if (nextButton) {
         nextButton.classList.remove('hidden');
         nextButton.style.opacity = "1";
         nextButton.style.visibility = "visible";
       }
-      
+
       if (videoTrack && prevButton && nextButton) {
         // Set scroll amount to slide one video card at a time
         const scrollAmount = 280; // Card width + gap
-        
+
         // Initialize global position tracker
         window.currentVideoPosition = 0;
-        
+
         // Function to check if page is in RTL mode
         function isRTLMode() {
           return document.dir === 'rtl' || document.body.getAttribute('dir') === 'rtl';
         }
-        
+
         // Function to scroll videos that handles RTL mode
         function scrollVideos(direction) {
           const isRtl = isRTLMode();
@@ -1340,34 +1395,34 @@
           const containerWidth = videoTrack.parentElement.offsetWidth;
           const trackWidth = videoTrack.scrollWidth;
           const maxScroll = Math.max(0, trackWidth - containerWidth);
-          
+
           // Update current position - use the global tracker
           window.currentVideoPosition = window.currentVideoPosition || 0;
           window.currentVideoPosition += (direction * scrollAmount);
-          
+
           // Apply boundary limits
           if (window.currentVideoPosition < 0) window.currentVideoPosition = 0;
           if (window.currentVideoPosition > maxScroll) window.currentVideoPosition = maxScroll;
-          
+
           // Apply transform for smooth sliding
           // For RTL, we invert the sign of the transform
           const translateValue = isRtl ? window.currentVideoPosition : -window.currentVideoPosition;
           videoTrack.style.transform = `translateX(${translateValue}px)`;
-          
+
           console.log(`Direction: ${direction}, RTL: ${isRtl}, Position: ${window.currentVideoPosition}, Transform: ${translateValue}px`);
         }
-        
+
         // Function to check if there are more cards to scroll
         function updateButtonVisibility() {
           const containerWidth = videoTrack.parentElement.offsetWidth;
           const trackWidth = videoTrack.scrollWidth;
           const isRtl = isRTLMode();
-          
+
           console.log("Video slider: Container width =", containerWidth, "Track width =", trackWidth, "Current position =", window.currentVideoPosition, "RTL mode:", isRtl);
-          
+
           // In RTL mode, we don't swap the buttons logically - we keep the same button references
           // but the arrow appearance is flipped via CSS
-          
+
           // Only show prev button if not at the start
           if (window.currentVideoPosition <= 0) {
             prevButton.classList.add('hidden');
@@ -1378,7 +1433,7 @@
             prevButton.style.opacity = "1";
             prevButton.style.visibility = "visible";
           }
-          
+
           // Only show next button if not at the end
           if (window.currentVideoPosition >= trackWidth - containerWidth) {
             nextButton.classList.add('hidden');
@@ -1390,18 +1445,18 @@
             nextButton.style.visibility = "visible";
           }
         }
-        
+
         // Button click handlers
         prevButton.addEventListener('click', function() {
           scrollVideos(-1);
           updateButtonVisibility();
         });
-        
+
         nextButton.addEventListener('click', function() {
           scrollVideos(1);
           updateButtonVisibility();
         });
-        
+
         // Update on language change
         const langToggle = document.getElementById('chklang');
         if (langToggle) {
@@ -1414,7 +1469,7 @@
             }, 50);
           });
         }
-        
+
         // Handle window resize
         window.addEventListener('resize', function() {
           // Reset position on window resize
@@ -1422,7 +1477,7 @@
           videoTrack.style.transform = 'translateX(0)';
           updateButtonVisibility();
         });
-        
+
         // Initial button visibility check - with delay to ensure DOM calculations are accurate
         setTimeout(() => {
           console.log("Running initial video slider button visibility check");
@@ -1447,7 +1502,7 @@
       border-bottom: 2px solid #eee;
 
     }
-    
+
     .filter-btn {
       padding: 8px 18px;
       border: 2px solid #eee;
@@ -1458,23 +1513,23 @@
       cursor: pointer;
       transition: all 0.3s ease;
     }
-    
+
     .filter-btn:hover {
       border-color: var(--primary-color, #2196f3);
     }
-    
+
     .filter-btn.active {
       background-color: var(--primary-color, #2196f3);
       color: white;
       border-color: var(--primary-color, #2196f3);
     }
-    
+
     .dark-mode .filter-btn {
       background-color: var(--background-secondary);
       color: var(--text-primary);
       border-color: var(--border-color);
     }
-    
+
     .dark-mode .filter-btn:hover {
       border-color: var(--primary-color, #2196f3);
     }
@@ -1484,24 +1539,24 @@
       color: white;
       border-color: var(--primary-color, #2196f3);
     }
-    
+
     .hidden-content {
       display: none;
     }
-    
+
     /* Smooth transition for content visibility */
     [data-content-type] {
       transition: opacity 0.3s ease;
     }
-    
+
     .fade-out {
       opacity: 0;
     }
-    
+
     .fade-in {
       opacity: 1;
     }
-    
+
     @media (max-width: 768px) {
       .content-filter-bar {
         justify-content: flex-start;
@@ -1510,7 +1565,7 @@
         margin-bottom: 15px;
       }
     }
-    
+
     /* Enhanced Description Section Styles */
     .image-description {
       background-color: #f9f9f9;
@@ -1518,11 +1573,11 @@
       padding: 25px;
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
     }
-    
+
     .dark-mode .image-description {
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
     }
-    
+
     .description-title {
       font-size: 1.6rem;
       color: var(--primary-color, #2196f3);
@@ -1530,7 +1585,7 @@
       position: relative;
       display: inline-block;
     }
-    
+
     .description-title:after {
       content: '';
       position: absolute;
@@ -1541,23 +1596,23 @@
       background-color: var(--primary-color, #2196f3);
       border-radius: 3px;
     }
-    
+
     [dir="rtl"] .description-title:after {
       right: 0;
       left: 0;
     }
-    
+
     .description-content {
       font-size: 1rem;
       line-height: 1.6;
       color: #444;
       margin-bottom: 25px;
     }
-    
+
     .dark-mode .description-content {
       color: #ddd;
     }
-    
+
     .achievement-details {
       display: flex;
       flex-direction: column;
@@ -1565,34 +1620,34 @@
       border-top: 1px solid #eee;
       padding-top: 20px;
     }
-    
+
     .dark-mode .achievement-details {
       border-color: #444;
     }
-    
+
     .detail-item {
       display: flex;
       align-items: baseline;
     }
-    
+
     .detail-label {
       font-weight: 600;
       color: #555;
       width: 100px;
     }
-    
+
     .dark-mode .detail-label {
       color: #ccc;
     }
-    
+
     .detail-value {
       color: #333;
     }
-    
+
     .dark-mode .detail-value {
       color: #f0f0f0;
     }
-    
+
     /* Enhanced News Links Styles */
     #newsLinksSection {
       padding: 30px;
@@ -1602,25 +1657,25 @@
       border-radius: 10px;
       box-shadow: 0 3px 15px var(--shadow-color);
     }
-    
+
     .dark-mode #newsLinksSection {
       background-color: var(--background-secondary);
       box-shadow: 0 3px 15px var(--shadow-color);
     }
-    
+
     #newsLinksSection .sectionTitle {
       text-align: center;
       color: var(--primary-color, #2196f3);
       margin-bottom: 25px;
       font-size: 1.8rem;
     }
-    
+
     .newsLinks {
       list-style: none;
       padding: 0;
       margin: 0;
     }
-    
+
     .newsLinks li {
       margin-bottom: 15px;
       padding: 15px;
@@ -1629,17 +1684,17 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    
+
     .dark-mode .newsLinks li {
       background-color: #333;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
-    
+
     .newsLinks li:hover {
       transform: translateY(-3px);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
-    
+
     .newsLinks a {
       display: flex;
       align-items: center;
@@ -1647,28 +1702,28 @@
       text-decoration: none;
       font-weight: 500;
     }
-    
+
     .dark-mode .newsLinks a {
       color: #f0f0f0;
     }
-    
+
     .news-icon {
       color: var(--primary-color, #2196f3);
       margin-inline-end: 15px;
       font-size: 1.2rem;
       min-width: 25px;
     }
-    
+
     /* RTL-specific fixes */
     [dir="rtl"] .newsLinks a {
       text-align: right;
     }
-    
+
     [dir="rtl"] .news-icon {
       margin-left: 15px;
       margin-right: 0;
     }
-    
+
     /* Slide Indicators Styles */
     .slide-indicators-container {
       width: 100%;
@@ -1676,14 +1731,14 @@
       justify-content: center;
       margin-top: 15px;
     }
-    
+
     .slide-indicators {
       display: flex;
       justify-content: center;
       gap: 8px;
       padding: 10px 0;
     }
-    
+
     .indicator-dot {
       width: 10px;
       height: 10px;
@@ -1692,33 +1747,33 @@
       cursor: pointer;
       transition: all 0.2s ease;
     }
-    
+
     .indicator-dot:hover {
       background-color: #999;
     }
-    
+
     .indicator-dot.active {
       background-color: var(--primary-color, #2196f3);
       transform: scale(1.2);
     }
-    
+
     .dark-mode .indicator-dot {
       background-color: #555;
     }
-    
+
     .dark-mode .indicator-dot:hover {
       background-color: #777;
     }
-    
+
     .dark-mode .indicator-dot.active {
       background-color: var(--primary-color, #2196f3);
     }
-    
+
     @media (max-width: 768px) {
       .slide-indicators {
         gap: 6px;
       }
-      
+
       .indicator-dot {
         width: 8px;
         height: 8px;
@@ -1732,96 +1787,96 @@
       initializeImageIndicators();
       initializeVideoIndicators();
     });
-    
+
     // Generate and initialize image indicators
     function initializeImageIndicators() {
       const thumbnails = document.querySelectorAll('.thumbnail');
       const indicatorsContainer = document.querySelector('.image-indicators');
-      
+
       if (!thumbnails.length || !indicatorsContainer) return;
-      
+
       // Clear any existing indicators
       indicatorsContainer.innerHTML = '';
-      
+
       // Create an indicator dot for each thumbnail
       thumbnails.forEach((thumb, index) => {
         const indicator = document.createElement('div');
         indicator.classList.add('indicator-dot');
-        
+
         // Set first indicator as active by default
         if (index === 0) {
           indicator.classList.add('active');
         }
-        
+
         // Add click event to change image
         indicator.addEventListener('click', function() {
           changeImage(thumb.src);
         });
-        
+
         indicatorsContainer.appendChild(indicator);
       });
     }
-    
+
     // Generate and initialize video indicators
     function initializeVideoIndicators() {
       const videoCards = document.querySelectorAll('.video-card');
       const indicatorsContainer = document.querySelector('.video-indicators');
-      
+
       if (!videoCards.length || !indicatorsContainer) return;
-      
+
       // Clear any existing indicators
       indicatorsContainer.innerHTML = '';
-      
+
       // Create an indicator dot for each video
       videoCards.forEach((card, index) => {
         const indicator = document.createElement('div');
         indicator.classList.add('indicator-dot');
-        
+
         // Set first indicator as active by default
         if (index === 0) {
           indicator.classList.add('active');
         }
-        
+
         // Add click event to play video
         indicator.addEventListener('click', function() {
           playInMainPlayer(card);
           updateVideoIndicators(index);
         });
-        
+
         indicatorsContainer.appendChild(indicator);
       });
     }
-    
+
     // Update indicator active state for images
     function updateImageIndicators(index) {
       const indicators = document.querySelectorAll('.image-indicators .indicator-dot');
-      
+
       if (!indicators.length) return;
-      
+
       // Remove active class from all indicators
       indicators.forEach(dot => dot.classList.remove('active'));
-      
+
       // Add active class to current indicator
       if (indicators[index]) {
         indicators[index].classList.add('active');
       }
     }
-    
+
     // Update indicator active state for videos
     function updateVideoIndicators(index) {
       const indicators = document.querySelectorAll('.video-indicators .indicator-dot');
-      
+
       if (!indicators.length) return;
-      
+
       // Remove active class from all indicators
       indicators.forEach(dot => dot.classList.remove('active'));
-      
+
       // Add active class to current indicator
       if (indicators[index]) {
         indicators[index].classList.add('active');
       }
     }
-    
+
     // Thumbnail slider functionality
   </script>
     <!--Main JS App File-->

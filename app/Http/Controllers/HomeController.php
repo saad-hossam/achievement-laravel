@@ -20,9 +20,17 @@ class HomeController extends Controller
 
         ]);
     }
-    public function services()
+    public function about()
     {
-        return view('Front.services');
+        return view('Front.about');
+    }
+    public function details()
+    {
+        return view('Front.details');
+    }
+    public function videos()
+    {
+        return view('Front.video');
     }
 
 

@@ -16,15 +16,18 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Add event listeners to search input
         if (searchInput) {
-            searchInput.addEventListener('input', function() {
-                // Show loading state
-                showLoadingState();
-                
-                // Use a slight delay to mimic search process
-                setTimeout(() => {
-                    filterArticles();
-                    hideLoadingState();
-                }, 300);
+            // Handle both input and change events for better mobile compatibility
+            ['input', 'change'].forEach(eventType => {
+                searchInput.addEventListener(eventType, function() {
+                    // Show loading state
+                    showLoadingState();
+                    
+                    // Use a slight delay to mimic search process
+                    setTimeout(() => {
+                        filterArticles();
+                        hideLoadingState();
+                    }, 300);
+                });
             });
         }
 
@@ -125,7 +128,6 @@ function initializeListingStates() {
         loadingState = document.createElement('div');
         loadingState.className = 'listing-state loading';
         loadingState.innerHTML = `
-
         `;
         articlesContainer.appendChild(loadingState);
     }
@@ -137,8 +139,8 @@ function initializeListingStates() {
         noResults.id = 'no-results-message';
         noResults.className = 'no-results-message';
         
-        // Set the text based on current language
-        const currentLang = document.dir === 'rtl' || localStorage.getItem('language') === 'ar' ? 'ar' : 'en';
+        // Set the text based on current language using consistent method
+        const currentLang = localStorage.getItem('selectedLanguage') || 'en';
         noResults.textContent = currentLang === 'ar' ? 
             'لم يتم العثور على نتائج للبحث. حاول تعديل معايير البحث والفلترة.' : 
             'No results found. Try adjusting your search and filter criteria.';
@@ -200,11 +202,16 @@ function filterArticles() {
     const sortBy = sortByFilter ? sortByFilter.value : 'date-desc';
     const startDate = startDateInput ? startDateInput.value : '';
     const endDate = endDateInput ? endDateInput.value : '';
-    let searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+    let searchTerm = searchInput ? searchInput.value : '';
+    
+    // Debug log the original search term
+    console.log('Original search term:', searchTerm);
     
     // Normalize search term if we have the normalization function
     if (window.normalizeSearchText) {
         searchTerm = window.normalizeSearchText(searchTerm);
+        // Debug log the normalized search term
+        console.log('Normalized search term:', searchTerm);
     }
 
     // Get all article elements
@@ -220,26 +227,76 @@ function filterArticles() {
     articlesArray.forEach(article => {
         const articleDate = new Date(article.dataset.date);
         const articleCategory = article.dataset.category;
-        let articleTitle = article.dataset.title.toLowerCase();
+        let articleTitle = article.dataset.title;
         const articleTitleElement = article.querySelector('h3');
         const articleDesc = article.querySelector('p');
-        let articleTitleText = articleTitleElement ? articleTitleElement.textContent.toLowerCase() : '';
-        let articleDescText = articleDesc ? articleDesc.textContent.toLowerCase() : '';
+        let articleTitleText = articleTitleElement ? articleTitleElement.textContent : '';
+        let articleDescText = articleDesc ? articleDesc.textContent : '';
+        
+        // Debug log article text before normalization
+        console.log('Article before normalization:', {
+            title: articleTitle,
+            titleText: articleTitleText,
+            desc: articleDescText
+        });
         
         // Normalize article text if we have the normalization function
         if (window.normalizeSearchText) {
             articleTitle = window.normalizeSearchText(articleTitle);
             articleTitleText = window.normalizeSearchText(articleTitleText);
             articleDescText = window.normalizeSearchText(articleDescText);
+            
+            // Debug log article text after normalization
+            console.log('Article after normalization:', {
+                title: articleTitle,
+                titleText: articleTitleText,
+                desc: articleDescText
+            });
         }
         
         let showArticle = true;
 
-        // Filter by search term
-        if (searchTerm && !articleTitle.includes(searchTerm) && 
-            !articleTitleText.includes(searchTerm) && 
-            !articleDescText.includes(searchTerm)) {
-            showArticle = false;
+        // Filter by search term - more lenient matching for voice input
+        if (searchTerm) {
+            // Split search term into words for partial matching
+            const searchWords = searchTerm.split(/\s+/).filter(word => word.length > 0);
+            
+            // Debug log search words
+            console.log('Search words:', searchWords);
+            
+            // Check if any of the search words are found in the article
+            const hasMatch = searchWords.some(word => {
+                // Try exact match first
+                const exactMatch = articleTitle.includes(word) || 
+                                 articleTitleText.includes(word) || 
+                                 articleDescText.includes(word);
+                
+                if (exactMatch) {
+                    console.log('Found exact match for word:', word);
+                    return true;
+                }
+                
+                // Try partial match if exact match fails
+                const partialMatch = articleTitle.split(/\s+/).some(titleWord => {
+                    // Check if the search word is contained in any part of the title word
+                    return titleWord.includes(word) || word.includes(titleWord);
+                }) || articleTitleText.split(/\s+/).some(titleWord => {
+                    return titleWord.includes(word) || word.includes(titleWord);
+                }) || articleDescText.split(/\s+/).some(descWord => {
+                    return descWord.includes(word) || word.includes(descWord);
+                });
+                
+                if (partialMatch) {
+                    console.log('Found partial match for word:', word);
+                }
+                
+                return partialMatch;
+            });
+            
+            if (!hasMatch) {
+                showArticle = false;
+                console.log('No match found for article:', articleTitle);
+            }
         }
 
         // Filter by category - only hide if category is selected and doesn't match
@@ -355,8 +412,8 @@ function clearFilters() {
     } else {
         const dateRangeDisplay = document.querySelector('.date-range-display .date-range-text');
         if (dateRangeDisplay) {
-            const isArabic = document.dir === 'rtl' || localStorage.getItem('language') === 'ar';
-            dateRangeDisplay.textContent = isArabic ? 'اختر نطاق التاريخ' : 'Select date range';
+            const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+            dateRangeDisplay.textContent = currentLang === 'ar' ? 'اختر نطاق التاريخ' : 'Select date range';
         }
     }
     
