@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('achievement_link_id')->constrained()->cascadeOnDelete();
             $table->string('locale')->index();
-            $table->string('title');
+            $table->text('title');
             $table->unique(['achievement_link_id', 'locale']);
         });
     }

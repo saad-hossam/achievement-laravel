@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Traits\SaveFile;
 use App\Models\Department;
 use Illuminate\Http\Request;
+use App\Http\Requests\EditDepartmentRequest;
 use App\Http\Requests\StoreDepartmentRequest;
 use App\Http\Requests\UpdateDepartmentRequest;
 
@@ -64,7 +65,7 @@ use SaveFile;
         return view('dashboard.departments.edit',['department'=>$department]);
     }
 
-    public function update(UpdateDepartmentRequest $request, Department $department)
+    public function update(EditDepartmentRequest $request, Department $department)
 {
     // Step 1: Save the department main fields (e.g., status)
     $data = $request->except(['_token', '_method', 'ar', 'en', 'fr']); // Exclude translations

@@ -114,7 +114,7 @@
                         </div>
                         <div class="col-md-6">
                             <label>تاريخ الانجاز</label>
-                            <input class="form-control fc-datepicker" name="achievement_date" placeholder="MM/DD/YYYY" type="text">
+                            <input class="form-control achievement-datepicker" name="achievement_date" placeholder="MM/DD/YYYY" type="text">
                         </div>
 
                         <div class="col-md-6 mt-3">
@@ -183,5 +183,15 @@
 <script src="{{URL::asset('assets/admin/plugins/pickerjs/picker.min.js')}}"></script>
 <!-- Internal form-elements js -->
 <script src="{{URL::asset('assets/admin/js/form-elements.js')}}"></script>
-
+<script>
+    $(document).ready(function() {
+        $('.achievement-datepicker').datepicker({
+            dateFormat: 'yy/mm/dd',      // MM/DD/YYYY format
+            changeMonth: true,           // show month dropdown
+            changeYear: true,            // show year dropdown
+            yearRange: "1950:2050",      // year selection range
+            showButtonPanel: true        // show Today and Done buttons
+        });
+    });
+    </script>
 @endsection

@@ -47,7 +47,7 @@ class AchievementController extends Controller
         // Step 1: Save the department main fields (e.g., status)
         $data = $request->except(['_token', 'ar', 'en']); // Exclude translations
         $achievementDate = $request->achievement_date
-    ? Carbon::createFromFormat('m/d/Y', $request->achievement_date)->format('Y-m-d')
+    ? Carbon::createFromFormat('Y/m/d', $request->achievement_date)->format('Y-m-d')
     : null;
     $data['achievement_date']=$achievementDate;
         if ($request->hasFile('image_layout')) {
@@ -113,7 +113,7 @@ class AchievementController extends Controller
     {
         $data = $request->except(['_token', '_method', 'ar', 'en', 'fr']); // Exclude translations
         $achievementDate = $request->achievement_date
-        ? Carbon::createFromFormat('m/d/Y', $request->achievement_date)->format('Y-m-d')
+        ? Carbon::createFromFormat('Y/m/d', $request->achievement_date)->format('Y-m-d')
         : null;
         $data['achievement_date']=$achievementDate;
         if ($request->hasFile('image_layout')) {
@@ -141,8 +141,17 @@ class AchievementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $achievement = Achievement::find($request->achievement_id);
+        if ($achievement) {
+            // Unlink the image if it exists
+            if ($achievement->image && file_exists(public_path('images/achievements/'.$achievement->image))) {
+                unlink(public_path('images/achievements/'.$achievement->image));
+            }
+            $achievement->translations()->delete();
+            $achievement->delete();
+        }
+        return redirect()->route('achievements.index');
     }
 }
