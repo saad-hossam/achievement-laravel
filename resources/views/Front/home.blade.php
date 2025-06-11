@@ -92,9 +92,9 @@
                    data-title="{{ $achievement->translate(app()->getLocale())->title }}"
          data-date="{{ $achievement->achievement_date ? $achievement->achievement_date->format('Y-m-d') : '' }}">
                   <div class="coverPhoto">
-                      <img src="{{ asset('images/achievements/' . $achievement->image_layout) }}" alt="{{ $achievement->title }}">
-                  </div>
 
+                    <img src="{{ asset('images/achievements/' . $achievement->image_layout) }}" alt="{{ $achievement->title }}">
+                  </div>
                   <div class="cardText">
                       <small class="article-date">{{ $achievement->achievement_date ? $achievement->achievement_date->format('Y-m-d') : '' }}</small>
                       <h3>{{ $achievement->translate(app()->getLocale())->title }}</h3>
