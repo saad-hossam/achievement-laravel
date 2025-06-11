@@ -118,7 +118,7 @@
     color: var(--text-primary);
   }
 
-  
+
 
 
 
@@ -273,7 +273,7 @@
   .thumbnail-container {
     padding: 5px 35px;
   }
-  
+
   .thumbnail-container .slider-nav {
     width: 26px;
     height: 26px;
@@ -359,7 +359,7 @@
 }
 
 body {
-  font-family: "Cairo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: "Cairo" , sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
   font-weight: 400;
   line-height: 1.5;
@@ -1142,7 +1142,7 @@ header .container .button {
   height: 100%;
   background-color: var(--background-secondary) !important;
   position: absolute;
-  
+
   /* -webkit-transform: skewY(-6deg);
           transform: skewY(-6deg); */
   -webkit-transform-origin: top left;
@@ -1261,7 +1261,7 @@ height:225px;
 #articles .container .box .cardText h3 {
   margin: 0;
   text-transform: capitalize;
-  font-size: 1.2rem;
+  font-size: 1rem;
   padding-top: .5rem;
   font-weight: 600;
   font-family: "Cairo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -2967,7 +2967,7 @@ height:225px;
     flex-direction: column;
     gap: 12px;
   }
-  
+
   .filter-group > div {
     width: 100%;
     min-width: 0;
@@ -3205,12 +3205,12 @@ header .laguagesButton .checkboxlang:checked + .labellang .balllang {
     gap: 10px;
     margin-left: 10px;
   }
-  
+
   header .darkModeButton,
   header .laguagesButton {
     transform: scale(1);
   }
-  
+
   header .darkModeButton .label,
   header .laguagesButton .labellang {
     transform: scale(1);
@@ -3357,11 +3357,11 @@ header .laguagesButton .checkboxlang:checked + .labellang .balllang {
   .search-container {
     padding: 0 15px;
   }
-  
+
   .search-box {
     max-width: 100%;
   }
-  
+
   .search-box input {
     height: 45px;
     font-size: 14px;
@@ -3474,7 +3474,7 @@ header .laguagesButton .checkboxlang:checked + .labellang .balllang {
     padding: 6px 32px 6px 10px !important;
     font-size: 13px;
   }
-  
+
   .rtl .filter-group select.category-filter,
   .rtl .filter-group select.sort-filter {
     padding: 6px 10px 6px 32px !important;
@@ -4305,7 +4305,7 @@ header .laguagesButton .checkboxlang:checked + .labellang .balllang {
   .video-modal-content {
     width: 95%;
   }
-  
+
   .video-modal-close {
     top: -35px;
     font-size: 24px;
@@ -4474,7 +4474,7 @@ header .laguagesButton .checkboxlang:checked + .labellang .balllang {
   .details-layout {
     flex-direction: column;
   }
-  
+
   .slider-column,
   .description-column {
     width: 100%;
@@ -4485,20 +4485,20 @@ header .laguagesButton .checkboxlang:checked + .labellang .balllang {
   .main-image {
     height: 350px;
   }
-  
+
   .thumbnail-container {
     justify-content: center;
   }
-  
+
   .thumbnail {
     width: 60px;
     height: 45px;
   }
-  
+
   .description-title {
     font-size: 22px;
   }
-  
+
   .image-description {
     margin-top: 20px;
   }
@@ -4508,16 +4508,16 @@ header .laguagesButton .checkboxlang:checked + .labellang .balllang {
   .main-image {
     height: 250px;
   }
-  
+
   .thumbnail {
     width: 50px;
     height: 40px;
   }
-  
+
   .image-description {
     padding: 15px;
   }
-  
+
   .description-title {
     font-size: 20px;
   }
@@ -4559,7 +4559,7 @@ header .laguagesButton .checkboxlang:checked + .labellang .balllang {
   .rtl .thumbnail-container .slider-prev {
     right: 5px;
   }
-  
+
   .rtl .thumbnail-container .slider-next {
     left: 5px;
   }
@@ -4737,25 +4737,25 @@ header .laguagesButton .checkboxlang:checked + .labellang .balllang {
     height: 40px;
     font-size: 20px;
   }
-  
+
   .prev-btn {
     left: 10px;
   }
-  
+
   .next-btn {
     right: 10px;
   }
-  
+
   .rtl .prev-btn {
     left: auto;
     right: 10px;
   }
-  
+
   .rtl .next-btn {
     right: auto;
     left: 10px;
   }
-  
+
   .overlay-close {
     font-size: 30px;
   }
@@ -4895,11 +4895,11 @@ header .laguagesButton .checkboxlang:checked + .labellang .balllang {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
   }
-  
+
   #relatedVideosSection .video-display-box {
     height: 180px;
   }
-  
+
   #relatedVideosSection .main-play-icon-area {
     font-size: 40px;
     width: 60px;
@@ -5023,11 +5023,11 @@ html.theme-transitioning * {
     #voice-search {
         transform: scale(1.2);
     }
-    
+
     #voice-search.feedback {
         transform: scale(1.15);
     }
-    
+
     @keyframes pulse {
         0% {
             transform: scale(1.2);
@@ -5466,19 +5466,19 @@ font-weight: 500;
       width: 100%;
       margin: 16px;
   }
-  
+
   .calendar-day {
       font-size: 12px;
   }
-  
+
   .calendar-footer {
       flex-direction: column;
   }
-  
+
   .calendar-footer button {
       width: 100%;
   }
-} 
+}
 /* =================================         ================================= */
 
 /* ================================= Details Page ================================= */
@@ -6326,4 +6326,4 @@ body[dir="rtl"] .slider-next .rtl-flip {
 .dark-mode .article-counter.filtered {
   color: white;
 
-} 
+}
