@@ -79,7 +79,7 @@
                             <div class="achievement-details">
                                 <div class="detail-item">
                                     <span class="detail-label" data-i18n="date_label">Date:</span>
-                                    <span class="detail-value">{{ $achievement->achievement_date->format('d-m-y') }}</span>
+                                    <span class="detail-value">{{ $achievement->achievement_date ? $achievement->achievement_date->format('Y-m-d') : '' }}</span>
                                 </div>
 {{--                                <div class="detail-item">--}}
 {{--                                    <span class="detail-label" data-i18n="location_label">Location:</span>--}}
