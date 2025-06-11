@@ -410,32 +410,24 @@ const LangSystem = {
     // Get language directly from localStorage using consistent key
     const savedLang = localStorage.getItem('selectedLanguage') || 'en';
 
-    document.addEventListener('DOMContentLoaded', () => {
-  const langToggle = document.getElementById('chklang');
+    // Set up language toggle
+    const langToggle = document.getElementById('chklang');
+    if (langToggle) {
+      // Set initial state directly
+      langToggle.checked = savedLang === 'ar';
 
-  if (!langToggle) return;
+      // Remove any existing listeners by cloning
+      const newToggle = langToggle.cloneNode(true);
+      langToggle.parentNode.replaceChild(newToggle, langToggle);
 
-  // Load saved language or fallback to default
-  const savedLang = localStorage.getItem('lang') || '{{ app()->getLocale() }}';
-
-  // Set toggle state based on savedLang
-  langToggle.checked = savedLang === 'ar';
-
-  // Replace old toggle to remove old listeners
-  const newToggle = langToggle.cloneNode(true);
-  langToggle.parentNode.replaceChild(newToggle, langToggle);
-
-  // Add event listener
-  newToggle.addEventListener('change', () => {
-    const newLang = newToggle.checked ? 'ar' : 'en';
-
-    // Save to localStorage
-    localStorage.setItem('lang', newLang);
-
-    // Optional: redirect to backend route to update Laravel locale
-    window.location.href = `/change-language/${newLang}`;
-  });
-});
+      // Add single event listener for direct changes
+      newToggle.addEventListener('change', (e) => {
+        e.preventDefault(); // Prevent any default behavior
+        const newLang = newToggle.checked ? 'ar' : 'en';
+        this.changeLang(newLang);
+      });
+    } else {
+    }
 
     // Apply language immediately
     this.changeLang(savedLang);
