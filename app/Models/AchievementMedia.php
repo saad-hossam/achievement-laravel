@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class AchievementMedia extends Model
 {
     use HasFactory;
-    protected $fillable = ['achievement_id', 'type', 'path'];
+    protected $fillable = ['achievement_id', 'type', 'path','video_id'];
 
     public function achievement()
     {
