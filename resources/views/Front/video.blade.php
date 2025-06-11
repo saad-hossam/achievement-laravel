@@ -62,7 +62,7 @@
         </div>
     </section>
     <!-- Filter End -->
-
+<div id="video-results" class="video-results"></div>
     <!-- Video Counter -->
     <div class="article-counter-container">
         <div class="article-counter">
@@ -75,176 +75,27 @@
 
     <div class="container">
         <div class="video-grid" id="videos">
-            <!-- Video items with data attributes for filtering -->
-            <div class="video-card-wrapper" data-category="military" data-title="Military Exercise"
-                data-date="2024-03-15">
-                <div class="video-display-box">
-                    <div class="thumbnail-container">
-                        <img src="https://img.youtube.com/vi/dY3t90L_q3Q/hqdefault.jpg" alt="Video Thumbnail"
-                            class="thumbnail-image">
-                        <div class="main-play-icon-area">
-                            <i class="fa-regular fa-circle-play"></i>
+            @foreach ($videos as $video)
+                <div class="video-card-wrapper"
+                     data-category="{{ $video->achievement->category ?? '' }}"
+                     data-title="{{ $video->achievement->title ?? 'Untitled' }}"
+                     data-date="{{ $video->achievement->date ?? '2025-01-01' }}">
+                    <div class="video-display-box">
+                        <div class="thumbnail-container">
+                            <img src="https://img.youtube.com/vi/{{ $video->video_id }}/hqdefault.jpg"
+                                 alt="Video Thumbnail"
+                                 class="thumbnail-image">
+                            <div class="main-play-icon-area">
+                                <i class="fa-regular fa-circle-play"></i>
+                            </div>
+                        </div>
+                        <div class="youtube-logo-wrapper">
+                            <img src="{{ asset('images/favicon.png') }}" alt="YouTube Logo" class="youtube-logo-image">
                         </div>
                     </div>
-                    <div class="youtube-logo-wrapper">
-                        <img src="images/favicon.png" alt="YouTube Logo" class="youtube-logo-image">
-                    </div>
+                    <p class="video-card-title">{{ $video->achievement->title ?? 'No Title' }}</p>
                 </div>
-                <p class="video-card-title" data-lang="video1"></p>
-            </div>
-
-            <div class="video-card-wrapper" data-category="defense" data-title="Defense Strategy"
-                data-date="2024-02-20">
-                <div class="video-display-box">
-                    <div class="thumbnail-container">
-                        <img src="https://img.youtube.com/vi/pOWKt8p-GYY/hqdefault.jpg" alt="Video Thumbnail"
-                            class="thumbnail-image">
-                        <div class="main-play-icon-area">
-                            <i class="fa-regular fa-circle-play"></i>
-                        </div>
-                    </div>
-                    <div class="youtube-logo-wrapper">
-                        <img src="images/favicon.png" alt="YouTube Logo" class="youtube-logo-image">
-                    </div>
-                </div>
-                <p class="video-card-title" data-lang="video2"></p>
-            </div>
-
-            <div class="video-card-wrapper" data-category="technology" data-title="New Technology"
-                data-date="2024-01-10">
-                <div class="video-display-box">
-                    <div class="thumbnail-container">
-                        <img src="https://img.youtube.com/vi/e65Q-NrK-dc/hqdefault.jpg" alt="Video Thumbnail"
-                            class="thumbnail-image">
-                        <div class="main-play-icon-area">
-                            <i class="fa-regular fa-circle-play"></i>
-                        </div>
-                    </div>
-                    <div class="youtube-logo-wrapper">
-                        <img src="images/favicon.png" alt="YouTube Logo" class="youtube-logo-image">
-                    </div>
-                </div>
-                <p class="video-card-title" data-lang="video3"></p>
-            </div>
-
-            <div class="video-card-wrapper" data-category="industry" data-title="Industry Development"
-                data-date="2023-12-15">
-                <div class="video-display-box">
-                    <div class="thumbnail-container">
-                        <img src="https://img.youtube.com/vi/ftV6GKQyKw4/hqdefault.jpg" alt="Video Thumbnail"
-                            class="thumbnail-image">
-                        <div class="main-play-icon-area">
-                            <i class="fa-regular fa-circle-play"></i>
-                        </div>
-                    </div>
-                    <div class="youtube-logo-wrapper">
-                        <img src="images/favicon.png" alt="YouTube Logo" class="youtube-logo-image">
-                    </div>
-                </div>
-                <p class="video-card-title" data-lang="video4"></p>
-            </div>
-
-            <div class="video-card-wrapper" data-category="international" data-title="International Relations"
-                data-date="2023-11-05">
-                <div class="video-display-box">
-                    <div class="thumbnail-container">
-                        <img src="https://img.youtube.com/vi/7iEtc19nQNs/hqdefault.jpg" alt="Video Thumbnail"
-                            class="thumbnail-image">
-                        <div class="main-play-icon-area">
-                            <i class="fa-regular fa-circle-play"></i>
-                        </div>
-                    </div>
-                    <div class="youtube-logo-wrapper">
-                        <img src="images/favicon.png" alt="YouTube Logo" class="youtube-logo-image">
-                    </div>
-                </div>
-                <p class="video-card-title" data-lang="video5"></p>
-            </div>
-
-            <div class="video-card-wrapper" data-category="development" data-title="Development Project"
-                data-date="2023-10-20">
-                <div class="video-display-box">
-                    <div class="thumbnail-container">
-                        <img src="https://img.youtube.com/vi/Nz6c3zAtDDg/hqdefault.jpg" alt="Video Thumbnail"
-                            class="thumbnail-image">
-                        <div class="main-play-icon-area">
-                            <i class="fa-regular fa-circle-play"></i>
-                        </div>
-                    </div>
-                    <div class="youtube-logo-wrapper">
-                        <img src="images/favicon.png" alt="YouTube Logo" class="youtube-logo-image">
-                    </div>
-                </div>
-                <p class="video-card-title" data-lang="video6"></p>
-            </div>
-
-            <div class="video-card-wrapper" data-category="security" data-title="Security Operations"
-                data-date="2023-09-15">
-                <div class="video-display-box">
-                    <div class="thumbnail-container">
-                        <img src="https://img.youtube.com/vi/pKFod1gJflk/hqdefault.jpg" alt="Video Thumbnail"
-                            class="thumbnail-image">
-                        <div class="main-play-icon-area">
-                            <i class="fa-regular fa-circle-play"></i>
-                        </div>
-                    </div>
-                    <div class="youtube-logo-wrapper">
-                        <img src="images/favicon.png" alt="YouTube Logo" class="youtube-logo-image">
-                    </div>
-                </div>
-                <p class="video-card-title" data-lang="video7"></p>
-            </div>
-
-            <div class="video-card-wrapper" data-category="leadership" data-title="Leadership Conference"
-                data-date="2023-08-25">
-                <div class="video-display-box">
-                    <div class="thumbnail-container">
-                        <img src="https://img.youtube.com/vi/WmRxceCn7MU/hqdefault.jpg" alt="Video Thumbnail"
-                            class="thumbnail-image">
-                        <div class="main-play-icon-area">
-                            <i class="fa-regular fa-circle-play"></i>
-                        </div>
-                    </div>
-                    <div class="youtube-logo-wrapper">
-                        <img src="images/favicon.png" alt="YouTube Logo" class="youtube-logo-image">
-                    </div>
-                </div>
-                <p class="video-card-title" data-lang="video8"></p>
-            </div>
-
-            <div class="video-card-wrapper" data-category="military" data-title="Military Technology"
-                data-date="2023-07-10">
-                <div class="video-display-box">
-                    <div class="thumbnail-container">
-                        <img src="https://img.youtube.com/vi/3ZxtQTsN0tE/hqdefault.jpg" alt="Video Thumbnail"
-                            class="thumbnail-image">
-                        <div class="main-play-icon-area">
-                            <i class="fa-regular fa-circle-play"></i>
-                        </div>
-                    </div>
-                    <div class="youtube-logo-wrapper">
-                        <img src="images/favicon.png" alt="YouTube Logo" class="youtube-logo-image">
-                    </div>
-                </div>
-                <p class="video-card-title" data-lang="video9"></p>
-            </div>
-
-            <div class="video-card-wrapper" data-category="defense" data-title="Defense Innovation"
-                data-date="2023-06-05">
-                <div class="video-display-box">
-                    <div class="thumbnail-container">
-                        <img src="https://img.youtube.com/vi/oovmi47l3gk/hqdefault.jpg" alt="Video Thumbnail"
-                            class="thumbnail-image">
-                        <div class="main-play-icon-area">
-                            <i class="fa-regular fa-circle-play"></i>
-                        </div>
-                    </div>
-                    <div class="youtube-logo-wrapper">
-                        <img src="images/favicon.png" alt="YouTube Logo" class="youtube-logo-image">
-                    </div>
-                </div>
-                <p class="video-card-title" data-lang="video10"></p>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
