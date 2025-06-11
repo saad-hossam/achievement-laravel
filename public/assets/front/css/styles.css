@@ -4314,6 +4314,7 @@ header .laguagesButton .checkboxlang:checked + .labellang .balllang {
 
 /* Details page layout */
 .details-layout {
+    height: 40rem;
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
@@ -4327,6 +4328,7 @@ header .laguagesButton .checkboxlang:checked + .labellang .balllang {
 
 .description-column {
   flex: 1;
+  height:100%
   min-width: 300px;
   display: flex;
   flex-direction: column;
@@ -4428,6 +4430,7 @@ header .laguagesButton .checkboxlang:checked + .labellang .balllang {
 .description-content {
   margin-bottom: 25px;
   line-height: 1.7;
+  overflow-y:scroll;
 }
 
 .description-content p {
