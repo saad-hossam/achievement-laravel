@@ -90,16 +90,15 @@
               <div class="box"
                    data-category="{{ $achievement->department->translate(app()->getLocale())->name ?? 'general' }}"
                    data-title="{{ $achievement->translate(app()->getLocale())->title }}"
-                   data-date="{{ $achievement->achievement_date->format('Y-m-d') }}">
-
+         data-date="{{ $achievement->achievement_date ? $achievement->achievement_date->format('Y-m-d') : '' }}">
                   <div class="coverPhoto">
                       <img src="{{ asset('images/achievements/' . $achievement->image_layout) }}" alt="{{ $achievement->title }}">
                   </div>
 
                   <div class="cardText">
-                      <small class="article-date">{{ $achievement->achievement_date->format('Y-m-d') }}</small>
+                      <small class="article-date">{{ $achievement->achievement_date ? $achievement->achievement_date->format('Y-m-d') : '' }}</small>
                       <h3>{{ $achievement->translate(app()->getLocale())->title }}</h3>
-                      <p>{!!  $achievement->translate(app()->getLocale())->desc !!}</p>
+                      {{-- <p>{!!  $achievement->translate(app()->getLocale())->desc !!}</p> --}}
                   </div>
 
                   <div class="cardFooter">
