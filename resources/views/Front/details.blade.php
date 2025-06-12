@@ -110,7 +110,7 @@
                     <div class="main-video-player">
                         <iframe
                             id="mainVideoPlayer"
-                            src="{{ $firstVideo ? 'https://www.youtube.com/embed/' . $firstVideo->video_id : 'https://www.youtube.com/embed/3vmr8EXVhwM' }}"
+                            src="{{ $firstVideo ? 'https://www.youtube.com/embed/' . $firstVideo->video_id : 'https://www.youtube.com/embed/Nz6c3zAtDDg' }}"
                             frameborder="0" allowfullscreen>
                         </iframe>
 
