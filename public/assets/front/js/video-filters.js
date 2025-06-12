@@ -1,6 +1,6 @@
 // Initialize filters when the document is ready
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // Wait a brief moment to ensure custom dropdowns have initialized
     setTimeout(() => {
         // Get all filter elements
@@ -10,23 +10,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const endDateInput = document.getElementById('end-date');
         const clearFiltersBtn = document.getElementById('clear-filters');
         const searchInput = document.getElementById('search-input');
-        
+
         // Initialize article count
         const videos = document.querySelectorAll('#videos .video-card-wrapper');
         const articleCountElement = document.getElementById('article-count');
         if (articleCountElement) {
             articleCountElement.textContent = videos.length;
         }
-        
+
         // Add loading indicator and listing states containers if not already present
         initializeListingStates();
-        
+
         // Add event listeners to search input
         if (searchInput) {
             searchInput.addEventListener('input', function() {
                 // Show loading state
                 showLoadingState();
-                
+
                 // Use a slight delay to mimic search process
                 setTimeout(() => {
                     filterVideos();
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 300);
             });
         }
-        
+
         if (sortByFilter) {
             sortByFilter.addEventListener('change', function() {
                 showLoadingState();
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 300);
             });
         }
-        
+
         if (startDateInput) {
             startDateInput.addEventListener('change', function() {
                 showLoadingState();
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 300);
             });
         }
-        
+
         if (endDateInput) {
             endDateInput.addEventListener('change', function() {
                 showLoadingState();
@@ -89,11 +89,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Initial filter state
         updateFilterButtonState();
-        
+
         // Run initial filter
         filterVideos();
     }, 200);
-    
+
     // Listen for language changes and update filters accordingly
     document.addEventListener('translationsLoaded', (event) => {
         // Give some time for the translations to be applied to the DOM
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.customDropdowns.sort.refresh();
                 }
             }
-            
+
             // Update the filters UI and re-apply filtering
             filterVideos();
             updateFilterButtonState();
@@ -120,12 +120,12 @@ function initializeListingStates() {
     // Make sure we're working with the videos container
     const videosContainer = document.getElementById('videos');
     if (!videosContainer) return;
-    
+
     // Add listing-container class if it doesn't have it
     if (!videosContainer.classList.contains('listing-container')) {
         videosContainer.classList.add('listing-container');
     }
-    
+
     // Check if we already have the loading state element
     let loadingState = document.querySelector('.listing-state.loading');
     if (!loadingState) {
@@ -135,22 +135,22 @@ function initializeListingStates() {
             <div class="spinner"></div>
             <p class="message" data-i18n="loading_message">Loading...</p>
         `;
-        // videosContainer.appendChild(loadingState);   
+        // videosContainer.appendChild(loadingState);
     }
-    
+
     // Check if we already have the no results message element
     let noResults = document.getElementById('no-results-message');
     if (!noResults) {
         noResults = document.createElement('div');
         noResults.id = 'no-results-message';
         noResults.className = 'no-results-message';
-        
+
         // Set the text based on current language
         const currentLang = document.dir === 'rtl' || localStorage.getItem('language') === 'ar' ? 'ar' : 'en';
-        noResults.textContent = currentLang === 'ar' ? 
-            'لم يتم العثور على نتائج للبحث. حاول تعديل معايير البحث والفلترة.' : 
+        noResults.textContent = currentLang === 'ar' ?
+            'لم يتم العثور على نتائج للبحث. حاول تعديل معايير البحث والفلترة.' :
             'No results found. Try adjusting your search and filter criteria.';
-        
+
         videosContainer.appendChild(noResults);
     }
 }
@@ -159,11 +159,11 @@ function initializeListingStates() {
 function showLoadingState() {
     const loadingState = document.querySelector('.listing-state.loading');
     const videos = document.querySelectorAll('#videos .video-card-wrapper');
-    
+
     // Only show loading state if we have videos to filter
     if (loadingState && videos.length > 0) {
         loadingState.style.display = 'flex';
-        
+
         // Optional: temporarly reduce opacity of video items
         videos.forEach(video => {
             video.style.opacity = '0.5';
@@ -176,11 +176,11 @@ function showLoadingState() {
 function hideLoadingState() {
     const loadingState = document.querySelector('.listing-state.loading');
     const videos = document.querySelectorAll('#videos .video-card-wrapper');
-    
+
     if (loadingState) {
         loadingState.style.display = 'none';
     }
-    
+
     // Restore opacity of video items
     videos.forEach(video => {
         video.style.opacity = '1';
@@ -203,7 +203,7 @@ function filterVideos() {
     const startDate = startDateInput ? startDateInput.value : '';
     const endDate = endDateInput ? endDateInput.value : '';
     let searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
-    
+
     // Normalize search term if we have the normalization function
     if (window.normalizeSearchText) {
         searchTerm = window.normalizeSearchText(searchTerm);
@@ -214,7 +214,7 @@ function filterVideos() {
     const videosArray = Array.from(videos);
     let visibleCount = 0;
     const totalCount = videosArray.length;
-    
+
     // Filter videos
     videosArray.forEach(video => {
         const videoDate = new Date(video.dataset.date);
@@ -222,13 +222,13 @@ function filterVideos() {
         let videoTitle = video.dataset.title.toLowerCase();
         const videoTitleElement = video.querySelector('.video-card-title');
         let videoTitleText = videoTitleElement ? videoTitleElement.textContent.toLowerCase() : '';
-        
+
         // Normalize video text if we have the normalization function
         if (window.normalizeSearchText) {
             videoTitle = window.normalizeSearchText(videoTitle);
             videoTitleText = window.normalizeSearchText(videoTitleText);
         }
-        
+
         let showVideo = true;
 
         // Filter by search term
@@ -286,7 +286,7 @@ function filterVideos() {
 
     // Update filter button state
     updateFilterButtonState();
-    
+
     // Show message if no results
     const noResultsMessage = document.getElementById('no-results-message');
     if (noResultsMessage) {
@@ -296,14 +296,14 @@ function filterVideos() {
             noResultsMessage.style.display = 'none';
         }
     }
-    
+
     // Update the video count in the counter
     const articleCountElement = document.getElementById('article-count');
-    
+
     if (articleCountElement) {
         // Update the count
         articleCountElement.textContent = visibleCount;
-        
+
         // Highlight the counter if filtered (not showing all videos)
         const counterContainer = document.querySelector('.article-counter');
         if (counterContainer) {
@@ -333,7 +333,7 @@ function clearFilters() {
     if (startDateInput) startDateInput.value = '';
     if (endDateInput) endDateInput.value = '';
     if (searchInput) searchInput.value = '';
-    
+
     // Update custom dropdowns if available
     if (window.customDropdowns) {
         if (window.customDropdowns.category) {
@@ -343,7 +343,7 @@ function clearFilters() {
             window.customDropdowns.sort.updateValue('date-desc');
         }
     }
-    
+
     // Clear date range picker display if available
     if (window.dateRangePicker) {
         window.dateRangePicker.clearDateRange();
@@ -354,37 +354,37 @@ function clearFilters() {
             dateRangeDisplay.textContent = isArabic ? 'اختر نطاق التاريخ' : 'Select date range';
         }
     }
-    
+
     // Show all videos
     const videos = document.querySelectorAll('#videos .video-card-wrapper');
     videos.forEach(video => {
         video.style.display = 'block';
     });
-    
+
     // Update article counter
     const articleCountElement = document.getElementById('article-count');
-    
+
     if (articleCountElement) {
         // Update the count to show all videos
         articleCountElement.textContent = videos.length;
     }
-    
+
     // Remove filtered highlight
     const counterContainer = document.querySelector('.article-counter');
     if (counterContainer) {
         counterContainer.classList.remove('filtered');
         updateCounterIcon(false);
     }
-    
+
     // Hide no results message
     const noResultsMessage = document.getElementById('no-results-message');
     if (noResultsMessage) {
         noResultsMessage.style.display = 'none';
     }
-    
+
     // Reset filter state
     filterVideos();
-    
+
     // Disable the clear filters button
     if (clearFiltersBtn) {
         clearFiltersBtn.disabled = true;
@@ -395,7 +395,7 @@ function clearFilters() {
 function updateCounterIcon(isFiltered) {
     const counterIcon = document.querySelector('.article-counter i');
     if (!counterIcon) return;
-    
+
     if (isFiltered) {
         // Change to a filtered state icon
         counterIcon.classList.remove('fa-filter');
@@ -416,56 +416,49 @@ function updateFilterButtonState() {
     const endDateInput = document.getElementById('end-date');
     const clearFiltersBtn = document.getElementById('clear-filters');
     const searchInput = document.getElementById('search-input');
-    
+
     // Check if any filter is active
     const categoryActive = categoryFilter && categoryFilter.value !== '';
     const sortByActive = sortByFilter && sortByFilter.value !== 'date-desc'; // Check if not default
     const dateRangeActive = (startDateInput && startDateInput.value !== '') || (endDateInput && endDateInput.value !== '');
     const searchActive = searchInput && searchInput.value !== '';
-    
+
     // Enable/disable clear filters button
     if (clearFiltersBtn) {
         clearFiltersBtn.disabled = !(categoryActive || sortByActive || dateRangeActive || searchActive);
     }
 }
 
-// Add event listener for video thumbnails to open modal
 document.addEventListener('DOMContentLoaded', () => {
     const thumbnails = document.querySelectorAll('.thumbnail-container');
     const modal = document.getElementById('video-modal');
     const iframe = document.getElementById('youtube-iframe');
     const closeBtn = document.querySelector('.video-modal-close');
-    
-    if (!thumbnails || !modal || !iframe) return;
-    
+
+    if (!thumbnails.length || !modal || !iframe) return;
+
     thumbnails.forEach(thumbnail => {
-        thumbnail.addEventListener('click', function() {
-            const imgSrc = thumbnail.querySelector('img').src;
-            // Extract video ID from YouTube thumbnail URL
-            const videoId = imgSrc.match(/\/vi\/([^\/]+)\//) ? imgSrc.match(/\/vi\/([^\/]+)\//)[1] : null;
-            
+        thumbnail.addEventListener('click', function () {
+            const videoId = thumbnail.dataset.videoId;
             if (videoId) {
-                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
                 modal.style.display = 'block';
-                document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+                document.body.style.overflow = 'hidden';
             }
         });
     });
-    
-    if (closeBtn) {
-        closeBtn.addEventListener('click', function() {
-            modal.style.display = 'none';
-            iframe.src = '';
-            document.body.style.overflow = ''; // Restore scrolling
-        });
-    }
-    
-    // Close modal when clicking outside of content
-    window.addEventListener('click', function(event) {
+
+    closeBtn?.addEventListener('click', () => {
+        modal.style.display = 'none';
+        iframe.src = '';
+        document.body.style.overflow = '';
+    });
+
+    window.addEventListener('click', event => {
         if (event.target === modal) {
             modal.style.display = 'none';
             iframe.src = '';
-            document.body.style.overflow = ''; // Restore scrolling
+            document.body.style.overflow = '';
         }
     });
-}); 
+});

@@ -1,7 +1,54 @@
 @extends('layouts.front.master')
 
-@section('content')
+<style>
+.video-modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    /* padding-top: 40px; */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
 
+.video-modal.show {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+}
+
+.video-modal-content {
+    margin: auto;
+    display: block;
+    max-width: 80%;
+    max-height: 80%;
+    position: relative;
+}
+
+.video-modal-close {
+    position: absolute;
+    top: -30px;
+    right: 0;
+    color: #fff;
+    font-size: 36px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 500px;
+    border: none;
+}
+</style>
+
+@section('content')
 <section class="video-gallery-section">
     <!-- Banner/Breadcrumbs -->
     <div class="banner">
@@ -9,8 +56,7 @@
             <p class="breadcrumbs" data-lang="video_library"></p>
         </div>
     </div>
-
-    <!-- Search Container Start -->
+ <!-- Search Container Start -->
     <div class="search-container">
         <div class="search-box" role="search">
             <label for="search-input" class="sr-only">Search videos</label>
@@ -21,48 +67,9 @@
         </div>
     </div>
     <!-- Search Container End -->
+    <!-- Search + Filters -->
+    <!-- Your existing filter/search markup here -->
 
-    <!-- Filter Start -->
-    <section class="filter-section" aria-label="Video Filters" style="margin:0 20px;">
-        <div class="filter-container">
-            <div class="filter-group">
-                <select id="category-filter" class="category-filter">
-                    <option value="" data-lang="allCategories">All Categories</option>
-                    <option value="military" data-lang="military">Military</option>
-                    <option value="defense" data-lang="defense">Defense</option>
-                    <option value="industry" data-lang="industry">Industry</option>
-                    <option value="technology" data-lang="technology">Technology</option>
-                    <option value="international" data-lang="international">International Relations</option>
-                    <option value="development" data-lang="development">Development</option>
-                    <option value="security" data-lang="security">Security</option>
-                    <option value="leadership" data-lang="leadership">Leadership</option>
-                </select>
-            </div>
-            <div class="filter-group date-filter">
-                <label for="date-range" data-lang="dateRange">Date Range:</label>
-                <div class="date-picker-container">
-                    <!-- The date range picker will be initialized by JavaScript -->
-                </div>
-                <input type="hidden" id="start-date">
-                <input type="hidden" id="end-date">
-            </div>
-            <div class="filter-group">
-                <select id="sort-by" class="sort-filter" aria-label="Sort videos">
-                    <option value="date-desc" selected data-lang="dateNewest">Date (Newest First)</option>
-                    <option value="date-asc" data-lang="dateOldest">Date (Oldest First)</option>
-                    <option value="title-asc" data-lang="titleAZ">Title (A-Z)</option>
-                    <option value="title-desc" data-lang="titleZA">Title (Z-A)</option>
-                </select>
-            </div>
-            <button class="clear-filters-btn" id="clear-filters" disabled aria-label="Clear all filters"
-                tabindex="0">
-                <i class="fas fa-times" aria-hidden="true"></i> <span data-lang="clearFilters">Clear All
-                    Filters</span>
-            </button>
-        </div>
-    </section>
-    <!-- Filter End -->
-<div id="video-results" class="video-results"></div>
     <!-- Video Counter -->
     <div class="article-counter-container">
         <div class="article-counter">
@@ -71,28 +78,35 @@
             <span data-lang="videosFound">Videos Found</span>
         </div>
     </div>
-    <!-- Video Counter End -->
 
+    <!-- Videos Grid -->
     <div class="container">
         <div class="video-grid" id="videos">
             @foreach ($videos as $video)
                 <div class="video-card-wrapper"
-                     data-category="{{ $video->achievement->category ?? '' }}"
-                     data-title="{{ $video->achievement->title ?? 'Untitled' }}"
-                     data-date="{{ $video->achievement->date ?? '2025-01-01' }}">
+                    data-category="{{ $video->achievement->category ?? '' }}"
+                    data-title="{{ $video->achievement->title ?? 'Untitled' }}"
+                    data-date="{{ $video->achievement->date ?? '2025-01-01' }}">
+
                     <div class="video-display-box">
-                        <div class="thumbnail-container">
-                            <img src="https://img.youtube.com/vi/{{ $video->video_id }}/hqdefault.jpg"
-                                 alt="Video Thumbnail"
-                                 class="thumbnail-image">
+                        <div class="thumbnail-container" data-video-id="{{ $video->video_id }}">
+                            @if ($video->type === 'video' && !empty($video->video_id))
+                                <img src="https://img.youtube.com/vi/{{ $video->video_id }}/hqdefault.jpg"
+                                    alt="Video Thumbnail" class="thumbnail-image">
+                            @else
+                                <img src="{{ asset('images/default-thumbnail.jpg') }}"
+                                    alt="Fallback Thumbnail" class="thumbnail-image">
+                            @endif
                             <div class="main-play-icon-area">
                                 <i class="fa-regular fa-circle-play"></i>
                             </div>
                         </div>
+
                         <div class="youtube-logo-wrapper">
                             <img src="{{ asset('images/favicon.png') }}" alt="YouTube Logo" class="youtube-logo-image">
                         </div>
                     </div>
+
                     <p class="video-card-title">{{ $video->achievement->title ?? 'No Title' }}</p>
                 </div>
             @endforeach
@@ -100,7 +114,6 @@
     </div>
 </section>
 
-<!-- Add no results message -->
 <!-- No results message -->
 <div id="no-results-message" style="display: none; text-align: center; padding: 40px; width: 100%;">
     <i class="fas fa-search" style="font-size: 48px; color: #ccc; margin-bottom: 20px;"></i>
@@ -117,4 +130,78 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const thumbnails = document.querySelectorAll('.thumbnail-container');
+    const modal = document.getElementById('video-modal');
+    const iframe = document.getElementById('youtube-iframe');
+    const closeBtn = document.querySelector('.video-modal-close');
+
+    if (!modal || !iframe) return;
+
+    thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', function () {
+            const videoId = this.dataset.videoId;
+            if (videoId) {
+                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+
+    closeBtn?.addEventListener('click', () => {
+        modal.classList.remove('show');
+        iframe.src = '';
+        document.body.style.overflow = '';
+    });
+
+    window.addEventListener('click', event => {
+        if (event.target === modal) {
+            modal.classList.remove('show');
+            iframe.src = '';
+            document.body.style.overflow = '';
+        }
+    });
+});
+
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('search-input');
+    const videos = document.querySelectorAll('.video-card-wrapper');
+    const counter = document.getElementById('article-count');
+    const noResultsMessage = document.getElementById('no-results-message');
+
+    if (!searchInput) return;
+
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.trim().toLowerCase();
+        let matchCount = 0;
+
+        videos.forEach(card => {
+            const title = card.dataset.title?.toLowerCase() || '';
+            if (title.includes(query)) {
+                card.style.display = '';
+                matchCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        counter.textContent = matchCount;
+
+        if (matchCount === 0) {
+            noResultsMessage.style.display = 'block';
+        } else {
+            noResultsMessage.style.display = 'none';
+        }
+    });
+});
+</script>
+
 @endsection
