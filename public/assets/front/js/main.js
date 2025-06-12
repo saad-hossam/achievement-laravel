@@ -433,23 +433,37 @@ const LangSystem = {
     this.changeLang(savedLang);
   },
 
-  changeLang(lang) {
-    // Update localStorage with consistent key
+changeLang(lang) {
+  const currentPath = window.location.pathname;
+  const newPath = currentPath.replace(/^\/(ar|en)/, `/${lang}`);
+  const newUrl = `${newPath}${window.location.search}${window.location.hash}`;
+
+  // If we're switching to a different language path
+  if (newPath !== currentPath) {
+    // Set the language in localStorage (persist selection across reload)
     localStorage.setItem('selectedLanguage', lang);
 
-    // Update document direction and language attributes
-    document.documentElement.lang = lang;
-    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-    document.body.classList.toggle('rtl', lang === 'ar');
+    // Reload immediately with the new URL
+    window.location.replace(newUrl);
 
-    // Update content immediately
-    this.updateContent(lang);
+    // Stop execution — do NOT continue with dynamic updates
+    return;
+  }
 
-    // Dispatch a single event for other systems
-    window.dispatchEvent(new CustomEvent('languageChanged', {
-      detail: { language: lang }
-    }));
-  },
+  // If no URL change, do client-side updates only
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.body.classList.toggle('rtl', lang === 'ar');
+
+  // Update content immediately
+  this.updateContent(lang);
+
+  // Notify other parts of app
+  window.dispatchEvent(new CustomEvent('languageChanged', {
+    detail: { language: lang }
+  }));
+},
+
 
   updateContent(lang) {
     // Update regular elements immediately
