@@ -112,11 +112,6 @@
             @endforeach
         </div>
     </div>
-      <!-- Pagination (Always Below All Articles) -->
- <div class="pagination-wrapper d-flex justify-content-center mt-4">
-  {{ $videos->withQueryString()->links() }}
-</div>
-
 </section>
 
 <!-- No results message -->

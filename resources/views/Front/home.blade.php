@@ -1,5 +1,7 @@
 @extends("layouts.front.master")
+<style>
 
+    </style>
 @section('content')
 
 <!-- Start Landing -->
@@ -140,11 +142,6 @@ data-category="{{ $achievement->department_id }}"
       <p data-lang="noResultsDesc">{{ __('Try adjusting your filters or search criteria.') }}</p>
     </div>
   </div>
-  <!-- Pagination (Always Below All Articles) -->
- <div class="pagination-wrapper d-flex justify-content-center mt-4">
-  {{ $achievements->withQueryString()->links() }}
-</div>
-
 </div>
 <!-- End Articles -->
 
