@@ -1230,7 +1230,7 @@ header .container .button {
   padding-top: 3rem;
   display: -ms-grid;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   /* grid-template-columns: repeat(3, 1fr);  */
   gap: 40px;
 }
@@ -1242,11 +1242,64 @@ header .container .button {
   overflow: hidden;
   -webkit-transition: 0.4s;
   transition: 0.4s;
-  height: 34rem;
+  height: 37rem;
+  text-align:center;
 }
 #articles .container .box .coverPhoto  {
-height:225px;
+height:270px;
 }
+.date-filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.date-filter label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+}
+  .pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+  }
+
+  .pagination {
+    display: flex;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+  }
+
+  .pagination li a,
+  .pagination li span {
+    display: inline-block;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    color: #333;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+
+  .pagination li.active span,
+  .pagination li a:hover {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+  }
+
+  .pagination li.disabled span {
+    color: #ccc;
+    cursor: not-allowed;
+  }
+  .pagination-wrapper .small,
+.pagination-wrapper .text-muted {
+  display: none !important;
+}
+
+
 #articles .container .box .coverPhoto img {
   height:100%;
   max-width: 100%;

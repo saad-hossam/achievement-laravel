@@ -71,4 +71,6 @@ Route::group([
 
     Route::post('/articles/filter', action: [HomeController::class, 'filter'])->name('articles.filter');
 
+Route::post('/filter', action: [HomeController::class, 'filter'])->name('articles.filter');
+
 });

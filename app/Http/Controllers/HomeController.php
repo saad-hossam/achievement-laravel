@@ -16,7 +16,7 @@ class HomeController extends Controller
     public function index()
     {
          $departments = Department::active()->with('translations')->get(); // Departments with translations
-         $achievements = Achievement::with('translations')->get(); // Departments with translations
+         $achievements = Achievement::with('translations')->paginate(12); // Departments with translations
 
         return view('Front.home', [
             'departments' => $departments,
@@ -102,7 +102,7 @@ public function filter(Request $request)
 
   public function videos()
 {
-    $videos = AchievementMedia::where('type', 'video')->get();
+    $videos = AchievementMedia::where('type', 'video')->paginate(12);
 
     return view('Front.video', compact('videos'));
 }

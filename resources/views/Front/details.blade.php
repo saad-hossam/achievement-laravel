@@ -5,14 +5,14 @@
         <!-- Banner/Breadcrumbs -->
         <div class="banner">
             <div class="container">
-                <p class="breadcrumbs" data-lang="gallary">Gallery</p>
+                {{-- <p class="breadcrumbs" data-lang="gallary"></p> --}}
             </div>
         </div>
 
         <!--Start Details Content-->
         <div id="details-content" style="padding-top:40px;">
             <div class="container">
-                <h2 class="mainTitle" data-lang="gallary">{{ $achievement->title }}</h2>
+                <h2 class="mainTitle" data-lang="gallary">{{ $achievement->translate(app()->getLocale())->title }}</h2>
 
                 <!-- Content Filter Bar -->
                 <div class="content-filter-bar">
@@ -72,13 +72,13 @@
                     <!-- Description Column -->
                     <div class="description-column" data-content-type="description">
                         <div class="image-description">
-                            <h3 class="description-title" data-i18n="about_achievement">About This Achievement</h3>
+                            <h3 class="description-title" data-lang="aboutAchievement">  </h3>
                             <div class="description-content">
                                 {!! $achievement->translate(app()->getLocale())->desc !!}
                             </div>
                             <div class="achievement-details">
                                 <div class="detail-item">
-                                    <span class="detail-label" data-i18n="date_label">Date:</span>
+                                    <span class="detail-label" data-i18n="dateLabel">Date:</span>
                                     <span class="detail-value">{{ $achievement->achievement_date ? $achievement->achievement_date->format('Y-m-d') : '' }}</span>
                                 </div>
 {{--                                <div class="detail-item">--}}
@@ -86,7 +86,7 @@
 {{--                                    <span class="detail-value">{{ $achievement->location }}</span>--}}
 {{--                                </div>--}}
                                 <div class="detail-item">
-                                    <span class="detail-label" data-i18n="category_label">Category:</span>
+                                    <span class="detail-label" data-i18n="categoryLabel">Category:</span>
                                     <span class="detail-value">{{ $achievement->department->translate(app()->getLocale())->name }}</span>
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
                 </div>
             </div>
         </div>
-
+@if ($achievement->media->where('type', 'video')->count() > 0)
         <!-- Related Videos Section -->
         <div id="relatedVideosSection" data-content-type="videos">
             <div class="container">
@@ -120,7 +120,7 @@
                         </button>
                     </div>
                     <div class="main-video-info">
-                        <h3 id="mainVideoTitle" data-i18n="achievement_overview">{{ $achievement->title }}</h3>
+                        <h3 id="mainVideoTitle">{{ $achievement->title }}</h3>
                         <p id="mainVideoDescription">{{ $achievement->video_description ?? 'Watch this video for more details.' }}</p>
                     </div>
                 </div>
@@ -166,6 +166,8 @@
             </div>
         </div>
 
+        @endif
+
         <!-- Video Modal -->
         <div id="videoModal" class="video-modal">
             <div class="video-modal-content">
@@ -178,16 +180,17 @@
 
         <!-- News Section -->
         <div id="newsLinksSection" data-content-type="news">
-            <div class="container">
+            <div class="">
                 <h2 class="sectionTitle" data-lang="news">Latest News</h2>
                 <ul class="newsLinks">
                     @foreach($achievement->links as $link)
-                        <li>
-                            <a href="{{ $link->url }}" target="_blank" rel="noopener noreferrer">
-                                <i class="fas fa-newspaper icon news-icon"></i>
-                                <span>{{ $link->translate(app()->getLocale())->title }}</span>
-                            </a>
-                        </li>
+                       <li>
+    <a href="{{ $link->url }}" target="_blank" rel="noopener noreferrer">
+        <i class="fas fa-newspaper icon news-icon"></i>
+        <span>{{ optional($link->translate(app()->getLocale()))->title }}</span>
+    </a>
+</li>
+
                     @endforeach
                 </ul>
             </div>

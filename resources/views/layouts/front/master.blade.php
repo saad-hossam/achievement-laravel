@@ -2,6 +2,8 @@
 <html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
 
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link rel="icon" href="{{ URL::asset('assets/img/logo.png') }}" type="image/x-icon" />
 
     <meta charset="UTF-8" />
