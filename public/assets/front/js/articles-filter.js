@@ -282,7 +282,7 @@ function filterArticles() {
         }
 
         // Filter by category - only hide if category is selected and doesn't match
-        if (category && category !== '' && category !== 'all' && articleCategory !== category) {
+if (category && category !== '' && category !== 'all' && articleCategory !== String(category)) {
             showArticle = false;
         }
 
@@ -474,4 +474,4 @@ function updateFilterButtonState() {
     if (clearFiltersBtn) {
         clearFiltersBtn.disabled = !(categoryActive || sortByActive || dateRangeActive || searchActive);
     }
-} 
+}

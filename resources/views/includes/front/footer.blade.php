@@ -4,8 +4,10 @@
 
     <p class="copyright">
       coded  by
-      <a href="#" >: AOI IT DEPARTMENT</a
-            >.
+      <a href="#" >:
+
+AOI - IT Department - 2025
+</a>
           </p>
         <!--</div>-->
   </div>
