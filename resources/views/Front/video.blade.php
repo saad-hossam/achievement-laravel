@@ -90,14 +90,25 @@
                     data-date="{{ $video->created_at->format('Y-m-d') }}">
 
                     <div class="video-display-box">
-                        <div class="thumbnail-container" data-video-id="{{ $video->id }}">
+                        <!-- <div class="thumbnail-container" data-video-id="{{ $video->id }}">
                             <img src="{{ asset('images/default-thumbnail.jpg') }}"
                                 alt="Video Thumbnail" class="thumbnail-image">
                             <div class="main-play-icon-area">
                                 <i class="fa-regular fa-circle-play"></i>
                             </div>
+                        </div> -->
+                        <div class="thumbnail-container" data-video-id="{{ $video->video_id }}">
+                            @if ($video->type === 'video' && !empty($video->video_id))
+                                <img src="https://img.youtube.com/vi/{{ $video->video_id }}/hqdefault.jpg"
+                                    alt="Video Thumbnail" class="thumbnail-image">
+                            @else
+                                <img src="{{ asset('images/default-thumbnail.jpg') }}"
+                                    alt="Fallback Thumbnail" class="thumbnail-image">
+                            @endif
+                            <div class="main-play-icon-area">
+                                <i class="fa-regular fa-circle-play"></i>
+                            </div>
                         </div>
-
                         <div class="youtube-logo-wrapper">
                             <img src="{{ asset('images/favicon.png') }}" alt="YouTube Logo" class="youtube-logo-image">
                         </div>
