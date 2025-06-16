@@ -242,44 +242,20 @@ function filterArticles() {
         let showArticle = true;
 
         // Filter by search term - more lenient matching for voice input
+              // Filter by search term - more lenient matching for voice input
         if (searchTerm) {
-            // Split search term into words and filter out very common words
-            const commonWords = ['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'with', 'by', 'about'];
-            const searchWords = searchTerm.toLowerCase().split(/\s+/)
-                .filter(word => word.length > 1 && !commonWords.includes(word));
+            // Normalize the search term and article text
+            const normalizedSearchTerm = searchTerm.toLowerCase();
+            const normalizedTitle = articleTitle.toLowerCase();
+            const normalizedTitleText = articleTitleText.toLowerCase();
+            const normalizedDescText = articleDescText.toLowerCase();
 
-
-            // Calculate required match threshold based on search length
-            const requiredMatches = Math.max(1, Math.ceil(searchWords.length * 0.6)); // Require 60% of words to match
-
-            // Count matches for each word
-            let matchCount = 0;
-            searchWords.forEach(word => {
-                // Try exact word match first
-                const exactMatch = articleTitle.toLowerCase().split(/\s+/).includes(word) ||
-                    articleTitleText.toLowerCase().split(/\s+/).includes(word) ||
-                    articleDescText.toLowerCase().split(/\s+/).includes(word);
-
-                if (exactMatch) {
-                    matchCount++;
-                    return;
-                }
-
-                // If no exact match, try partial match
-                const partialMatch = articleTitle.toLowerCase().includes(word) ||
-                    articleTitleText.toLowerCase().includes(word) ||
-                    articleDescText.toLowerCase().includes(word);
-
-                if (partialMatch) {
-                    matchCount++;
-                }
-            });
-
-            // Show article only if it meets the required match threshold
-            if (matchCount < requiredMatches) {
-                showArticle = false;
-            }
+            // Show article if any part matches the search term
+            showArticle = normalizedTitle.includes(normalizedSearchTerm) ||
+                         normalizedTitleText.includes(normalizedSearchTerm) ||
+                         normalizedDescText.includes(normalizedSearchTerm);
         }
+        
 
         // Filter by category - only hide if category is selected and doesn't match
 if (category && category !== '' && category !== 'all' && articleCategory !== String(category)) {

@@ -79,24 +79,20 @@
         </div>
     </div>
 
-    <!-- Videos Grid -->
+        <!-- Videos Grid -->
     <div class="container">
         <div class="video-grid" id="videos">
             @foreach ($videos as $video)
                 <div class="video-card-wrapper"
-                    data-category="{{ $video->achievement->category ?? '' }}"
+
+                data-category="{{ $video->category ?? '' }}"
                     data-title="{{ $video->achievement->title ?? 'Untitled' }}"
-                    data-date="{{ $video->achievement->date ?? '2025-01-01' }}">
+                    data-date="{{ $video->created_at->format('Y-m-d') }}">
 
                     <div class="video-display-box">
-                        <div class="thumbnail-container" data-video-id="{{ $video->video_id }}">
-                            @if ($video->type === 'video' && !empty($video->video_id))
-                                <img src="https://img.youtube.com/vi/{{ $video->video_id }}/hqdefault.jpg"
-                                    alt="Video Thumbnail" class="thumbnail-image">
-                            @else
-                                <img src="{{ asset('images/default-thumbnail.jpg') }}"
-                                    alt="Fallback Thumbnail" class="thumbnail-image">
-                            @endif
+                        <div class="thumbnail-container" data-video-id="{{ $video->id }}">
+                            <img src="{{ asset('images/default-thumbnail.jpg') }}"
+                                alt="Video Thumbnail" class="thumbnail-image">
                             <div class="main-play-icon-area">
                                 <i class="fa-regular fa-circle-play"></i>
                             </div>
@@ -183,9 +179,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const query = searchInput.value.trim().toLowerCase();
         let matchCount = 0;
 
-        videos.forEach(card => {
+            videos.forEach(card => {
             const title = card.dataset.title?.toLowerCase() || '';
-            if (title.includes(query)) {
+            const currentLocale = document.documentElement.lang || 'en';
+            
+            // Normalize Arabic text for better search
+            const normalizedTitle = currentLocale === 'ar' ? 
+                title.normalize('NFKD').replace(/[\u064B-\u065F\u0670]/g, '') : 
+                title;
+            
+            const normalizedQuery = currentLocale === 'ar' ? 
+                query.normalize('NFKD').replace(/[\u064B-\u065F\u0670]/g, '') : 
+                query;
+
+            if (normalizedTitle.includes(normalizedQuery)) {
                 card.style.display = '';
                 matchCount++;
             } else {

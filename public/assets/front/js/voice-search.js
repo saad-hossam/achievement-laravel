@@ -227,24 +227,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function normalizeArabicText(text) {
         if (!text || typeof text !== 'string') return text || '';
 
-        // Enhanced Arabic character normalization mapping
-        const normalizationMap = {
-            // Alif forms
-            'أ': 'ا', 'إ': 'ا', 'آ': 'ا', 'ٱ': 'ا', 'ٵ': 'ا', 'ٲ': 'ا',
-            // Hamza forms
-            'ؤ': 'و', 'ئ': 'ي', 'ء': '',
-            // Taa marbuta and haa
-            'ة': 'ه', 'ۀ': 'ه', 'ہ': 'ه', 'ۃ': 'ه',
-            // Yaa and Alif Maqsura
-            'ى': 'ي', 'ۍ': 'ي', 'ێ': 'ي', 'ې': 'ي', 'ۑ': 'ي',
-            // Kaf variations
-            'ك': 'ك', 'ڪ': 'ك', 'ګ': 'ك', 'ڬ': 'ك', 'ڭ': 'ك', 'ڮ': 'ك',
-            // Remove all diacritics (tashkeel)
-            'َ': '', 'ُ': '', 'ِ': '', 'ّ': '', 'ً': '', 'ٌ': '', 'ٍ': '', 'ْ': '',
-            'ٓ': '', 'ٔ': '', 'ٕ': '', 'ٖ': '', 'ٗ': '', '٘': '', 'ٙ': '', 'ٚ': '', 'ٛ': '', 'ٜ': '', 'ٝ': '', 'ٞ': '', 'ٟ': ''
-        };
-
-        return text.split('').map(char => normalizationMap[char] || char).join('');
+        return text
+            .replace(/[أإآٱٵٲ]/g, 'ا')
+            .replace(/ؤ/g, 'و')
+            .replace(/ئ/g, 'ي')
+            .replace(/ء/g, '')
+            .replace(/[ةۀہۃ]/g, 'ه')
+            .replace(/[ىۍێېۑ]/g, 'ي')
+            .replace(/[ڪګڬڭڮ]/g, 'ك')
+            .replace(/[ًٌٍَُِّْٕٖٜٟٓٔٗ٘ٙٚٛٝٞ]/g, '');
     }
 
     // Enhanced search text normalization for better Arabic matching
@@ -313,17 +304,49 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Function to remove duplicate consecutive words
-    function removeDuplicateWords(text) {
-        if (!text) return text;
-        const words = text.split(/\s+/);
-        const result = [];
-        for (let i = 0; i < words.length; i++) {
-            if (i === 0 || words[i].toLowerCase() !== words[i - 1].toLowerCase()) {
-                result.push(words[i]);
-            }
-        }
-        return result.join(' ');
-    }
+// Enhanced function to remove duplicate consecutive words
+    	function removeDuplicateWords(text) {
+		    if (!text || typeof text !== 'string') return text;
+			
+			    // First normalize the text to ensure consistent comparison
+			    const { normalized } = TextNormalizer.normalizeSearchText(text);
+			
+			    // Split into words and remove empty strings
+			    const words = normalized.split(/\s+/).filter(word => word.length > 0);
+			
+			    // Use a more robust deduplication approach
+			    const result = [];
+			    let lastWord = '';
+			
+			    for (let i = 0; i < words.length; i++) {
+			        const currentWord = words[i];
+			
+			        // Skip if this word is the same as the last word
+			        if (currentWord === lastWord) {
+			            continue;
+			        }
+			
+			        // Check for similar words (e.g., "real" and "really")
+			        if (lastWord && (
+			            currentWord.startsWith(lastWord) ||
+			            lastWord.startsWith(currentWord) ||
+			            // Add Levenshtein distance check for similar words
+			            levenshteinDistance(currentWord, lastWord) <= 2
+			        )) {
+			            // Keep the longer word if they're similar
+			            if (currentWord.length > lastWord.length) {
+			                result[result.length - 1] = currentWord;
+			                lastWord = currentWord;
+			            }
+			            continue;
+			        }
+			
+			        result.push(currentWord);
+			        lastWord = currentWord;
+			    }
+			
+			    return result.join(' ');
+			}
 
     // Helper function to get the current language
     function getCurrentLanguage() {
