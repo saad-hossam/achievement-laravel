@@ -20,6 +20,36 @@
                          onerror="this.src='https://via.placeholder.com/400x500?text=Profile+Photo'">
                 </div>
             </div>
+             <div class="col-lg-7">
+          <div class="card border-0 bg-transparent">
+            <div class="card-body px-md-4 bg-transparent">
+              <h1 class=" mb-0 fw-bold" data-lang="bioTitle">Major General Eng Mokhtar Abdel
+                Latif</h1>
+              <h1 class="display-4 mt-0 mb-2 fw-bold" data-lang="bioTitle1">Major General Eng Mokhtar Abdel
+                Latif</h1>
+              <h3 class=" mb-2" data-lang="chairmanTitle">Chairman of the Arab Organization for
+                Industrialization</h3>
+              <p class="lead" data-lang="bioIntro">
+                Major General Mokhtar Abdel Latif assumed the position of Chairman of the Arab Organization for
+                Industrialization, succeeding General Abdel Moneim El-Terras in 2022.
+              </p>
+              <div class="d-flex mt-4">
+                <div class="me-3">
+                  <span class="badge p-2 rounded-pill"><i class="fas fa-star me-1"></i> <span
+                      data-lang="leadership">Leadership</span></span>
+                </div>
+                <div class="me-3">
+                  <span class="badge p-2 rounded-pill"><i class="fas fa-gear me-1"></i> <span
+                      data-lang="engineering">Engineering</span></span>
+                </div>
+                <div class="me-3">
+                  <span class="badge p-2 rounded-pill"><i class="fas fa-shield-alt me-1"></i> <span
+                      data-lang="military">Military</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         </div>
     </div>
 
