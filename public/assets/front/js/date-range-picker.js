@@ -402,7 +402,7 @@ class DateRangePicker {
             }
             if (this.endDate && this.endDate.toDateString() === currentDate.toDateString()) {
                 dayElement.classList.add('selected', 'end-date');
-                alert(this.isArabic ?'يرجى إدخال تاريخ بدء يسبق تاريخ الانتهاء' : 'Please enter a start date that comes before the end date');
+                // alert(this.isArabic ?'يرجى إدخال تاريخ بدء يسبق تاريخ الانتهاء' : 'Please enter a start date that comes before the end date');
             }
             
             // Add temporary selection for single date
@@ -466,12 +466,14 @@ class DateRangePicker {
             // If end date is before start date, clear it
             if (this.endDate && this.endDate < date) {
                 this.endDate = null;
+                alert(this.isArabic ?'يرجى إدخال تاريخ بدء يسبق تاريخ الانتهاء' : 'Please enter a start date that comes before the end date');
             }
         } else {
             this.endDate = date;
             // If start date is after end date, clear it
             if (this.startDate && this.startDate > date) {
                 this.startDate = null;
+                alert(this.isArabic ?'يرجى إدخال تاريخ بدء يسبق تاريخ الانتهاء' : 'Please enter a start date that comes before the end date');
             }
         }
         
