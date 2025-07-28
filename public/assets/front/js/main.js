@@ -1648,4 +1648,3 @@ function initializeOverlay() {
   }
 
   // Thumbnail slider functionality
-
