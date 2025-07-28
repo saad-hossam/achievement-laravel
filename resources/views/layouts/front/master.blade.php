@@ -18,6 +18,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <!--Link Styles Sheet-->
   <link rel="stylesheet" href="{{ asset('assets/front') }}/css/styles.css" />
+  @stack('scripts')
+
 
   <title> اﻹنجازات</title>
 </head>

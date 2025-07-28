@@ -228,14 +228,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!text || typeof text !== 'string') return text || '';
 
         return text
-            .replace(/[أإآٱٵٲ]/g, 'ا')
-            .replace(/ؤ/g, 'و')
-            .replace(/ئ/g, 'ي')
-            .replace(/ء/g, '')
-            .replace(/[ةۀہۃ]/g, 'ه')
-            .replace(/[ىۍێېۑ]/g, 'ي')
-            .replace(/[ڪګڬڭڮ]/g, 'ك')
-            .replace(/[ًٌٍَُِّْٕٖٜٟٓٔٗ٘ٙٚٛٝٞ]/g, '');
+            // .replace(/[أإآٱٵٲ]/g, 'ا')
+            // .replace(/ؤ/g, 'و')
+            // .replace(/ئ/g, 'ي')
+            // .replace(/ء/g, '')
+            // .replace(/[ةۀہۃ]/g, 'ه')
+            // .replace(/[ىۍێېۑ]/g, 'ي')
+            // .replace(/[ڪګڬڭڮ]/g, 'ك')
+            // .replace(/[ًٌٍَُِّْٕٖٜٟٓٔٗ٘ٙٚٛٝٞ]/g, '');
     }
 
     // Enhanced search text normalization for better Arabic matching
@@ -575,7 +575,7 @@ document.addEventListener('DOMContentLoaded', () => {
             searchInput.placeholder = message;
             setTimeout(() => {
                 const currentLang = getCurrentLanguage();
-                const holdPlaceholder = currentLang === 'ar' ? 'اضغط مع الاستمرار للبحث الصوتي...' : 'Hold to voice search...';
+                const holdPlaceholder = currentLang === 'ar' ? 'أدخل عنوان للبحث...' : 'Search by title...';
                 searchInput.placeholder = holdPlaceholder;
             }, 3000);
         }
@@ -850,7 +850,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (searchInput) {
             searchInput.classList.remove('voice-listening');
             const currentLang = getCurrentLanguage();
-            const placeholder = currentLang === 'ar' ? 'اضغط مع الاستمرار للبحث الصوتي...' : 'Hold to voice search...';
+            const placeholder = currentLang === 'ar' ? 'أدخل عنوان للبحث...' : 'Search by title...';
             searchInput.placeholder = placeholder;
         }
 
@@ -918,7 +918,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateRecognitionLanguage();
     if (searchInput) {
         const currentLang = getCurrentLanguage();
-        const holdPlaceholder = currentLang === 'ar' ? 'اضغط مع الاستمرار للبحث الصوتي...' : 'Hold to voice search...';
+        const holdPlaceholder = currentLang === 'ar' ? 'أدخل عنوان للبحث...' : 'Search by title...';
         searchInput.placeholder = holdPlaceholder;
         searchInput.dataset.originalPlaceholder = holdPlaceholder;
     }

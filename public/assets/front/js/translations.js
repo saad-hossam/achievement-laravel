@@ -2,11 +2,11 @@ const translations = {
  en: {
     // Header / Navigation
     home: "Home",
-    about: "About Us",
+    about: "Biography",
     videos: "Videos",
 
     // Filters
-    news: "Achievements",
+    news: "News",
     filterTitle: "Title:",
     filterDay: "Day:",
     filterMonth: "Month:",
@@ -32,7 +32,7 @@ const translations = {
     search_placeholder: "Search achievements...",
     searchPlaceholder: "Search achievements...",
     category: "Category",
-    allCategories: "All Categories",
+    allCategories: "All Events",
     dateRange: "Date Range",
     sortBy: "Sort By",
     dateNewest: "Date (Newest First)",
@@ -54,7 +54,7 @@ const translations = {
     landingParagraph: "Chairman of the Arab Organization for Industrialization",
 
     // Articles Section
-    latestArticles: "Latest Achievements",
+    latestArticles: "AOI events during the period from 12/8/2022 to the present",
     readMore: "Read More",
 
     // Article Titles and Descriptions
@@ -103,7 +103,7 @@ const translations = {
     video_library: "Video Library",
     search_videos_placeholder: "Search videos...",
     searchPlaceholder: "Search videos...",
-    allCategories: "All Categories",
+    allCategories: "All Events",
     category: "Category",
     noResultsTitle: "No Results Found",
     noResultsDesc: "Try adjusting the filters or search criteria.",
@@ -138,11 +138,11 @@ const translations = {
   ar: {
     // Header / Navigation
     home: " الرئيسية",
-    about: "  معلومات عنا",
+    about: "  السيرة ذاتية",
     videos: " الفيديوهات",
 
     // Filters
-    news: "الإنجازات",
+    news: "الجرائد",
     filterTitle: "العنوان:",
     filterDay: "اليوم:",
     filterMonth: "الشهر:",
@@ -168,7 +168,7 @@ const translations = {
     search_placeholder: "ابحث عن الإنجازات...",
     searchPlaceholder: "ابحث عن الإنجازات...",
     category: "الفئة",
-    allCategories: "كل الفئات",
+    allCategories: "جميع الأحداث",
     dateRange: "نطاق التاريخ",
     sortBy: "ترتيب حسب",
     dateNewest: "التاريخ (الأحدث أولاً )",
@@ -190,7 +190,7 @@ const translations = {
     landingParagraph: "رئيس مجلس إدارة الهيئة العربية للتصنيع",
 
     // Articles Section
-    latestArticles: " الانجازات ",
+    latestArticles: " أحداث الهيئة خلال الفترة من 12/8/2022 إلى الآن ",
     readMore: "اقرأ المزيد",
 
     // Article Titles and Descriptions
@@ -240,7 +240,7 @@ const translations = {
     video_library: "مكتبة الفيديو",
     search_videos_placeholder: "البحث عن الفيديوهات...",
     searchPlaceholder: "البحث عن الفيديوهات...",
-    allCategories: "جميع الفئات",
+    allCategories: "جميع الأحداث",
     category: "الفئة",
     noResultsTitle: "لم يتم العثور على نتائج",
     noResultsDesc: "حاول تعديل المرشحات أو معايير البحث.",

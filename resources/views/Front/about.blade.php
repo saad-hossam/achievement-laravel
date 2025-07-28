@@ -33,7 +33,7 @@
                 Major General Mokhtar Abdel Latif assumed the position of Chairman of the Arab Organization for
                 Industrialization, succeeding General Abdel Moneim El-Terras in 2022.
               </p>
-              <div class="d-flex mt-4">
+              <!-- <div class="d-flex mt-4">
                 <div class="me-3">
                   <span class="badge p-2 rounded-pill"><i class="fas fa-star me-1"></i> <span
                       data-lang="leadership">Leadership</span></span>
@@ -46,7 +46,7 @@
                   <span class="badge p-2 rounded-pill"><i class="fas fa-shield-alt me-1"></i> <span
                       data-lang="military">Military</span></span>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

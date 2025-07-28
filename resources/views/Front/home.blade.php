@@ -23,7 +23,7 @@
 <!-- End Landing -->
 
 <!-- Start Articles -->
-<div id="articles" style="margin: 20px;">
+<div id="articles" style="margin: 20px; text-align: center">
   <h2 class="mainTitle" data-i18n="latestArticles">{{ __('Latest Articles') }}</h2>
 
   <!-- Search Input -->
@@ -105,9 +105,10 @@
     @foreach ($achievements as $achievement)
       <div
         class="box"
-data-category="{{ $achievement->department_id }}"
+        data-category="{{ $achievement->department_id }}"
         data-title="{{ $achievement->translate(app()->getLocale())->title }}"
         data-date="{{ optional($achievement->achievement_date)->format('Y-m-d') }}"
+        onclick="window.location.href='{{ route('details', $achievement->id) }}'"
       >
         <div class="coverPhoto">
           <img

@@ -1,4 +1,4 @@
-// Date Range Picker with Presets
+// Date Range Picker with Dual Calendar Overlays
 
 class DateRangePicker {
     constructor(container, options = {}) {
@@ -23,27 +23,35 @@ class DateRangePicker {
         this.isOpen = false;
         this.startDate = null;
         this.endDate = null;
-        this.currentMonth = new Date().getMonth();
-        this.currentYear = new Date().getFullYear();
-        this.isArabic = localStorage.getItem('selectedLanguage') === 'ar';
-        this.inRangeSelection = false;
-        this.tempStartDate = null;
+        this.startCalendarMonth = 0;
+        this.startCalendarYear = new Date().getFullYear();
+        this.endCalendarMonth = new Date().getMonth(); // End calendar shows same month by default
+        this.endCalendarYear = new Date().getFullYear();
+        
+        // Handle year overflow for end calendar
+        if (this.endCalendarMonth > 11) {
+            this.endCalendarMonth = 0;
+            this.endCalendarYear++;
+        }
+        
+        this.isArabic = typeof localStorage !== 'undefined' ? localStorage.getItem('selectedLanguage') === 'ar' : false;
         
         this.render();
         this.attachEvents();
         
         // Listen for language changes at window level
-        window.addEventListener('languageChanged', (event) => {
-            this.updateLanguage(event.detail.language);
-        });
+        if (typeof window !== 'undefined') {
+            window.addEventListener('languageChanged', (event) => {
+                this.updateLanguage(event.detail.language);
+            });
 
-        // Also listen for settings loaded event
-        window.addEventListener('settingsLoaded', (event) => {
-            this.updateLanguage(event.detail.language);
-        });
+            window.addEventListener('settingsLoaded', (event) => {
+                this.updateLanguage(event.detail.language);
+            });
+        }
 
         // Initial language setup
-        const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+        const currentLang = typeof localStorage !== 'undefined' ? localStorage.getItem('selectedLanguage') || 'en' : 'en';
         this.updateLanguage(currentLang);
     }
     
@@ -54,11 +62,6 @@ class DateRangePicker {
         // Create the input display
         this.displayElement = document.createElement('div');
         this.displayElement.className = 'date-range-display date-picker-trigger';
-        
-        // Calendar icon
-        // const calendarIcon = document.createElement('i');
-        // calendarIcon.className = 'fas fa-calendar';
-        // this.displayElement.appendChild(calendarIcon);
         
         // Display text
         this.displayText = document.createElement('span');
@@ -85,45 +88,27 @@ class DateRangePicker {
         
         this.dropdown.appendChild(presetSection);
         
-        // Create the calendar overlay for custom range
+        // Create the dual calendar overlay for custom range
         this.calendarOverlay = document.createElement('div');
-        this.calendarOverlay.className = 'calendar-overlay';
+        this.calendarOverlay.className = 'calendar-overlay dual-calendar-overlay';
         
-        // Create calendar container
-        const calendarContainer = document.createElement('div');
-        calendarContainer.className = 'calendar-container';
+        // Create main calendar container
+        const mainCalendarContainer = document.createElement('div');
+        mainCalendarContainer.className = 'dual-calendar-container';
         
-        // Calendar header with month/year navigation
-        const calendarHeader = document.createElement('div');
-        calendarHeader.className = 'calendar-header';
+        // Create start date calendar
+        this.startCalendarContainer = this.createCalendarContainer('start');
+        mainCalendarContainer.appendChild(this.startCalendarContainer);
         
-        // Previous month button
-        this.prevMonthBtn = document.createElement('button');
-        this.prevMonthBtn.className = 'calendar-nav-btn prev-month';
-        this.prevMonthBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
-        calendarHeader.appendChild(this.prevMonthBtn);
+        // Create end date calendar
+        this.endCalendarContainer = this.createCalendarContainer('end');
+        mainCalendarContainer.appendChild(this.endCalendarContainer);
         
-        // Month/Year display
-        this.monthYearDisplay = document.createElement('div');
-        this.monthYearDisplay.className = 'month-year-display';
-        calendarHeader.appendChild(this.monthYearDisplay);
+        this.calendarOverlay.appendChild(mainCalendarContainer);
         
-        // Next month button
-        this.nextMonthBtn = document.createElement('button');
-        this.nextMonthBtn.className = 'calendar-nav-btn next-month';
-        this.nextMonthBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
-        calendarHeader.appendChild(this.nextMonthBtn);
-        
-        calendarContainer.appendChild(calendarHeader);
-        
-        // Calendar body with days
-        this.calendarBody = document.createElement('div');
-        this.calendarBody.className = 'calendar-body';
-        calendarContainer.appendChild(this.calendarBody);
-        
-        // Calendar footer with buttons
+        // Create shared footer
         const calendarFooter = document.createElement('div');
-        calendarFooter.className = 'calendar-footer';
+        calendarFooter.className = 'dual-calendar-footer';
         
         // Apply button
         const applyBtn = document.createElement('button');
@@ -143,13 +128,70 @@ class DateRangePicker {
         clearBtn.textContent = this.isArabic ? 'مسح' : 'Clear';
         calendarFooter.appendChild(clearBtn);
         
-        calendarContainer.appendChild(calendarFooter);
-        this.calendarOverlay.appendChild(calendarContainer);
+        this.calendarOverlay.appendChild(calendarFooter);
         
         // Add elements to container
         this.container.appendChild(this.displayElement);
         this.container.appendChild(this.dropdown);
         document.body.appendChild(this.calendarOverlay);
+    }
+    
+    createCalendarContainer(type) {
+        const container = document.createElement('div');
+        container.className = `calendar-container ${type}-calendar`;
+        
+        // Calendar title
+        const title = document.createElement('div');
+        title.className = 'calendar-title';
+        title.textContent = type === 'start' 
+            ? (this.isArabic ? 'تاريخ البداية' : 'Start Date')
+            : (this.isArabic ? 'تاريخ النهاية' : 'End Date');
+        container.appendChild(title);
+        
+        // Calendar header with month/year navigation
+        const calendarHeader = document.createElement('div');
+        calendarHeader.className = 'calendar-header';
+        
+        // Previous month button
+        const prevMonthBtn = document.createElement('button');
+        prevMonthBtn.className = 'calendar-nav-btn prev-month';
+        prevMonthBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+        prevMonthBtn.dataset.calendarType = type;
+        calendarHeader.appendChild(prevMonthBtn);
+        
+        // Month/Year display
+        const monthYearDisplay = document.createElement('div');
+        monthYearDisplay.className = 'month-year-display';
+        calendarHeader.appendChild(monthYearDisplay);
+        
+        // Next month button
+        const nextMonthBtn = document.createElement('button');
+        nextMonthBtn.className = 'calendar-nav-btn next-month';
+        nextMonthBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+        nextMonthBtn.dataset.calendarType = type;
+        calendarHeader.appendChild(nextMonthBtn);
+        
+        container.appendChild(calendarHeader);
+        
+        // Calendar body with days
+        const calendarBody = document.createElement('div');
+        calendarBody.className = 'calendar-body';
+        container.appendChild(calendarBody);
+        
+        // Store references
+        if (type === 'start') {
+            this.startPrevBtn = prevMonthBtn;
+            this.startNextBtn = nextMonthBtn;
+            this.startMonthYearDisplay = monthYearDisplay;
+            this.startCalendarBody = calendarBody;
+        } else {
+            this.endPrevBtn = prevMonthBtn;
+            this.endNextBtn = nextMonthBtn;
+            this.endMonthYearDisplay = monthYearDisplay;
+            this.endCalendarBody = calendarBody;
+        }
+        
+        return container;
     }
     
     getArabicLabel(label) {
@@ -174,7 +216,10 @@ class DateRangePicker {
         
         // Close dropdown when clicking outside
         document.addEventListener('click', (e) => {
-            if (!this.container.contains(e.target) && this.isOpen) {
+            if (!this.container.contains(e.target) && 
+                !this.calendarOverlay.contains(e.target) && 
+                this.isOpen && 
+                this.calendarOverlay.style.display !== 'flex') {
                 this.closeDropdown();
             }
         });
@@ -193,17 +238,29 @@ class DateRangePicker {
             });
         });
         
-        // Calendar navigation
-        this.prevMonthBtn.addEventListener('click', (e) => {
+        // Calendar navigation for both calendars
+        this.startPrevBtn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            this.changeMonth(-1);
+            this.changeMonth('start', -1);
         });
         
-        this.nextMonthBtn.addEventListener('click', (e) => {
+        this.startNextBtn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            this.changeMonth(1);
+            this.changeMonth('start', 1);
+        });
+        
+        this.endPrevBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.changeMonth('end', -1);
+        });
+        
+        this.endNextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.changeMonth('end', 1);
         });
         
         // Calendar buttons
@@ -213,6 +270,12 @@ class DateRangePicker {
         
         applyBtn.addEventListener('click', () => {
             if (this.startDate && this.endDate) {
+                // Ensure start date is before end date
+                if (this.startDate > this.endDate) {
+                    const temp = this.startDate;
+                    this.startDate = this.endDate;
+                    this.endDate = temp;
+                }
                 this.updateDisplay();
                 this.closeCalendarOverlay();
                 this.closeDropdown();
@@ -228,7 +291,14 @@ class DateRangePicker {
         
         clearBtn.addEventListener('click', () => {
             this.clearDateRange();
-            this.closeCalendarOverlay();
+            this.renderBothCalendars(); // Re-render to show cleared selection
+        });
+        
+        // Close calendar overlay when clicking outside of it
+        this.calendarOverlay.addEventListener('click', (e) => {
+            if (e.target === this.calendarOverlay) {
+                this.closeCalendarOverlay();
+            }
         });
     }
     
@@ -244,55 +314,53 @@ class DateRangePicker {
         this.dropdown.style.display = 'block';
         this.isOpen = true;
         this.displayElement.classList.add('active');
-        
-        // Add click outside listener
-        setTimeout(() => {
-            document.addEventListener('click', this.outsideClickHandler);
-        }, 10);
     }
     
     closeDropdown() {
         this.dropdown.style.display = 'none';
         this.isOpen = false;
         this.displayElement.classList.remove('active');
-        
-        // Remove click outside listener
-        document.removeEventListener('click', this.outsideClickHandler);
-    }
-    
-    outsideClickHandler = (e) => {
-        if (!this.container.contains(e.target)) {
-            this.closeDropdown();
-        }
+        // Don't automatically close calendar overlay - let user choose both dates
     }
     
     openCalendarOverlay() {
         this.calendarOverlay.style.display = 'flex';
-        this.renderCalendar();
+        this.closeDropdown(); // Close the dropdown but keep calendar open
+        this.renderBothCalendars();
     }
     
     closeCalendarOverlay() {
         this.calendarOverlay.style.display = 'none';
     }
     
-    renderCalendar() {
-        // Use the stored current month and year
-        const currentDate = new Date(this.currentYear, this.currentMonth);
+    renderBothCalendars() {
+        this.renderCalendar('start');
+        this.renderCalendar('end');
+    }
+    
+    renderCalendar(type) {
+        const isStart = type === 'start';
+        const currentMonth = isStart ? this.startCalendarMonth : this.endCalendarMonth;
+        const currentYear = isStart ? this.startCalendarYear : this.endCalendarYear;
+        const monthYearDisplay = isStart ? this.startMonthYearDisplay : this.endMonthYearDisplay;
+        const calendarBody = isStart ? this.startCalendarBody : this.endCalendarBody;
+        
+        const currentDate = new Date(currentYear, currentMonth);
         
         // Update month/year display
-        this.monthYearDisplay.textContent = currentDate.toLocaleDateString(this.isArabic ? 'ar-EG' : 'en-US', {
+        monthYearDisplay.textContent = currentDate.toLocaleDateString(this.isArabic ? 'ar-EG' : 'en-US', {
             month: 'long',
             year: 'numeric'
         });
         
         // Clear previous calendar
-        this.calendarBody.innerHTML = '';
+        calendarBody.innerHTML = '';
         
         // Create weekdays header
         const weekdays = document.createElement('div');
         weekdays.className = 'calendar-weekdays';
         const weekdayNames = this.isArabic ? 
-            ['أحد', 'إثن', 'ثلا', 'أرب', 'خمي', 'جمع', 'سبت'] :
+            ['أحد', 'إثنين', 'ثلاث', 'أربع', 'خميس', 'جمعة', 'سبت'] :
             ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         
         weekdayNames.forEach(day => {
@@ -301,15 +369,15 @@ class DateRangePicker {
             weekdays.appendChild(dayElement);
         });
         
-        this.calendarBody.appendChild(weekdays);
+        calendarBody.appendChild(weekdays);
         
         // Create days grid
         const daysGrid = document.createElement('div');
         daysGrid.className = 'calendar-days';
         
         // Get first day of month and total days
-        const firstDay = new Date(this.currentYear, this.currentMonth, 1);
-        const lastDay = new Date(this.currentYear, this.currentMonth + 1, 0);
+        const firstDay = new Date(currentYear, currentMonth, 1);
+        const lastDay = new Date(currentYear, currentMonth + 1, 0);
         const totalDays = lastDay.getDate();
         const startingDay = firstDay.getDay();
         
@@ -326,32 +394,37 @@ class DateRangePicker {
             dayElement.className = 'calendar-day';
             dayElement.textContent = this.isArabic ? this.toArabicNumeral(day) : day;
             
-            const currentDate = new Date(this.currentYear, this.currentMonth, day);
+            const currentDate = new Date(currentYear, currentMonth, day);
             
             // Add classes for selected dates
             if (this.startDate && this.startDate.toDateString() === currentDate.toDateString()) {
-                dayElement.classList.add('range-start');
+                dayElement.classList.add('selected', 'start-date');
             }
             if (this.endDate && this.endDate.toDateString() === currentDate.toDateString()) {
-                dayElement.classList.add('range-end');
+                dayElement.classList.add('selected', 'end-date');
+                // alert(this.isArabic ?'يرجى إدخال تاريخ بدء يسبق تاريخ الانتهاء' : 'Please enter a start date that comes before the end date');
             }
+            
+            // Add temporary selection for single date
+            if (this.startDate && !this.endDate && this.startDate.toDateString() === currentDate.toDateString()) {
+                dayElement.classList.add('single-selected');
+            }
+            
+            // Add in-range styling
             if (this.startDate && this.endDate && 
-                currentDate > this.startDate && currentDate < this.endDate) {
+                currentDate >= this.startDate && currentDate <= this.endDate) {
                 dayElement.classList.add('in-range');
             }
             
             // Add click handler
             dayElement.addEventListener('click', () => {
-                this.handleDayClick(currentDate);
+                this.handleDayClick(currentDate, type);
             });
             
             daysGrid.appendChild(dayElement);
         }
         
-        this.calendarBody.appendChild(daysGrid);
-        
-        // Update navigation arrows direction based on language
-        this.updateNavigationArrows();
+        calendarBody.appendChild(daysGrid);
     }
     
     toArabicNumeral(num) {
@@ -361,52 +434,50 @@ class DateRangePicker {
         ).join('');
     }
     
-    updateNavigationArrows() {
-        // Set correct arrow icons and directions based on language
-        if (this.isArabic) {
-            this.prevMonthBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
-            this.nextMonthBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
-        } else {
-            this.prevMonthBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
-            this.nextMonthBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
-        }
-    }
-    
-    changeMonth(delta) {
-        // Update the current month and year
-        this.currentMonth += delta;
-        
-        // Handle year change if needed
-        if (this.currentMonth < 0) {
-            this.currentMonth = 11;
-            this.currentYear--;
-        } else if (this.currentMonth > 11) {
-            this.currentMonth = 0;
-            this.currentYear++;
-        }
-        
-        // Re-render the calendar
-        this.renderCalendar();
-    }
-    
-    handleDayClick(date) {
-        if (!this.startDate || (this.startDate && this.endDate)) {
-            // Start new range
-            this.startDate = date;
-            this.endDate = null;
-            this.inRangeSelection = true;
-        } else {
-            // Complete range
-            if (date < this.startDate) {
-                this.endDate = this.startDate;
-                this.startDate = date;
-            } else {
-                this.endDate = date;
+    changeMonth(calendarType, delta) {
+        if (calendarType === 'start') {
+            this.startCalendarMonth += delta;
+            
+            if (this.startCalendarMonth < 0) {
+                this.startCalendarMonth = 11;
+                this.startCalendarYear--;
+            } else if (this.startCalendarMonth > 11) {
+                this.startCalendarMonth = 0;
+                this.startCalendarYear++;
             }
-            this.inRangeSelection = false;
+        } else {
+            this.endCalendarMonth += delta;
+            
+            if (this.endCalendarMonth < 0) {
+                this.endCalendarMonth = 11;
+                this.endCalendarYear--;
+            } else if (this.endCalendarMonth > 11) {
+                this.endCalendarMonth = 0;
+                this.endCalendarYear++;
+            }
         }
         
-        this.renderCalendar();
+        this.renderCalendar(calendarType);
+    }
+    
+    handleDayClick(date, calendarType) {
+        if (calendarType === 'start') {
+            this.startDate = date;
+            // If end date is before start date, clear it
+            if (this.endDate && this.endDate < date) {
+                this.endDate = null;
+                alert(this.isArabic ?'يرجى إدخال تاريخ بدء يسبق تاريخ الانتهاء' : 'Please enter a start date that comes before the end date');
+            }
+        } else {
+            this.endDate = date;
+            // If start date is after end date, clear it
+            if (this.startDate && this.startDate > date) {
+                this.startDate = null;
+                alert(this.isArabic ?'يرجى إدخال تاريخ بدء يسبق تاريخ الانتهاء' : 'Please enter a start date that comes before the end date');
+            }
+        }
+        
+        this.renderBothCalendars();
     }
     
     applyPreset(preset) {
@@ -414,30 +485,23 @@ class DateRangePicker {
         let start, end;
         
         if (preset === 'thisYear') {
-            // This year: Jan 1 to Dec 31 of current year
             start = new Date(today.getFullYear(), 0, 1);
             end = new Date(today.getFullYear(), 11, 31);
         } else if (preset === 'lastYear') {
-            // Last year: Jan 1 to Dec 31 of previous year
             start = new Date(today.getFullYear() - 1, 0, 1);
             end = new Date(today.getFullYear() - 1, 11, 31);
         } else if (preset === 'thisMonth') {
-            // This month: 1st day to last day of current month
             start = new Date(today.getFullYear(), today.getMonth(), 1);
             end = new Date(today.getFullYear(), today.getMonth() + 1, 0);
         } else if (preset === 'lastMonth') {
-            // Last month: 1st day to last day of previous month
             start = new Date(today.getFullYear(), today.getMonth() - 1, 1);
             end = new Date(today.getFullYear(), today.getMonth(), 0);
         } else {
-            // Days-based presets
             const days = parseInt(preset);
             if (days === 0) {
-                // Today
                 start = new Date(today);
                 end = new Date(today);
             } else {
-                // Days ago to today
                 start = new Date(today);
                 start.setDate(start.getDate() + days);
                 end = new Date(today);
@@ -456,17 +520,14 @@ class DateRangePicker {
         this.startDate = null;
         this.endDate = null;
         
-        // Reset display text
         this.displayText.textContent = this.isArabic ? 'اختر نطاق التاريخ' : 'Select date range';
         
-        // Reset the hidden input elements
         const startDateEl = document.getElementById(this.options.startDateId);
         const endDateEl = document.getElementById(this.options.endDateId);
         
         if (startDateEl) startDateEl.value = '';
         if (endDateEl) endDateEl.value = '';
         
-        // Notify any change listeners
         this.notifyChange();
     }
     
@@ -475,7 +536,6 @@ class DateRangePicker {
             const startFormatted = this.formatDisplayDate(this.startDate);
             const endFormatted = this.formatDisplayDate(this.endDate);
             
-            // Check if start and end dates are the same
             if (this.startDate.toDateString() === this.endDate.toDateString()) {
                 this.displayText.textContent = startFormatted;
             } else {
@@ -499,29 +559,19 @@ class DateRangePicker {
     }
     
     notifyChange() {
-        // Get actual DOM elements for compatibility with existing code
         const startDateEl = document.getElementById(this.options.startDateId);
         const endDateEl = document.getElementById(this.options.endDateId);
         
-        // Update actual DOM elements
         if (startDateEl) {
             startDateEl.value = this.startDate ? this.formatDateForInput(this.startDate) : '';
-        }
-        
-        if (endDateEl) {
-            endDateEl.value = this.endDate ? this.formatDateForInput(this.endDate) : '';
-        }
-        
-        // Trigger a change event on both inputs
-        if (startDateEl) {
             startDateEl.dispatchEvent(new Event('change', { bubbles: true }));
         }
         
         if (endDateEl) {
+            endDateEl.value = this.endDate ? this.formatDateForInput(this.endDate) : '';
             endDateEl.dispatchEvent(new Event('change', { bubbles: true }));
         }
         
-        // Call onChange callback if provided
         if (typeof this.options.onChange === 'function') {
             this.options.onChange({
                 startDate: this.startDate,
@@ -530,7 +580,6 @@ class DateRangePicker {
         }
     }
     
-    // Public methods to get current values
     getStartDate() {
         return this.startDate;
     }
@@ -539,25 +588,27 @@ class DateRangePicker {
         return this.endDate;
     }
     
-    // Method to set date programmatically
     setDateRange(startDate, endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
-        
         this.updateDisplay();
     }
     
-    // Update language based on language change
     updateLanguage(language) {
-        // Update isArabic flag
         this.isArabic = language === 'ar';
         
-        // Update display text
         if (this.startDate && this.endDate) {
             this.updateDisplay();
         } else {
             this.displayText.textContent = this.isArabic ? 'اختر نطاق التاريخ' : 'Select date range';
         }
+        
+        // Update calendar titles
+        const startTitle = this.startCalendarContainer.querySelector('.calendar-title');
+        const endTitle = this.endCalendarContainer.querySelector('.calendar-title');
+        
+        if (startTitle) startTitle.textContent = this.isArabic ? 'تاريخ البداية' : 'Start Date';
+        if (endTitle) endTitle.textContent = this.isArabic ? 'تاريخ النهاية' : 'End Date';
         
         // Update presets
         const presetButtons = this.dropdown.querySelectorAll('.date-range-preset');
@@ -580,11 +631,6 @@ class DateRangePicker {
             btn.textContent = label;
         });
         
-        // Update calendar if it's open
-        if (this.calendarOverlay.style.display === 'flex') {
-            this.renderCalendar();
-        }
-        
         // Update buttons in calendar footer
         const applyBtn = this.calendarOverlay.querySelector('.calendar-apply-btn');
         const cancelBtn = this.calendarOverlay.querySelector('.calendar-cancel-btn');
@@ -594,12 +640,9 @@ class DateRangePicker {
         if (cancelBtn) cancelBtn.textContent = this.isArabic ? 'إلغاء' : 'Cancel';
         if (clearBtn) clearBtn.textContent = this.isArabic ? 'مسح' : 'Clear';
         
-        // Update navigation arrows
-        this.updateNavigationArrows();
-
-        // Force a re-render of the calendar to ensure all translations are applied
+        // Re-render calendars if open
         if (this.calendarOverlay.style.display === 'flex') {
-            this.renderCalendar();
+            this.renderBothCalendars();
         }
     }
 }
@@ -608,7 +651,6 @@ class DateRangePicker {
 document.addEventListener('DOMContentLoaded', () => {
     const dateFilterContainer = document.querySelector('.filter-group.date-filter');
     if (dateFilterContainer) {
-        // Use the existing date-picker-container if present, otherwise create one
         let datePickerContainer = dateFilterContainer.querySelector('.date-picker-container');
         if (!datePickerContainer) {
             datePickerContainer = document.createElement('div');
@@ -616,7 +658,6 @@ document.addEventListener('DOMContentLoaded', () => {
             dateFilterContainer.appendChild(datePickerContainer);
         }
         
-        // Create hidden inputs if they don't exist
         let startDateInput = document.getElementById('start-date');
         let endDateInput = document.getElementById('end-date');
         
@@ -634,31 +675,30 @@ document.addEventListener('DOMContentLoaded', () => {
             dateFilterContainer.appendChild(endDateInput);
         }
         
-        // Initialize the date range picker
         const dateRangePicker = new DateRangePicker(datePickerContainer, {
             startDateId: 'start-date',
             endDateId: 'end-date',
             onChange: (dates) => {
-                // Update the clear filters button state
                 const clearFiltersBtn = document.getElementById('clear-filters');
                 if (clearFiltersBtn) {
                     clearFiltersBtn.disabled = !dates.startDate && !dates.endDate;
                 }
                 
-                // Filter articles based on date range
-                filterArticles();
+                if (typeof filterArticles === 'function') {
+                    filterArticles();
+                }
             }
         });
         
-        // Store the picker instance globally
-        window.dateRangePicker = dateRangePicker;
-        
-        // Make the update language function available globally
-        window.updateDateRangePicker = function(language) {
-            if (window.dateRangePicker) {
-                window.dateRangePicker.updateLanguage(language);
-            }
-        };
+        if (typeof window !== 'undefined') {
+            window.dateRangePicker = dateRangePicker;
+            
+            window.updateDateRangePicker = function(language) {
+                if (window.dateRangePicker) {
+                    window.dateRangePicker.updateLanguage(language);
+                }
+            };
+        }
     }
 });
 
@@ -668,7 +708,6 @@ function filterArticles() {
     const endDate = document.getElementById('end-date').value;
     
     if (!startDate && !endDate) {
-        // If no dates are selected, show all articles
         document.querySelectorAll('.box').forEach(box => {
             box.style.display = 'block';
         });
@@ -691,4 +730,4 @@ function filterArticles() {
         
         box.style.display = show ? 'block' : 'none';
     });
-} 
+}

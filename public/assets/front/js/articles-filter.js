@@ -241,20 +241,37 @@ function filterArticles() {
 
         let showArticle = true;
 
+        function normalizeArabicText(text) {
+            if (!text || typeof text !== 'string') return text || '';
+        
+            return text
+                .toLowerCase()
+                .replace(/[أإآٱٵٲ]/g, 'ا')     // All forms of 'Alef' to 'ا'
+                .replace(/ؤ/g, 'و')             // Hamza on Waw to Waw
+                .replace(/ئ/g, 'ي')             // Hamza on Ya to Ya
+                .replace(/ء/g, '')              // Remove standalone Hamza
+                .replace(/[ةۀہۃ]/g, 'ه')        // Teh Marbuta and others to Ha
+                .replace(/[ىۍێېۑ]/g, 'ي')       // All forms of Ya to regular Ya
+                .replace(/[ڪګڬڭڮ]/g, 'ك')       // All forms of Kaf to regular Kaf
+                .replace(/[ًٌٍَُِّْٕٖٜٟٓٔٗ٘ٙٚٛٝٞ]/g, ''); // Remove all diacritics
+        }
+        
         // Filter by search term - more lenient matching for voice input
-              // Filter by search term - more lenient matching for voice input
         if (searchTerm) {
             // Normalize the search term and article text
-            const normalizedSearchTerm = searchTerm.toLowerCase();
-            const normalizedTitle = articleTitle.toLowerCase();
-            const normalizedTitleText = articleTitleText.toLowerCase();
-            const normalizedDescText = articleDescText.toLowerCase();
-
-            // Show article if any part matches the search term
-            showArticle = normalizedTitle.includes(normalizedSearchTerm) ||
-                         normalizedTitleText.includes(normalizedSearchTerm) ||
-                         normalizedDescText.includes(normalizedSearchTerm);
+            const normalizedSearchTerm = normalizeArabicText(searchTerm);
+        
+            const normalizedTitle = normalizeArabicText(articleTitle);
+            const normalizedTitleText = normalizeArabicText(articleTitleText);
+            const normalizedDescText = normalizeArabicText(articleDescText);
+        
+            // Show article if any part matches the normalized search term
+            showArticle =
+                normalizedTitle.includes(normalizedSearchTerm) ||
+                normalizedTitleText.includes(normalizedSearchTerm) ||
+                normalizedDescText.includes(normalizedSearchTerm);
         }
+        
         
 
         // Filter by category - only hide if category is selected and doesn't match

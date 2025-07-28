@@ -102,7 +102,7 @@ public function filter(Request $request)
 
   public function videos()
 {
-    $videos = AchievementMedia::where('type', 'video')->get();
+    $videos = AchievementMedia::where('type', 'video')->latest()->get();
 
     return view('Front.video', compact('videos'));
 }
