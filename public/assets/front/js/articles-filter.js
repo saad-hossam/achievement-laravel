@@ -128,8 +128,10 @@ function initializeListingStates() {
         loadingState = document.createElement('div');
         loadingState.className = 'listing-state loading';
         loadingState.innerHTML = `
+            <div class="spinner"></div>
+            <p class="message" data-i18n="loading_message">Loading...</p>
         `;
-        articlesContainer.appendChild(loadingState);
+        // articlesContainer.appendChild(loadingState);
     }
 
     // Check if we already have the no results message element
@@ -243,7 +245,7 @@ function filterArticles() {
 
         function normalizeArabicText(text) {
             if (!text || typeof text !== 'string') return text || '';
-        
+
             return text
                 .toLowerCase()
                 .replace(/[أإآٱٵٲ]/g, 'ا')     // All forms of 'Alef' to 'ا'
@@ -255,27 +257,27 @@ function filterArticles() {
                 .replace(/[ڪګڬڭڮ]/g, 'ك')       // All forms of Kaf to regular Kaf
                 .replace(/[ًٌٍَُِّْٕٖٜٟٓٔٗ٘ٙٚٛٝٞ]/g, ''); // Remove all diacritics
         }
-        
+
         // Filter by search term - more lenient matching for voice input
         if (searchTerm) {
             // Normalize the search term and article text
             const normalizedSearchTerm = normalizeArabicText(searchTerm);
-        
+
             const normalizedTitle = normalizeArabicText(articleTitle);
             const normalizedTitleText = normalizeArabicText(articleTitleText);
             const normalizedDescText = normalizeArabicText(articleDescText);
-        
+
             // Show article if any part matches the normalized search term
             showArticle =
                 normalizedTitle.includes(normalizedSearchTerm) ||
                 normalizedTitleText.includes(normalizedSearchTerm) ||
                 normalizedDescText.includes(normalizedSearchTerm);
         }
-        
-        
+
+
 
         // Filter by category - only hide if category is selected and doesn't match
-if (category && category !== '' && category !== 'all' && articleCategory !== String(category)) {
+        if (category && category !== '' && category !== 'all' && articleCategory !== String(category)) {
             showArticle = false;
         }
 

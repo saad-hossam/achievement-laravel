@@ -88,6 +88,10 @@ class DateRangePicker {
         
         this.dropdown.appendChild(presetSection);
         
+        // Create the outer container to hold the full-screen background
+        this.overlayWrapper = document.createElement('div');
+        this.overlayWrapper.className = 'calendar-overlay-wrapper';
+        
         // Create the dual calendar overlay for custom range
         this.calendarOverlay = document.createElement('div');
         this.calendarOverlay.className = 'calendar-overlay dual-calendar-overlay';
@@ -130,10 +134,13 @@ class DateRangePicker {
         
         this.calendarOverlay.appendChild(calendarFooter);
         
+        // Add calendar overlay to wrapper
+        this.overlayWrapper.appendChild(this.calendarOverlay);
+        
         // Add elements to container
         this.container.appendChild(this.displayElement);
         this.container.appendChild(this.dropdown);
-        document.body.appendChild(this.calendarOverlay);
+        document.body.appendChild(this.overlayWrapper);
     }
     
     createCalendarContainer(type) {
@@ -217,9 +224,9 @@ class DateRangePicker {
         // Close dropdown when clicking outside
         document.addEventListener('click', (e) => {
             if (!this.container.contains(e.target) && 
-                !this.calendarOverlay.contains(e.target) && 
+                !this.overlayWrapper.contains(e.target) && 
                 this.isOpen && 
-                this.calendarOverlay.style.display !== 'flex') {
+                this.overlayWrapper.style.display !== 'flex') {
                 this.closeDropdown();
             }
         });
@@ -295,8 +302,8 @@ class DateRangePicker {
         });
         
         // Close calendar overlay when clicking outside of it
-        this.calendarOverlay.addEventListener('click', (e) => {
-            if (e.target === this.calendarOverlay) {
+        this.overlayWrapper.addEventListener('click', (e) => {
+            if (e.target === this.overlayWrapper) {
                 this.closeCalendarOverlay();
             }
         });
@@ -324,12 +331,14 @@ class DateRangePicker {
     }
     
     openCalendarOverlay() {
+        this.overlayWrapper.style.display = 'flex';
         this.calendarOverlay.style.display = 'flex';
         this.closeDropdown(); // Close the dropdown but keep calendar open
         this.renderBothCalendars();
     }
     
     closeCalendarOverlay() {
+        this.overlayWrapper.style.display = 'none';
         this.calendarOverlay.style.display = 'none';
     }
     
@@ -641,7 +650,7 @@ class DateRangePicker {
         if (clearBtn) clearBtn.textContent = this.isArabic ? 'مسح' : 'Clear';
         
         // Re-render calendars if open
-        if (this.calendarOverlay.style.display === 'flex') {
+        if (this.overlayWrapper.style.display === 'flex') {
             this.renderBothCalendars();
         }
     }

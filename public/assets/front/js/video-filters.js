@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initialize article count
         const videos = document.querySelectorAll('#videos .video-card-wrapper');
         const articleCountElement = document.getElementById('article-count');
+             console.log('Found videos:', videos.length); // Add this line
+             console.log('Counter element:', articleCountElement); // Add this line
         if (articleCountElement) {
             articleCountElement.textContent = videos.length;
         }

@@ -5206,6 +5206,7 @@ html.theme-transitioning * {
   width: 100%;
   font-size: 14px;
   color: #333;
+  min-width: 12rem;
 }
 
 .date-range-display i.fa-chevron-down {
@@ -5276,13 +5277,27 @@ font-weight: 500;
 }
 
 /* Calendar Overlay */
+.calendar-overlay-wrapper{
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  z-index: 1100;
+}
+
 .calendar-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
   display: none;
   flex-direction: column;
   gap: 2rem;
@@ -5585,9 +5600,9 @@ font-weight: 500;
 
 /* Mobile Responsive */
 @media (max-width: 480px) {
-  .calendar-container {
-      width: 80%;
-      margin: 0rem;
+
+  .calendar-overlay{
+    transform: scale(.75);
   }
   
   .dual-calendar-container{

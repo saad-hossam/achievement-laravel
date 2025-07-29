@@ -74,7 +74,7 @@
     <div class="article-counter-container">
         <div class="article-counter">
             <i class="fas fa-filter" aria-hidden="true"></i>
-            <strong id="article-count">0</strong>
+            <strong id="article-count">{{ count($videos) }}</strong>
             <span data-lang="videosFound">Videos Found</span>
         </div>
     </div>
