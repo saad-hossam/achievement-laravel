@@ -971,12 +971,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // iOS debugging
-    if (isIOS) {
-        // Test microphone access
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ audio: true })
-                .then(() => console.log('Microphone access granted'))
-                .catch(() => console.log('Microphone access denied'));
-        }
-    }
+    // if (isIOS) {
+    //     // Test microphone access
+    //     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    //         navigator.mediaDevices.getUserMedia({ audio: true })
+    //             .then(() => console.log('Microphone access granted'))
+    //             .catch(() => console.log('Microphone access denied'));
+    //     }
+    // }
 });
